@@ -7,6 +7,7 @@ namespace FrasesCurtas.Services {
 
         // injecao de depencia do dbcontext p/ armezar op em memory
         private readonly AplicacaoDbContexto dbContexto;
+       
         public FraseService(AplicacaoDbContexto appDbContexto) {
             dbContexto = appDbContexto;
         }
@@ -41,6 +42,5 @@ namespace FrasesCurtas.Services {
             return frase;
         }
 
-       
     }
 }

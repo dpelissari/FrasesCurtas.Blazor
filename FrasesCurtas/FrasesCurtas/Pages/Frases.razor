@@ -21,21 +21,23 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @if(frases != null && frases.Count > 0)
+        @if (frases != null && frases.Count > 0)
+        {
+            foreach (var item in frases)
             {
-                foreach(var item in frases){
-                      <td>@item.Id</td>
-                      <td>@item.Descricao</td>
-                      <td>@item.DataCadastro</td>
-                      <td>@item.Arquivada</td>
-                      <td>
-                          <a href="/atualizar-frase/@item.Id" class="btn btn-warning">Atualizar</a>
-                          <button class="btn btn-danger" @onclick="async () => await ApagarFrase(item.Id)">Apagar</button>
-                      </td>
-                }
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Descricao</td>
+                    <td>@item.DataCadastro</td>
+                    <td>@item.Arquivada</td>
+                    <td>
+                        <a href="/atualizar-frase/@item.Id" class="btn btn-warning">Atualizar</a>
+                        <button class="btn btn-danger" @onclick="async () => await ApagarFrase(item.Id)">Apagar</button>
+                    </td>
+                </tr>
             }
-        </tr>
+        }
+
     </tbody>
 </table>
 
@@ -44,7 +46,7 @@
     List<Frase> frases = new();
 
     // ao inicializar busca todas frases
-    protected override async Task OnInitializedAsync () { frases = await FraseService.BuscarTodas(); } 
+    protected override async Task OnInitializedAsync() { frases = await FraseService.BuscarTodas(); }
 
     async Task ApagarFrase(Guid id) {
 

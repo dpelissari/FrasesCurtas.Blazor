@@ -6,13 +6,19 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// conection string
+var connectionString = builder.Configuration.GetConnectionString("Frases") ?? "Data Source=FrasesCurtas.db";
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 // salvando em memoria
-builder.Services.AddDbContext<AplicacaoDbContexto>(options => options.UseInMemoryDatabase("FrasesDb"));
+//builder.Services.AddDbContext<AplicacaoDbContexto>(options => options.UseInMemoryDatabase("FrasesDb"));
+
+// salvando no sqlite
+builder.Services.AddSqlite<AplicacaoDbContexto>(connectionString);
 
 // configurando a injeção de dependencia do nosso serviço
 builder.Services.AddScoped<IFraseService, FraseService>();

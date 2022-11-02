@@ -9,5 +9,6 @@ namespace FrasesCurtas.Data {
         public AplicacaoDbContexto(DbContextOptions<AplicacaoDbContexto> options) : base(options) {
 
         }
+
     }
 }
