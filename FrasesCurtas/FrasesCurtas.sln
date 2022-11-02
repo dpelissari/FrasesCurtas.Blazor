@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrasesCurtas", "FrasesCurtas\FrasesCurtas.csproj", "{97159FF4-222C-44E2-8383-E51F2181BCF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97159FF4-222C-44E2-8383-E51F2181BCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97159FF4-222C-44E2-8383-E51F2181BCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97159FF4-222C-44E2-8383-E51F2181BCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97159FF4-222C-44E2-8383-E51F2181BCF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83298489-5468-4B14-9A40-5462FF7EC93D}
+	EndGlobalSection
+EndGlobal

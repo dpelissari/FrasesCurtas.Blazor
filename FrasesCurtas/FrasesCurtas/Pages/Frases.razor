@@ -1,0 +1,69 @@
+﻿@page "/frases"
+
+@using FrasesCurtas.Models
+@inject IJSRuntime JSRuntime
+@inject FrasesCurtas.Services.IFraseService FraseService
+
+<PageTitle>Frases</PageTitle>
+
+<h1>Frases</h1>
+
+<a href="/adicionar-frase">Criar</a>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Frase</th>
+            <th>Data de cadastro</th>
+            <th>Arquivada</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @if(frases != null && frases.Count > 0)
+            {
+                foreach(var item in frases){
+                      <td>@item.Id</td>
+                      <td>@item.Descricao</td>
+                      <td>@item.DataCadastro</td>
+                      <td>@item.Arquivada</td>
+                      <td>
+                          <a href="/atualizar-frase/@item.Id" class="btn btn-warning">Atualizar</a>
+                          <button class="btn btn-danger" @onclick="async () => await ApagarFrase(item.Id)">Apagar</button>
+                      </td>
+                }
+            }
+        </tr>
+    </tbody>
+</table>
+
+
+@code {
+    List<Frase> frases = new();
+
+    // ao inicializar busca todas frases
+    protected override async Task OnInitializedAsync () { frases = await FraseService.BuscarTodas(); } 
+
+    async Task ApagarFrase(Guid id) {
+
+        // exibe um alerta de confirmacao
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir essa frase?");
+
+        // se a confirmacao for false para por aqui
+        if (confirm is false)
+            return;
+
+        // se a confirmacao for true logaliza a frase pelo id
+        var frase = await FraseService.BuscarPor(id);
+
+        // apaga a frase localizada
+        await FraseService.Apagar(frase);
+
+        // atualiza as frases a serem exibidas
+        frases = await FraseService.BuscarTodas();
+
+        StateHasChanged();
+    }
+}
