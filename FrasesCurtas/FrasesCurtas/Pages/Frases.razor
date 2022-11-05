@@ -3,6 +3,7 @@
 @using FrasesCurtas.Models
 @inject IJSRuntime JSRuntime
 @inject FrasesCurtas.Services.IFraseService FraseService
+@using FrasesCurtas.Componentes;
 
 <PageTitle>Frases</PageTitle>
 
@@ -10,40 +11,33 @@
 
 <a href="/adicionar-frase">Criar</a>
 
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Frase</th>
-            <th>Data de cadastro</th>
-            <th>Arquivada</th>
-            <th></th>
+<ListaPaginada Dados="frases">
+  <ConteudoCabecalho>
+    <tr>
+      <th>Identificador</th>
+      <th>Frase</th>
+      <th>Data Cadastro</th>
+      <th>Arquivada?</th>
+    </tr>
+  </ConteudoCabecalho>
+  <ConteudoPrincipal>
+      <tr>
+        <td>@context.Id</td>
+        <td>@context.Descricao</td>
+        <td>@context.DataCadastro</td>
+        <td>@context.Arquivada</td>
+        <td>
+            <a href="/atualizar-frase/@context.Id" class="btn btn-warning">Atualizar</a>
+            <button class="btn btn-danger" @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
+        </td>
         </tr>
-    </thead>
-    <tbody>
-        @if (frases != null && frases.Count > 0)
-        {
-            foreach (var item in frases)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Descricao</td>
-                    <td>@item.DataCadastro</td>
-                    <td>@item.Arquivada</td>
-                    <td>
-                        <a href="/atualizar-frase/@item.Id" class="btn btn-warning">Atualizar</a>
-                        <button class="btn btn-danger" @onclick="async () => await ApagarFrase(item.Id)">Apagar</button>
-                    </td>
-                </tr>
-            }
-        }
-
-    </tbody>
-</table>
+  </ConteudoPrincipal>
+</ListaPaginada>
 
 
 @code {
-    List<Frase> frases = new();
+    //List<Frase> frases = new();
+    private IQueryable<Frase> frases;
 
     // ao inicializar busca todas frases
     protected override async Task OnInitializedAsync() { frases = await FraseService.BuscarTodas(); }

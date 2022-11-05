@@ -1,0 +1,85 @@
+﻿@typeparam TItem
+
+@if (!Dados.Any()){
+    <div class="none-indicator">(none)</div>
+}
+else {
+    <table class="table table-striped">
+        <thead>@ConteudoCabecalho</thead>
+        <tbody>@foreach (TItem item in ConteudoAtualExibido){ @ConteudoPrincipal(item)}</tbody>
+    </table>
+
+    @if (TotalPaginas() > 1) {
+        <div class="pager-display">
+            @if (PaginaAtual == 1){
+                <button disabled>&laquo;</button>
+                <button disabled>&lsaquo;</button>
+            }
+            else {
+                <button @onclick="@AvancarUmaPagina">&laquo;</button>
+                <button @onclick="@VoltarUmaPagina">&lsaquo;</button>
+            }
+            <span>@PaginaAtual de @TotalPaginas() </span>
+            @if (!irUltimaPagina()){
+                <button @onclick="@MoverProProximo">&rsaquo;</button>
+                <button @onclick="@MoverProUltimo">&raquo;</button>
+            }
+            else {
+                <button disabled>&rsaquo;</button>
+                <button disabled>&raquo;</button>
+            }
+        </div>
+    }
+}
+
+@code {
+
+    [Parameter]
+    public IQueryable<TItem> Dados { get; set; }
+    [Parameter]
+    public RenderFragment ConteudoCabecalho { get; set; }
+    [Parameter]
+    public RenderFragment<TItem> ConteudoPrincipal { get; set; }
+    [Parameter]
+    public int QtdeItensPorPagina { get; set; } = 5;
+    private int PaginaAtual = 1;
+    private List<TItem> ConteudoAtualExibido;
+    private int ContagemTotal;
+
+    protected override void OnParametersSet() {
+        AtualizarConteudoExibido();
+        ContagemTotal = Dados.Count();
+    }
+
+    private void AtualizarConteudoExibido() {
+        ConteudoAtualExibido = Dados.Skip((PaginaAtual - 1) * QtdeItensPorPagina).Take(QtdeItensPorPagina).ToList();
+    }
+
+    private bool irUltimaPagina() {
+        return PaginaAtual >= TotalPaginas();
+    }
+
+    private int TotalPaginas() {
+        return Convert.ToInt32(Math.Ceiling(ContagemTotal / Convert.ToDecimal(QtdeItensPorPagina)));
+    }
+
+    private void AvancarUmaPagina() {
+        PaginaAtual = 1;
+        AtualizarConteudoExibido();
+    }
+
+    private void VoltarUmaPagina() {
+        PaginaAtual--;
+        AtualizarConteudoExibido();
+    }
+
+    private void MoverProProximo() {
+        PaginaAtual++;
+        AtualizarConteudoExibido();
+    }
+
+    private void MoverProUltimo() {
+        PaginaAtual = TotalPaginas();
+        AtualizarConteudoExibido();
+    }
+}

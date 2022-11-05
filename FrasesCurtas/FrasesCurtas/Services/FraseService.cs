@@ -37,9 +37,9 @@ namespace FrasesCurtas.Services {
         }
 
         // metodo para listar todas frases
-        public async Task<List<Frase>> BuscarTodas() {
+        public async Task<IQueryable<Frase>> BuscarTodas() {
             var frase = await dbContexto.Frases.ToListAsync();
-            return frase;
+            return frase.AsQueryable();
         }
 
     }
