@@ -12,7 +12,6 @@ var connectionString = builder.Configuration.GetConnectionString("Frases") ?? "D
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 // salvando em memoria
 //builder.Services.AddDbContext<AplicacaoDbContexto>(options => options.UseInMemoryDatabase("FrasesDb"));
