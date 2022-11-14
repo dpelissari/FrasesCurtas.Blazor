@@ -5,13 +5,15 @@ namespace FrasesCurtas.Models {
         [Key]
         public Guid Id { get; set; }
 
+        public Guid IdAutor { get; set; }
+
         [Required]
         [MaxLength(500)]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
-        public string DataCadastro { get; set; }
+        public DateTime? DataCadastro { get; set; } = DateTime.Now;
 
-        public string Arquivada { get; set; } = "Falso";
+        public bool Arquivada { get; set; } = false;
 
         // metodo para geração do id em Guid
         public void GerarNovoId() {

@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 namespace FrasesCurtas.Data {
     public class AplicacaoDbContexto : DbContext {
 
-        public DbSet<Frase> Frases { get; set; }
+        public DbSet<Frase>? Frases { get; set; }
+        public DbSet<Autor>? Autores { get; set; }
 
         public AplicacaoDbContexto(DbContextOptions<AplicacaoDbContexto> options) : base(options) {
 

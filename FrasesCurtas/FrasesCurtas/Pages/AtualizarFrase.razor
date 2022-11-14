@@ -3,21 +3,33 @@
 @using FrasesCurtas.Models;
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IFraseService FraseService;
+@inject FrasesCurtas.Services.IAutorService AutorService;
 
 <h3>Atualizar Frase</h3>
 
 <EditForm Model="frase" OnValidSubmit="AtualizarFrases">
+    <label for="autorFrase">Autor</label>
+        <InputSelect @bind-Value="frase.IdAutor" class="form-control">
+             
+            @foreach (var autor in autores)
+            {
+                <option value="@autor.Id">@autor.Nome</option>
+            }
+        </InputSelect>
     <div class="form-group mb-3">
         <label for="descricaoFrase">Frase</label>
         <InputText @bind-Value="frase.Descricao" class="form-control" id="descricaoFrase"></InputText>
     </div>
     <div class="form-group mb-3">
         <label for="dataCadastroFrase">Data Cadastro</label>
-        <InputText @bind-Value="frase.DataCadastro" class="form-control" id="dataCadastroFrase"></InputText>
+             <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase"/>
     </div>
     <div class="form-group mb-3">
         <label for="arquivadaFrase">Arquvida</label>
-        <InputText @bind-Value="frase.Arquivada" class="form-control" id="arquivadaFrase"></InputText>
+           <InputSelect @bind-Value="frase.Arquivada" class="form-control">
+             <option value="true">Sim</option>
+             <option value="false">Não</option>
+        </InputSelect>
     </div>
 
     <DataAnnotationsValidator />
@@ -29,13 +41,16 @@
 
 @code {
     Frase frase = new();
+    private IQueryable<Autor> autores;
 
     [Parameter]public string id{ get; set; }  
 
     protected override async Task OnInitializedAsync()
     {
         frase = await FraseService.BuscarPor(Guid.Parse(id));
+        autores = await AutorService.BuscarTodas();
     }
+    
 
     async Task AtualizarFrases()
     {
@@ -43,4 +58,5 @@
 
         NavigationManager.NavigateTo("/frases");
     }
+
 }

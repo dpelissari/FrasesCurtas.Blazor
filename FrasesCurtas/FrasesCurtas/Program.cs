@@ -19,8 +19,9 @@ builder.Services.AddServerSideBlazor();
 // salvando no sqlite
 builder.Services.AddSqlite<AplicacaoDbContexto>(connectionString);
 
-// configurando a injeção de dependencia do nosso serviço
+// configurando a injeção de dependencia dos nossos serviços
 builder.Services.AddScoped<IFraseService, FraseService>();
+builder.Services.AddScoped<IAutorService, AutorService>();
 
 
 var app = builder.Build();

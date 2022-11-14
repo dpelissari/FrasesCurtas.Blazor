@@ -2,7 +2,8 @@
 
 @using FrasesCurtas.Models
 @inject IJSRuntime JSRuntime
-@inject FrasesCurtas.Services.IFraseService FraseService
+@inject FrasesCurtas.Services.IFraseService FraseService;
+@inject FrasesCurtas.Services.IAutorService AutorService;
 @using FrasesCurtas.Componentes;
 
 <PageTitle>Frases</PageTitle>
@@ -16,19 +17,22 @@
     <tr>
       <th>Identificador</th>
       <th>Frase</th>
+      <th>Autor</th>
       <th>Data Cadastro</th>
       <th>Arquivada?</th>
+     
     </tr>
   </ConteudoCabecalho>
   <ConteudoPrincipal>
       <tr>
         <td>@context.Id</td>
         <td>@context.Descricao</td>
+        <td>@context.IdAutor</td>
         <td>@context.DataCadastro</td>
         <td>@context.Arquivada</td>
         <td>
-            <a href="/atualizar-frase/@context.Id" class="btn btn-warning">Atualizar</a>
-            <button class="btn btn-danger" @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
+            <a href="/atualizar-frase/@context.Id">Atualizar</a>
+            <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
         </td>
         </tr>
   </ConteudoPrincipal>
@@ -40,7 +44,9 @@
     private IQueryable<Frase> frases;
 
     // ao inicializar busca todas frases
-    protected override async Task OnInitializedAsync() { frases = await FraseService.BuscarTodas(); }
+    protected override async Task OnInitializedAsync() { 
+        frases = await FraseService.BuscarTodas(); 
+    }
 
     async Task ApagarFrase(Guid id) {
 

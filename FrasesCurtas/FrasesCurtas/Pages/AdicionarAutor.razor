@@ -1,0 +1,41 @@
+﻿@page "/adicionar-autor/";
+
+@using FrasesCurtas.Models;
+@inject NavigationManager NavigationManager;
+@inject FrasesCurtas.Services.IAutorService AutorService;
+
+<h3>Adicionar autor</h3> 
+
+<EditForm Model="autor" OnValidSubmit="CriarAutor">
+    <div>
+        <label for="nomeAutor">Nome</label>
+        <InputText @bind-Value="autor.Nome" class="form-control" id="autornome"></InputText>
+    </div>
+    <div>
+        <label for="dataCadastroAutor">Data Cadastro</label>
+        <InputDate @bind-Value="autor.DataCadastro"/>
+    </div>
+    <div>
+        <label for="arquivadaFrase">Ativo?</label>
+        <InputSelect @bind-Value="autor.Ativo" class="form-control">
+             <option value="true">Sim</option>
+             <option value="false" selected>Não</option>
+
+        </InputSelect>
+    </div>
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <button type="submit">Incluir</button>
+</EditForm>
+
+@code {
+    Autor autor = new();
+
+    async Task CriarAutor() {
+        autor.GerarNovoId();
+        await AutorService.Adicionar(autor);
+        NavigationManager.NavigateTo("/autores");
+    }
+}

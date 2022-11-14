@@ -11,13 +11,35 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FrasesCurtas.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20221102211343_CriacaoDB")]
-    partial class CriacaoDB
+    [Migration("20221114041618_CriacaoBanco")]
+    partial class CriacaoBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
+
+            modelBuilder.Entity("FrasesCurtas.Models.Autor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Autores");
+                });
 
             modelBuilder.Entity("FrasesCurtas.Models.Frase", b =>
                 {
@@ -25,17 +47,18 @@ namespace FrasesCurtas.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Arquivada")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("Arquivada")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("DataCadastro")
-                        .IsRequired()
+                    b.Property<DateTime?>("DataCadastro")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("IdAutor")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
