@@ -7,6 +7,8 @@ namespace FrasesCurtas.Models {
 
         public Guid IdAutor { get; set; }
 
+        public Autor Autor { get; set; }
+
         [Required]
         [MaxLength(500)]
         public string? Descricao { get; set; }

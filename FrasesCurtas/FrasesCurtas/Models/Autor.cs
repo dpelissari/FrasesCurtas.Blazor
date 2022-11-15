@@ -12,6 +12,8 @@ namespace FrasesCurtas.Models
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         public bool Ativo { get; set; } = true;
 
+        public ICollection<Frase> Frases { get; set; }
+
         // metodo para geração do id em Guid
         public void GerarNovoId()
         {
