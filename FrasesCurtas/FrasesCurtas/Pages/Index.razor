@@ -5,24 +5,28 @@
 
 <PageTitle>Frases</PageTitle>
 
-<ListaPaginada Dados="frases">
-  <ConteudoCabecalho>
-    <tr>
-      <th>Identificador</th>
-      <th>Frase</th>
-      <th>Data Cadastro</th>
-      <th>Arquivada?</th>
-    </tr>
-  </ConteudoCabecalho>
-  <ConteudoPrincipal>
-      <tr>
-        <td>@context.Id</td>
-        <td>@context.Descricao</td>
-        <td>@context.DataCadastro</td>
-        <td>@context.Arquivada</td>
+    <ListaPaginada Dados="frases">
+      <ConteudoCabecalho>
+        <tr>
+          <th>Identificador</th>
+          <th>Frase</th>
+          <th>Autor</th>
+          <th>Data Cadastro</th>
+          <th>Arquivada?</th>
         </tr>
-  </ConteudoPrincipal>
-</ListaPaginada>
+      </ConteudoCabecalho>
+      <ConteudoPrincipal>
+          <tr>
+            <td>@context.Id</td>
+            <td>@context.Descricao</td>
+            <td>@context.Autor?.Nome</td>
+            <td>@context.DataCadastro</td>
+            <td>@context.Arquivada</td>
+            </tr>
+      </ConteudoPrincipal>
+    </ListaPaginada>
+  
+
 
 @code {
 

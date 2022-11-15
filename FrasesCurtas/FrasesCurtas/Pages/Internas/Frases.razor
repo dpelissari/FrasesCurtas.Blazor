@@ -1,4 +1,5 @@
-﻿@page "/frases"
+﻿@page "/int/frases"
+@attribute [Authorize(Roles = "Administrador")]
 
 @using FrasesCurtas.Models
 @inject IJSRuntime JSRuntime
@@ -10,7 +11,7 @@
 
 <h1>Frases</h1>
 
-<a href="/adicionar-frase">Criar</a>
+<a href="/int/frases/adicionar-frase/">Criar</a>
 
 <ListaPaginada Dados="frases">
   <ConteudoCabecalho>
@@ -20,18 +21,17 @@
       <th>Autor</th>
       <th>Data Cadastro</th>
       <th>Arquivada?</th>
-     
     </tr>
   </ConteudoCabecalho>
   <ConteudoPrincipal>
       <tr>
         <td>@context.Id</td>
         <td>@context.Descricao</td>
-        <td>@context.Autor.Nome</td>
+        <td>@context.Autor?.Nome</td>
         <td>@context.DataCadastro</td>
         <td>@context.Arquivada</td>
         <td>
-            <a href="/atualizar-frase/@context.Id">Atualizar</a>
+            <a href="/int/frases/atualizar-frase/@context.Id">Atualizar</a>
             <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
         </td>
         </tr>
@@ -40,6 +40,10 @@
 
 
 @code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set;  }
+
     //List<Frase> frases = new();
     private IQueryable<Frase> frases;
 

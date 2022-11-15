@@ -1,0 +1,41 @@
+﻿@page "/entrar";
+@using FrasesCurtas.Autenticacao;
+@inject ContaUsuarioService contaUsuarioservice;
+@inject IJSRuntime js;
+@inject AuthenticationStateProvider provedorAutenticacao;
+@inject NavigationManager navManager;
+
+<h3>Entrar</h3>
+
+<input @bind="modelo.Nome" />
+<input @bind="modelo.Senha" />
+<button @onclick="Autenticar">Entrar</button>
+
+@code {
+    private class Modelo
+    {
+        public string Nome { get; set; }
+        public string Senha { get; set; }
+    }
+
+    private Modelo modelo = new Modelo();
+
+    private async Task Autenticar()
+    {
+        var contaUsuario = contaUsuarioservice.BuscarPorNome(modelo.Nome);
+        if (contaUsuario == null || contaUsuario.Senha != modelo.Senha)
+        {
+            await js.InvokeVoidAsync("alert", "Usuario ou senha invalidos!");
+            return;
+        }
+
+        var provedorAutenticacaoCustomizado = (ProvedorAutenticacao)provedorAutenticacao;
+        await provedorAutenticacaoCustomizado.AtualizarEstadoAutenticao(new UsuarioSessao
+            {
+                Nome = contaUsuario.Nome,
+                NivelAcesso = contaUsuario.NivelAcesso
+            });
+            navManager.NavigateTo("int/frases/", true);
+    }
+}
+ 

@@ -61,7 +61,25 @@ namespace FrasesCurtas.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdAutor");
+
                     b.ToTable("Frases");
+                });
+
+            modelBuilder.Entity("FrasesCurtas.Models.Frase", b =>
+                {
+                    b.HasOne("FrasesCurtas.Models.Autor", "Autor")
+                        .WithMany("Frases")
+                        .HasForeignKey("IdAutor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+                });
+
+            modelBuilder.Entity("FrasesCurtas.Models.Autor", b =>
+                {
+                    b.Navigation("Frases");
                 });
 #pragma warning restore 612, 618
         }

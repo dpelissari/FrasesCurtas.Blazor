@@ -1,4 +1,5 @@
-﻿@page "/autores"
+﻿@page "/int/autores"
+@attribute [Authorize(Roles = "Administrador")]
 
 @using FrasesCurtas.Models
 @inject IJSRuntime JSRuntime
@@ -9,7 +10,7 @@
 
 <h1>Autores</h1>
 
-<a href="/adicionar-autor">Criar</a>
+<a href="/int/autores/adicionar-autor">Criar</a>
 
 <ListaPaginada Dados="autores">
   <ConteudoCabecalho>

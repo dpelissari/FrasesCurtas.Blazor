@@ -1,12 +1,32 @@
-﻿
+﻿@using FrasesCurtas.Autenticacao
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager;
+
+
 <div>
     <nav>
         <div>
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+            <AuthorizeView>
+                <Authorized>
+                    <NavLink Match="NavLinkMatch.All" @onclick="Logout">Sair</NavLink>
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink href="entrar/" Match="NavLinkMatch.All">Entrar</NavLink>
+                </NotAuthorized>
+            </AuthorizeView>
         </div>
     </nav>
 </div>
 
-@code {
 
+
+@code{
+    private async Task Logout()
+    {
+        var customAuthStateProvider = (ProvedorAutenticacao)authStateProvider;
+        await customAuthStateProvider.AtualizarEstadoAutenticao(null);
+        navManager.NavigateTo("/", true);
+
+    }
 }

@@ -1,4 +1,5 @@
-﻿@page "/atualizar-frase/{id}";
+﻿@page "/int/frases/atualizar-frase/{id}";
+@attribute [Authorize(Roles = "Administrador")]
 
 @using FrasesCurtas.Models;
 @inject NavigationManager NavigationManager;
@@ -56,7 +57,7 @@
     {
         await FraseService.Atualizar(frase);
 
-        NavigationManager.NavigateTo("/frases");
+        NavigationManager.NavigateTo("/int/frases");
     }
 
 }

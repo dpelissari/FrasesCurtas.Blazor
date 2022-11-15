@@ -1,4 +1,5 @@
-﻿@page "/atualizar-autor/{id}";
+﻿@page "/int/autores/atualizar-autor/{id}";
+@attribute [Authorize(Roles = "Administrador")]
 
 @using FrasesCurtas.Models;
 @inject NavigationManager NavigationManager;
@@ -44,6 +45,6 @@
     {
         await AutorService.Atualizar(autor);
 
-        NavigationManager.NavigateTo("/autores");
+        NavigationManager.NavigateTo("/int/autores");
     }
 }
