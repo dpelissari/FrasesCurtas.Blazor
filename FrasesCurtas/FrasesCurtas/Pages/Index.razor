@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using FrasesCurtas.Models
 @inject FrasesCurtas.Services.IFraseService FraseService
+@inject FrasesCurtas.Services.IAutorService AutorService
 @using FrasesCurtas.Componentes;
 
 <PageTitle>Frases</PageTitle>
@@ -29,10 +30,15 @@
 
 
 @code {
-
-    //List<Frase> frases = new();
     private IQueryable<Frase> frases;
 
     // ao inicializar busca todas frases
-    protected override async Task OnInitializedAsync() { frases = await FraseService.BuscarTodas(); }
+    protected override async Task OnInitializedAsync() { 
+        frases = await FraseService.BuscarTodas(); 
+
+        // alimenta autores
+        foreach (var frase in frases){
+            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);    
+        }
+    }
 }

@@ -9,23 +9,27 @@
 <h3>Atualizar Frase</h3>
 
 <EditForm Model="frase" OnValidSubmit="AtualizarFrases">
-    <label for="autorFrase">Autor</label>
-        <InputSelect @bind-Value="frase.IdAutor" class="form-control">
+
+    <div>
+        <label for="autorFrase">Autor</label>
+            <InputSelect @bind-Value="frase.IdAutor" class="form-control">
              
-            @foreach (var autor in autores)
-            {
-                <option value="@autor.Id">@autor.Nome</option>
-            }
-        </InputSelect>
-    <div class="form-group mb-3">
+                @foreach (var autor in autores){
+                    <option value="@autor.Id">@autor.Nome</option>
+                }
+            </InputSelect>
+
+     </div>
+
+    <div>
         <label for="descricaoFrase">Frase</label>
         <InputText @bind-Value="frase.Descricao" class="form-control" id="descricaoFrase"></InputText>
     </div>
-    <div class="form-group mb-3">
+    <div>
         <label for="dataCadastroFrase">Data Cadastro</label>
              <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase"/>
     </div>
-    <div class="form-group mb-3">
+    <div>
         <label for="arquivadaFrase">Arquvida</label>
            <InputSelect @bind-Value="frase.Arquivada" class="form-control">
              <option value="true">Sim</option>
@@ -36,7 +40,8 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <button class="btn btn-success" type="submit">Incluir</button>
+    <button class="btn btn-success" type="submit">Salvar</button>
+    <NavLink href="int/frases/">Cancelar</NavLink>
 
 </EditForm>
 

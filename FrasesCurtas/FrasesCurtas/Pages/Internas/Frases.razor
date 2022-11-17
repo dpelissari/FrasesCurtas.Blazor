@@ -44,12 +44,16 @@
     [CascadingParameter]
     private Task<AuthenticationState> authenticationState { get; set;  }
 
-    //List<Frase> frases = new();
     private IQueryable<Frase> frases;
 
     // ao inicializar busca todas frases
     protected override async Task OnInitializedAsync() { 
         frases = await FraseService.BuscarTodas(); 
+
+        // alimenta autores
+        foreach (var frase in frases){
+            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);    
+        }
     }
 
     async Task ApagarFrase(Guid id) {
