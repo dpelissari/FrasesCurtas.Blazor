@@ -6,28 +6,20 @@
 
 <PageTitle>Frases</PageTitle>
 
+<Outdoor />
+<div class="container">
     <ListaPaginada Dados="frases">
-      <ConteudoCabecalho>
-        <tr>
-          <th>Identificador</th>
-          <th>Frase</th>
-          <th>Autor</th>
-          <th>Data Cadastro</th>
-          <th>Arquivada?</th>
-        </tr>
-      </ConteudoCabecalho>
-      <ConteudoPrincipal>
-          <tr>
-            <td>@context.Id</td>
-            <td>@context.Descricao</td>
-            <td>@context.Autor?.Nome</td>
-            <td>@context.DataCadastro</td>
-            <td>@context.Arquivada</td>
-            </tr>
-      </ConteudoPrincipal>
-    </ListaPaginada>
-  
 
+        <ConteudoPrincipal>
+            <div class="card">
+                <p class="frase">@context.Descricao</p>
+                <p class="autor">@context.Autor?.Nome</p>
+            </div>
+        </ConteudoPrincipal>
+    </ListaPaginada>
+</div>
+  
+<Rodape />
 
 @code {
     private IQueryable<Frase> frases;

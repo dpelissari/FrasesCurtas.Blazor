@@ -1,11 +1,15 @@
 ﻿@page "/int/frases/adicionar-frase/";
 @attribute [Authorize(Roles = "Administrador")]
 
+@using FrasesCurtas.Componentes
 @using FrasesCurtas.Models;
 @using FrasesCurtas.Services
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IFraseService FraseService;
 @inject FrasesCurtas.Services.IAutorService AutorService;
+
+
+<Outdoor />
 
 <h3>AdicionarFrase</h3>
 

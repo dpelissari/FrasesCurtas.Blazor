@@ -1,15 +1,19 @@
 ﻿@page "/entrar";
 @using FrasesCurtas.Autenticacao;
+@using FrasesCurtas.Componentes
 @inject ContaUsuarioService contaUsuarioservice;
 @inject IJSRuntime js;
 @inject AuthenticationStateProvider provedorAutenticacao;
 @inject NavigationManager navManager;
 
-<h3>Entrar</h3>
 
-<input @bind="modelo.Nome" />
-<input @bind="modelo.Senha" type="password" />
-<button @onclick="Autenticar">Entrar</button>
+<Outdoor/>
+<div class="container">
+    <h1>Entrar</h1>
+    <input @bind="modelo.Nome" />
+    <input @bind="modelo.Senha" type="password" />
+    <button @onclick="Autenticar">Entrar</button>
+</div>
 
 @code {
     private class Modelo

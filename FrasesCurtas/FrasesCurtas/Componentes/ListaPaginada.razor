@@ -1,30 +1,37 @@
 ﻿@typeparam TItem
 
-@if (!Dados.Any()){
+@if (!Dados.Any())
+{
     <div class="none-indicator">(none)</div>
 }
-else {
-    <table class="table table-striped">
-        <thead>@ConteudoCabecalho</thead>
-        <tbody>@foreach (TItem item in ConteudoAtualExibido){ @ConteudoPrincipal(item)}</tbody>
-    </table>
+else
+{
+    @foreach (TItem item in ConteudoAtualExibido)
+    {
+        @ConteudoPrincipal(item)
+    }
 
-    @if (TotalPaginas() > 1) {
+    @if (TotalPaginas() > 1)
+    {
         <div class="pager-display">
-            @if (PaginaAtual == 1){
+            @if (PaginaAtual == 1)
+            {
                 <button disabled>&laquo;</button>
                 <button disabled>&lsaquo;</button>
             }
-            else {
+            else
+            {
                 <button @onclick="@AvancarUmaPagina">&laquo;</button>
                 <button @onclick="@VoltarUmaPagina">&lsaquo;</button>
             }
             <span>@PaginaAtual de @TotalPaginas() </span>
-            @if (!irUltimaPagina()){
+            @if (!irUltimaPagina())
+            {
                 <button @onclick="@MoverProProximo">&rsaquo;</button>
                 <button @onclick="@MoverProUltimo">&raquo;</button>
             }
-            else {
+            else
+            {
                 <button disabled>&rsaquo;</button>
                 <button disabled>&raquo;</button>
             }
@@ -36,8 +43,6 @@ else {
 
     [Parameter]
     public IQueryable<TItem> Dados { get; set; }
-    [Parameter]
-    public RenderFragment ConteudoCabecalho { get; set; }
     [Parameter]
     public RenderFragment<TItem> ConteudoPrincipal { get; set; }
     [Parameter]

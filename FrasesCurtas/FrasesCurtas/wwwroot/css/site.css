@@ -1,0 +1,16 @@
+
+@media all {
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+    * { outline:none; margin:0; padding:0; border:none; font-family:'Roboto', sans-serif; }
+    input { background:#ddd; }
+    .container {  max-width:1200px; display:block; margin:0 auto;}
+
+    .card { display:flex; flex-direction:column; width:100%; background:#ddd; margin:20px 0; padding:15px; border-radius:5px; justify-content:center; align-items:center;
+            box-shadow:0 0.3px 0.9px rgb(0 0 0 / 11%), 0 1.6px 3.6px rgb(0 0 0 / 13%); box-sizing:border-box; }
+    .card .frase { font-size:20px; font-weight:600; }
+    .card .autor { font-size:16px; text-transform:uppercase; }
+}
+
+@media (max-width:640px){
+    .container {  max-width:95%; }
+}

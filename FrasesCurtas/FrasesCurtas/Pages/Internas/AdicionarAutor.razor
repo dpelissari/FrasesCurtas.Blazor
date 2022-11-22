@@ -1,9 +1,12 @@
 ﻿@page "/int/autores/adicionar-autor/";
 @attribute [Authorize(Roles = "Administrador")]
 
+@using FrasesCurtas.Componentes
 @using FrasesCurtas.Models;
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IAutorService AutorService;
+
+<Outdoor />
 
 <h3>Adicionar autor</h3> 
 
