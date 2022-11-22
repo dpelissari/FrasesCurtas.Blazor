@@ -8,30 +8,25 @@
 
 <PageTitle>Autores</PageTitle>
 
-<Outdoor />
 
 <div class="container">
     <h1>Autores</h1>
-    <ListaPaginada Dados="autores">
 
-        <ConteudoPrincipal>
-            <table>
-                <tr>
-                    <th>Identificador</th>
-                    <th>Nome</th>
-                    <th>Data Cadastro</th>
-                    <th>ativo?</th>
-                </tr>
-                <tr>
-                    <td>@context.Id</td>
-                    <td>@context.Nome</td>
-                    <td>@context.DataCadastro</td>
-                    <td>@context.Ativo</td>
-                </tr>
-            </table>
-        </ConteudoPrincipal>
-    </ListaPaginada>
+     <div class="autores">
 
+        <ListaPaginada Dados="autores.OrderBy(a => a.Nome)" QtdeItensPorPagina="21">
+            <ConteudoPrincipal>
+                    <div class="autor">
+                        <div class="foto">
+                            @context.Nome.Substring(0,2)
+                        </div>
+                        <div class="nome">
+                            @context.Nome
+                        </div>
+                    </div>
+            </ConteudoPrincipal>
+        </ListaPaginada>
+      </div>
 </div>
 
 @code {

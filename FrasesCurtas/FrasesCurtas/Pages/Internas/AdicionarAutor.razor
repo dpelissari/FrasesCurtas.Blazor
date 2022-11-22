@@ -6,33 +6,36 @@
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IAutorService AutorService;
 
-<Outdoor />
 
-<h3>Adicionar autor</h3> 
 
-<EditForm Model="autor" OnValidSubmit="CriarAutor">
-    <div>
-        <label for="nomeAutor">Nome</label>
-        <InputText @bind-Value="autor.Nome" class="form-control" id="autornome"></InputText>
-    </div>
-    <div>
-        <label for="dataCadastroAutor">Data Cadastro</label>
-        <InputDate @bind-Value="autor.DataCadastro"/>
-    </div>
-    <div>
-        <label for="arquivadaFrase">Ativo?</label>
-        <InputSelect @bind-Value="autor.Ativo" class="form-control">
-             <option value="true">Sim</option>
-             <option value="false" selected>Não</option>
+<div class="container">
+    <h3>Adicionar autor</h3> 
 
-        </InputSelect>
-    </div>
+    <EditForm Model="autor" OnValidSubmit="CriarAutor">
+        <div>
+            <label for="nomeAutor">Nome</label>
+            <InputText @bind-Value="autor.Nome" class="form-control" id="autornome"></InputText>
+        </div>
+        <div>
+            <label for="dataCadastroAutor">Data Cadastro</label>
+            <InputDate @bind-Value="autor.DataCadastro"/>
+        </div>
+        <div>
+            <label for="arquivadaFrase">Ativo?</label>
+            <InputSelect @bind-Value="autor.Ativo" class="form-control">
+                 <option value="true">Sim</option>
+                 <option value="false" selected>Não</option>
 
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+            </InputSelect>
+        </div>
 
-    <button type="submit">Incluir</button>
-</EditForm>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <button type="submit">Incluir</button>
+    </EditForm>
+
+</div>
 
 @code {
     Autor autor = new();

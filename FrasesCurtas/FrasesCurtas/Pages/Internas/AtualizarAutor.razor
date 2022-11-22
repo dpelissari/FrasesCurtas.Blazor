@@ -1,36 +1,43 @@
 ﻿@page "/int/autores/atualizar-autor/{id}";
 @attribute [Authorize(Roles = "Administrador")]
 
+@using FrasesCurtas.Componentes
 @using FrasesCurtas.Models;
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IAutorService AutorService;
 
-<h3>Atualizar Autor</h3>
 
-<EditForm Model="autor" OnValidSubmit="AtualizarAutores">
-    <div>
-        <label for="nomeAutor">Nome</label>
-        <InputText @bind-Value="autor.Nome" class="form-control" id="nomeAutor"></InputText>
-    </div>
-    <div>
-        <label for="dataCadastroAutor">Data Cadastro</label>
-        <InputDate @bind-Value="autor.DataCadastro" id="dataCadastroAutor"/>
-    </div>
-    <div>
-        <label for="arquivadaFrase">Ativo?</label>
-           <InputSelect @bind-Value="autor.Ativo" class="form-control">
-             <option value="true">Sim</option>
-             <option value="false">Não</option>
-        </InputSelect>
-    </div>
 
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<div class="container">
 
-    <button type="submit">Salvar</button>
-    <NavLink href="int/frases/">Cancelar</NavLink>
+    <h3>Atualizar Autor</h3>
 
-</EditForm>
+    <EditForm Model="autor" OnValidSubmit="AtualizarAutores">
+        <div>
+            <label for="nomeAutor">Nome</label>
+            <InputText @bind-Value="autor.Nome" class="form-control" id="nomeAutor"></InputText>
+        </div>
+        <div>
+            <label for="dataCadastroAutor">Data Cadastro</label>
+            <InputDate @bind-Value="autor.DataCadastro" id="dataCadastroAutor"/>
+        </div>
+        <div>
+            <label for="arquivadaFrase">Ativo?</label>
+               <InputSelect @bind-Value="autor.Ativo" class="form-control">
+                 <option value="true">Sim</option>
+                 <option value="false">Não</option>
+            </InputSelect>
+        </div>
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <button type="submit">Salvar</button>
+        <NavLink href="int/frases/">Cancelar</NavLink>
+
+    </EditForm>
+
+</div>
 
 @code {
     Autor autor = new();

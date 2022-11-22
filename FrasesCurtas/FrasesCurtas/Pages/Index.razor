@@ -2,30 +2,41 @@
 @using FrasesCurtas.Models
 @inject FrasesCurtas.Services.IFraseService FraseService
 @inject FrasesCurtas.Services.IAutorService AutorService
+@inject NavigationManager NavigationManager
 @using FrasesCurtas.Componentes;
 
 <PageTitle>Frases</PageTitle>
 
-<Outdoor />
+
 <div class="container">
-    <ListaPaginada Dados="frases">
+    <ListaPaginada Dados="frases.Where(f => f.Arquivada == false).OrderBy(f => f.DataCadastro)" QtdeItensPorPagina="10">
 
         <ConteudoPrincipal>
             <div class="card">
                 <p class="frase">@context.Descricao</p>
                 <p class="autor">@context.Autor?.Nome</p>
+
+                <div class="compartilhamento">
+                    <p>Compartilhar frase:</p>
+                    <a href="https://wa.me/?text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br" target="_blank">Whats</a>
+                    <a  href="https://telegram.me/share/url?url=@currentUrl&text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br." target="_blank">Telegram</a>                     
+                </div>
             </div>
         </ConteudoPrincipal>
     </ListaPaginada>
 </div>
-  
-<Rodape />
+ 
 
 @code {
     private IQueryable<Frase> frases;
+    private string currentUrl;
 
     // ao inicializar busca todas frases
     protected override async Task OnInitializedAsync() { 
+
+        //url atual
+        currentUrl = NavigationManager.Uri;
+
         frases = await FraseService.BuscarTodas(); 
 
         // alimenta autores

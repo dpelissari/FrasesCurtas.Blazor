@@ -9,38 +9,40 @@
 @inject FrasesCurtas.Services.IAutorService AutorService;
 
 
-<Outdoor />
 
-<h3>AdicionarFrase</h3>
 
-<EditForm Model="frase" OnValidSubmit="CriarFrase">
-    <div>
-        <label>Autor</label>
-        <InputSelect @bind-Value="frase.IdAutor">
-            @foreach (var autor in autores) {
-                <option value="@autor.Id">@autor.Nome</option>
-            }
-        </InputSelect>
-        <label for="descricaoFrase">Frase</label>
-        <InputText @bind-Value="frase.Descricao" id="descricaoFrase"></InputText>
-    </div>
-    <div>
-        <label for="dataCadastroFrase">Data Cadastro</label>
-        <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase"/>
-    </div>
-    <div>
-        <label for="arquivadaFrase">Arquvida</label>
-        <InputSelect @bind-Value="frase.Arquivada" class="form-control">
-             <option value="true">Sim</option>
-             <option value="false" selected>Não</option>
-        </InputSelect>
-    </div>
+<div class="container">
+    <h3>AdicionarFrase</h3>
 
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+    <EditForm Model="frase" OnValidSubmit="CriarFrase">
+        <div>
+            <label>Autor</label>
+            <InputSelect @bind-Value="frase.IdAutor">
+                @foreach (var autor in autores) {
+                    <option value="@autor.Id">@autor.Nome</option>
+                }
+            </InputSelect>
+            <label for="descricaoFrase">Frase</label>
+            <InputText @bind-Value="frase.Descricao" id="descricaoFrase"></InputText>
+        </div>
+        <div>
+            <label for="dataCadastroFrase">Data Cadastro</label>
+            <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase"/>
+        </div>
+        <div>
+            <label for="arquivadaFrase">Arquvida</label>
+            <InputSelect @bind-Value="frase.Arquivada" class="form-control">
+                 <option value="true">Sim</option>
+                 <option value="false" selected>Não</option>
+            </InputSelect>
+        </div>
 
-    <button type="submit">Incluir</button>
-</EditForm>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <button type="submit">Incluir</button>
+    </EditForm>
+</div>
 
 @code {
     Frase frase = new();

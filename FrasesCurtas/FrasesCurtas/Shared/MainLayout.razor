@@ -1,13 +1,13 @@
-﻿@inherits LayoutComponentBase
+﻿@using FrasesCurtas.Componentes
+@inherits LayoutComponentBase
 
 <PageTitle>FrasesCurtas</PageTitle>
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <NavMenu />
+    <Outdoor />
 
-    <main>
-        @Body
-    </main>
+    <main>@Body</main>
+
+    <Rodape />
 </div>

@@ -9,52 +9,49 @@
 
 <PageTitle>Frases</PageTitle>
 
-<Outdoor/>
 
-<div class="container"> 
-<h1>Frases</h1>
+<div class="container">
+    <h1>Frases</h1>
 
-<a href="/int/frases/adicionar-frase/">Criar</a>
+    <a href="/int/frases/adicionar-frase/">Criar</a>
 
-<ListaPaginada Dados="frases">
-  <ConteudoPrincipal>
-      <table>
-          <tr>
-            <th>Frase</th>
-            <th>Autor</th>
-            <th>Data Cadastro</th>
-            <th>Arquivada?</th>
-        </tr>
-         <tr>
-        <td>@context.Descricao</td>
-        <td>@context.Autor?.Nome</td>
-        <td>@context.DataCadastro</td>
-        <td>@context.Arquivada</td>
-        <td><a href="/int/frases/atualizar-frase/@context.Id">Atualizar</a></td>
-        <td><button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button></td>
-             
-         </tr>
-      </table>
-        
-      
-  </ConteudoPrincipal>
-</ListaPaginada>
+    <ListaPaginada Dados="frases">
+        <ConteudoPrincipal>
+            <table>
+                <tr>
+                    <th>Frase</th>
+                    <th>Autor</th>
+                    <th>Data Cadastro</th>
+                    <th>Arquivada?</th>
+                </tr>
+                <tr>
+                    <td>@context.Descricao</td>
+                    <td>@context.Autor?.Nome</td>
+                    <td>@context.DataCadastro</td>
+                    <td>@context.Arquivada</td>
+                    <td><a href="/int/frases/atualizar-frase/@context.Id">Atualizar</a></td>
+                    <td><button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button></td>
+                </tr>
+            </table>
+        </ConteudoPrincipal>
+    </ListaPaginada>
 </div>
 
 @code {
 
     [CascadingParameter]
-    private Task<AuthenticationState> authenticationState { get; set;  }
+    private Task<AuthenticationState> authenticationState { get; set; }
 
     private IQueryable<Frase> frases;
 
     // ao inicializar busca todas frases
-    protected override async Task OnInitializedAsync() { 
-        frases = await FraseService.BuscarTodas(); 
+    protected override async Task OnInitializedAsync() {
+        frases = await FraseService.BuscarTodas();
 
         // alimenta autores
-        foreach (var frase in frases){
-            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);    
+        foreach (var frase in frases)
+        {
+            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
         }
     }
 

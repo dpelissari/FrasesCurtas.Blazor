@@ -1,0 +1,4 @@
+﻿@media all {
+    .frase { font-size:20px; font-weight:600; }
+    .card .autor { font-size:16px; text-transform:uppercase; margin:15px 0; }
+}

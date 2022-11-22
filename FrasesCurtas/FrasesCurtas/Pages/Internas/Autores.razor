@@ -8,35 +8,37 @@
 
 <PageTitle>Autores</PageTitle>
 
-<h1>Autores</h1>
 
-<a href="/int/autores/adicionar-autor">Criar</a>
+<div class="container">
+    <h1>Autores</h1>
 
-<ListaPaginada Dados="autores">
+    <a href="/int/autores/adicionar-autor">Criar</a>
 
-    <ConteudoPrincipal>
-        <table>
-            <tr>
-                <th>Identificador</th>
-                <th>Nome</th>
-                <th>Data Cadastro</th>
-                <th>ativo?</th>
-            </tr>
-            <tr>
-                <td>@context.Id</td>
-                <td>@context.Nome</td>
-                <td>@context.DataCadastro</td>
-                <td>@context.Ativo</td>
-                <td>
-                    <a href="int/autores/atualizar-autor/@context.Id">Atualizar</a>
-                    <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
-                </td>
-            </tr>
-        </table>
+    <ListaPaginada Dados="autores">
 
+        <ConteudoPrincipal>
+            <table>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Nome</th>
+                    <th>Data Cadastro</th>
+                    <th>ativo?</th>
+                </tr>
+                <tr>
+                    <td>@context.Id</td>
+                    <td>@context.Nome</td>
+                    <td>@context.DataCadastro</td>
+                    <td>@context.Ativo</td>
+                    <td>
+                        <a href="int/autores/atualizar-autor/@context.Id">Atualizar</a>
+                        <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
+                    </td>
+                </tr>
+            </table>
 
-    </ConteudoPrincipal>
-</ListaPaginada>
+        </ConteudoPrincipal>
+    </ListaPaginada>
+</div>
 
 
 @code {
