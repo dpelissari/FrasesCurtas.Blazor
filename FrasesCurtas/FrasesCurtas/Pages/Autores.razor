@@ -1,0 +1,65 @@
+﻿@page "/autores"
+
+
+@using FrasesCurtas.Models
+@inject IJSRuntime JSRuntime
+@inject FrasesCurtas.Services.IAutorService AutorService;
+@using FrasesCurtas.Componentes;
+
+<PageTitle>Autores</PageTitle>
+
+<Outdoor />
+
+<div class="container">
+    <h1>Autores</h1>
+    <ListaPaginada Dados="autores">
+
+        <ConteudoPrincipal>
+            <table>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Nome</th>
+                    <th>Data Cadastro</th>
+                    <th>ativo?</th>
+                </tr>
+                <tr>
+                    <td>@context.Id</td>
+                    <td>@context.Nome</td>
+                    <td>@context.DataCadastro</td>
+                    <td>@context.Ativo</td>
+                </tr>
+            </table>
+        </ConteudoPrincipal>
+    </ListaPaginada>
+
+</div>
+
+@code {
+    private IQueryable<Autor> autores;
+
+    // ao inicializar busca todos autores
+    protected override async Task OnInitializedAsync() {
+        autores = await AutorService.BuscarTodas();
+    }
+
+    async Task ApagarFrase(Guid id) {
+
+        // exibe um alerta de confirmacao ao apagar autor
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esse autor?");
+
+        // se a confirmacao for false para por aqui
+        if (confirm is false)
+            return;
+
+        // se a confirmacao for true logaliza o autor pelo id
+        var autor = await AutorService.BuscarPor(id);
+
+        // apaga o autor encontrado
+        await AutorService.Apagar(autor);
+
+        // atualiza os autores que serao exibidos
+        autores = await AutorService.BuscarTodas();
+
+        StateHasChanged();
+    }
+}
