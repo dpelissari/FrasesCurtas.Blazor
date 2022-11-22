@@ -2,31 +2,38 @@
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager;
 
+<header>
+    <nav class="container">
+        <button onclick="AtivarMenuMblExt()" id="menu-mobile">
+            <img id="btn-ext-mobile" src="imagens/ico-menu-mobile.svg" width="21" height="21" alt="Abrir menu mobile" />
+        </button>
 
-<div>
-    <nav>
-        <div>
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+        <a class="logo-mobile">
+           @* <img src="imagens/logo-mobile.png" alt="Logo" />*@ Frases Curtas
+        </a>
+
+        <ul class="navegar">
+            <li><NavLink href="/">Frases</NavLink></li>
+            <li><NavLink href="autores/">Autores</NavLink></li>
+            <li><NavLink href="/" >Quem somos</NavLink></li>
+            <li><NavLink href="/">Contato</NavLink></li>
             <AuthorizeView>
                 <Authorized>
-                    <NavLink Match="NavLinkMatch.All" @onclick="Logout">Sair</NavLink>
+                    <li><NavLink @onclick="Logout">Sair</NavLink></li>
                 </Authorized>
                 <NotAuthorized>
-                    <NavLink href="entrar/" Match="NavLinkMatch.All">Entrar</NavLink>
+                    <li><NavLink href="entrar/">Entrar</NavLink></li>
                 </NotAuthorized>
             </AuthorizeView>
-        </div>
+        </ul>
     </nav>
-</div>
+</header>
 
 
-
-@code{
-    private async Task Logout()
-    {
+@code {
+    private async Task Logout() {
         var customAuthStateProvider = (ProvedorAutenticacao)authStateProvider;
         await customAuthStateProvider.AtualizarEstadoAutenticao(null);
         navManager.NavigateTo("/", true);
-
     }
 }

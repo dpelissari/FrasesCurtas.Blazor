@@ -1,62 +1,30 @@
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+@media all {
+    header { position:absolute; top:445px; width:100%; background:#707070; height:65px; }
+    nav { display:flex; align-items:center; justify-content:space-between; height:65px; outline:none; }
+    .ingresso { background:#044968; margin-right:2px; }
+    ::deep ul { margin:0; padding:0; list-style:none; display:flex; justify-content:space-between; align-items:center; width:100%; text-transform:uppercase;  }
+    ::deep ul li a { color:#FFF; padding:0 20px; display:flex; align-items:center; font-size:15px; height:65px; text-decoration:none; }
+    ::deep ul li a:hover { background:#D9C777; }
+
+    #menu-mobile { display:none; }
+    header.fixo { position:fixed; top:0; z-index:9999; }
+    header .logo-mobile { display:none; }
 }
 
-.top-row {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+@media (max-width: 1110px) {
+    nav { padding:30px; box-sizing:border-box; }
+    ::deep ul li a { font-size:12px; padding:0 5px; }
 }
 
-.navbar-brand {
-    font-size: 1.1rem;
-}
+@media (max-width: 1035px) {
+    header { position:fixed; top:0; z-index:9999; }
+    header #menu-mobile { display:block; background:none; border:none;  }
+    header .logo-mobile { display:flex; height:65px; align-items:center; position:fixed; top:0; left:50%; margin-left:-50px; }
+    header .logo-mobile img { max-width:100px; }
 
-.oi {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
-}
-
-.nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
-}
-
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
-
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
-
-    .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
-
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
-}
-
-.nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
-
-@media (min-width: 641px) {
-    .navbar-toggler {
-        display: none;
-    }
-
-    .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-    }
+    ::deep ul { display:none; }
+    ::deep ul li a:hover { background:#DDD; }
+    ::deep ul.menuMobile { position:absolute; top:60px; left:0; width:100%; display:block !important; background:#FFF; box-shadow:0px 5px 9px -3px #000000; }
+    ::deep ul.menuMobile li a { color:#4496e5; height:44px; line-height:44px; padding-left:30px; font-weight:600; }
+    ::deep ul.menuMobile li:nth-child(even) a { background:#F5F5F5; }
 }
