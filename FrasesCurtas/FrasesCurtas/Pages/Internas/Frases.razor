@@ -15,27 +15,42 @@
 
     <a href="/int/frases/adicionar-frase/">Criar</a>
 
-    <ListaPaginada Dados="frases">
-        <ConteudoPrincipal>
-            <table>
-                <tr>
-                    <th>Frase</th>
-                    <th>Autor</th>
-                    <th>Data Cadastro</th>
-                    <th>Arquivada?</th>
-                </tr>
-                <tr>
-                    <td>@context.Descricao</td>
-                    <td>@context.Autor?.Nome</td>
-                    <td>@context.DataCadastro</td>
-                    <td>@context.Arquivada</td>
-                    <td><a href="/int/frases/atualizar-frase/@context.Id">Atualizar</a></td>
-                    <td><button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button></td>
-                </tr>
-            </table>
-        </ConteudoPrincipal>
-    </ListaPaginada>
+    <div class="frases card lista-itens">
+        <ListaPaginada Dados="frases">
+            <ConteudoPrincipal>
+                <div class="frase-item item">
+
+                    <div>
+                        <h3>Frase</h3>
+                        <p>@context.Descricao</p>
+                    </div>
+
+                    <div>
+                        <h3>Autor</h3>
+                        <p>@context.Autor?.Nome</p>
+                    </div>
+
+                    <div>
+                        <h3>Data Cadastro</h3>
+                        <p>context.DataCadastro</p>
+                    </div>
+
+                    <div>
+                        <h3>Arquivada?</h3>
+                        <p>@(context.Arquivada == true ? "sim" : "Não")</p>
+                    </div>
+
+                    <div class="acoes">
+                        <h3>Ações</h3>
+                        <a href="/int/frases/atualizar-frase/@context.Id" class="btn btn-amarelo">Atualizar</a>
+                        <a @onclick="async () => await ApagarFrase(context.Id)" class="btn btn-vermelho">Apagar</a>
+                    </div>
+                </div>
+            </ConteudoPrincipal>
+        </ListaPaginada>
+    </div>
 </div>
+
 
 @code {
 

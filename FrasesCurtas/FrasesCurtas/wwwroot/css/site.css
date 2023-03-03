@@ -8,6 +8,26 @@
 
     .card { display:flex; flex-direction:column; width:100%; background:#ddd; margin:20px 0; padding:15px; border-radius:5px; justify-content:center; align-items:center;
             box-shadow:0 0.3px 0.9px rgb(0 0 0 / 11%), 0 1.6px 3.6px rgb(0 0 0 / 13%); box-sizing:border-box; background:#FFF; }
+
+
+    /* botoes */
+    .btn { text-decoration:none; height:30px; border-radius:5px; width:min-content; padding:5px 10px; }
+    .btn:hover { cursor:pointer; opacity:0.9; }
+    .btn-amarelo { background:#f1c40f; color:#404040; }
+    .btn-vermelho { background:#e74c3c; color:#FFFFFF; }
+
+    /* paginacao */
+    .pg { width:30px; height:30px; border-radius:50%; margin:0 15px; border:1px solid#e74c3c }
+
+/*    .pg.avancar-proximo { background:#404040; }
+    .pg.avancar-ultimo { background:red; }
+
+    .pg.retroceder-um { background:#f1c40f; }
+    .pg.retroceder-todos { background:blue; }*/
+
+
+
+    .pg.pg-ultimo { background:#ff6a00; }
 }
 
 @media (max-width:640px){

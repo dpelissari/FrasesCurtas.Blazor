@@ -13,27 +13,34 @@ else
 
     @if (TotalPaginas() > 1)
     {
-        <div class="pager-display">
+        <div>
+          
             @if (PaginaAtual == 1)
             {
-                <button disabled>&laquo;</button>
-                <button disabled>&lsaquo;</button>
+                // se for a primeira pagina inativa botoes de retroceder
+                <button class="pg 1 retrocer-todos" disabled>&laquo;</button>
+                <button class="pg 2 retroceder-um" disabled>&lsaquo;</button>
             }
             else
             {
-                <button @onclick="@AvancarUmaPagina">&laquo;</button>
-                <button @onclick="@VoltarUmaPagina">&lsaquo;</button>
+                // se nao for a primeira pagina ativa botoes de retroceder
+                <button @onclick="@AvancarUmaPagina" class="pg 3 retroceder-todos">&laquo;</button>
+                <button @onclick="@VoltarUmaPagina" class="pg 4 retroceder-um">&lsaquo;</button>
             }
             <span>@PaginaAtual de @TotalPaginas() </span>
+
+            
             @if (!irUltimaPagina())
             {
-                <button @onclick="@MoverProProximo">&rsaquo;</button>
-                <button @onclick="@MoverProUltimo">&raquo;</button>
+                // se nao for a ultima pagina inativa os botoes de avancar
+                <button @onclick="@MoverProProximo"class="pg 5 avancar-um">&rsaquo;</button>
+                <button @onclick="@MoverProUltimo" class="pg 6 avancar-todos">&raquo;</button>
             }
             else
             {
-                <button disabled>&rsaquo;</button>
-                <button disabled>&raquo;</button>
+                // se nao for a primeira ou a ultima pagina ativa botoes de avancar uma pagina e de retroceder uma pagina
+                <button disabled class="pg 7 avancar-um">&rsaquo;</button>
+                <button disabled class="pg 8 avancar-todos">&raquo;</button>
             }
         </div>
     }

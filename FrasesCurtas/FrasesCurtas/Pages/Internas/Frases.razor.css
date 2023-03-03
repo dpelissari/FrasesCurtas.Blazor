@@ -1,0 +1,4 @@
+﻿ .card { padding: 0;}
+.frase-item { display:grid;  grid-template-columns:1fr 1fr 1fr 1fr 1fr; padding:15px; }
+.frase-item:nth-child(even) { background:#ddd; }
+.frase-item div { text-align:center; }
