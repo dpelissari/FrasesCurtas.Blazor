@@ -13,19 +13,19 @@ else
 
     @if (TotalPaginas() > 1)
     {
-        <div>
+        <div class="paginacao">
           
             @if (PaginaAtual == 1)
             {
                 // se for a primeira pagina inativa botoes de retroceder
-                <button class="pg 1 retrocer-todos" disabled>&laquo;</button>
-                <button class="pg 2 retroceder-um" disabled>&lsaquo;</button>
+                <button class="pg retrocer-todos" disabled>&laquo;</button>
+                <button class="pg retroceder-um" disabled>&lsaquo;</button>
             }
             else
             {
                 // se nao for a primeira pagina ativa botoes de retroceder
-                <button @onclick="@AvancarUmaPagina" class="pg 3 retroceder-todos">&laquo;</button>
-                <button @onclick="@VoltarUmaPagina" class="pg 4 retroceder-um">&lsaquo;</button>
+                <button @onclick="@AvancarUmaPagina" class="pg retroceder-todos">&laquo;</button>
+                <button @onclick="@VoltarUmaPagina" class="pg retroceder-um">&lsaquo;</button>
             }
             <span>@PaginaAtual de @TotalPaginas() </span>
 
@@ -33,14 +33,14 @@ else
             @if (!irUltimaPagina())
             {
                 // se nao for a ultima pagina inativa os botoes de avancar
-                <button @onclick="@MoverProProximo"class="pg 5 avancar-um">&rsaquo;</button>
-                <button @onclick="@MoverProUltimo" class="pg 6 avancar-todos">&raquo;</button>
+                <button @onclick="@MoverProProximo"class="pg avancar-um">&rsaquo;</button>
+                <button @onclick="@MoverProUltimo" class="pg avancar-todos">&raquo;</button>
             }
             else
             {
                 // se nao for a primeira ou a ultima pagina ativa botoes de avancar uma pagina e de retroceder uma pagina
-                <button disabled class="pg 7 avancar-um">&rsaquo;</button>
-                <button disabled class="pg 8 avancar-todos">&raquo;</button>
+                <button disabled class="pg avancar-um">&rsaquo;</button>
+                <button disabled class="pg avancar-todos">&raquo;</button>
             }
         </div>
     }

@@ -2,7 +2,7 @@
 .novo-registro { display:flex; justify-content:flex-end; } 
 .novo-registro .btn { display:flex; align-items:center; width:max-content; background:#404040; color:#fff; text-transform:uppercase;  } 
 .card { padding: 0; }
-.frase-item { display:grid;  grid-template-columns:1fr 1fr 1fr 1fr; padding:15px; align-items:center; box-sizing:border-box; width:100%; }
+.frase-item { display:grid;  grid-template-columns:1fr 1fr 1fr 1fr 1fr; padding:15px; align-items:center; }
 .frase-item .descricao a { color:#404040; font-weight:600; }
 
 .frase-item:nth-child(even) { background:#ddd; }

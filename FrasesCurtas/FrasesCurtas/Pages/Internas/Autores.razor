@@ -9,36 +9,46 @@
 <PageTitle>Autores</PageTitle>
 
 
-<div class="container">
-    <h1>Autores</h1>
+<div class="container"
+    <div class="novo-registro">
+        <a href="/int/autores/adicionar-autor" class="btn">Incluir autor</a>
+    </div>
 
-    <a href="/int/autores/adicionar-autor">Criar</a>
+    <div class="frases card lista-itens">
+        <ListaPaginada Dados="autores">
+            <ConteudoPrincipal>
+                <div class="frase-item">
 
-    <ListaPaginada Dados="autores">
+                    <div class="descricao">
+                    <h3>Identificador</h3>
+                        <p>@context.Id</p>
+                    </div>
 
-        <ConteudoPrincipal>
-            <table>
-                <tr>
-                    <th>Identificador</th>
-                    <th>Nome</th>
-                    <th>Data Cadastro</th>
-                    <th>ativo?</th>
-                </tr>
-                <tr>
-                    <td>@context.Id</td>
-                    <td>@context.Nome</td>
-                    <td>@context.DataCadastro</td>
-                    <td>@context.Ativo</td>
-                    <td>
+                    <div class="cadastro">
+                        <h3>Nome</h3>
+                        <p>@context.Nome</p>
+                    </div>
+
+                    <div class="status">
+                        <h3>Cadastro</h3>
+                        <p>@context.DataCadastro</p>
+                    </div>
+
+                <div class="status">
+                    <h3>Arquivada?</h3>
+                    <p>@(context.Ativo == true ? "Sim" : "Não")</p>
+                </div>
+
+                    <div class="acoes">
                         <a href="int/autores/atualizar-autor/@context.Id">Atualizar</a>
                         <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
-                    </td>
-                </tr>
-            </table>
-
-        </ConteudoPrincipal>
-    </ListaPaginada>
+                    </div>
+                </div>
+            </ConteudoPrincipal>
+        </ListaPaginada>
+    </div>
 </div>
+
 
 
 @code {

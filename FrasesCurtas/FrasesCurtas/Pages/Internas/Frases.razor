@@ -13,35 +13,31 @@
 <div class="container">
     <h1>Frases</h1>
 
-    <a href="/int/frases/adicionar-frase/">Criar</a>
+    <div class="novo-registro">
+        <a href="/int/frases/adicionar-frase/" class="btn">Incluir frase</a>
+    </div>
 
     <div class="frases card lista-itens">
         <ListaPaginada Dados="frases">
             <ConteudoPrincipal>
-                <div class="frase-item item">
+                <div class="frase-item">
 
-                    <div>
+                    <div class="descricao">
                         <h3>Frase</h3>
-                        <p>@context.Descricao</p>
+                        <p>@context.Descricao. <a href="/int/autores/atualizar-autor/@context.Autor.Id">@context.Autor.Nome</a> </p>
                     </div>
 
-                    <div>
-                        <h3>Autor</h3>
-                        <p>@context.Autor?.Nome</p>
-                    </div>
-
-                    <div>
+                    <div class="cadastro">
                         <h3>Data Cadastro</h3>
-                        <p>context.DataCadastro</p>
+                        <p>@context.DataCadastro?.ToString("dd/MM/yyyy")</p>
                     </div>
 
-                    <div>
+                    <div class="status">
                         <h3>Arquivada?</h3>
-                        <p>@(context.Arquivada == true ? "sim" : "Não")</p>
+                        <p>@(context.Arquivada == true ? "Sim" : "Não")</p>
                     </div>
 
                     <div class="acoes">
-                        <h3>Ações</h3>
                         <a href="/int/frases/atualizar-frase/@context.Id" class="btn btn-amarelo">Atualizar</a>
                         <a @onclick="async () => await ApagarFrase(context.Id)" class="btn btn-vermelho">Apagar</a>
                     </div>
