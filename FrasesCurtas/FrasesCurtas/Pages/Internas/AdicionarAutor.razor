@@ -29,6 +29,8 @@
             </InputSelect>
         </div>
 
+        <InputFile OnChange="HandleFileSelection" />
+
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -39,6 +41,19 @@
 
 @code {
     Autor autor = new();
+
+    private async Task HandleFileSelection(InputFileChangeEventArgs e) {
+        var arquivo = e.File;
+        if (arquivo != null)
+        {
+            var caminhoArquivo = Path.Combine("wwwroot", "autores", arquivo.Name);
+            using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
+            {
+                await arquivo.OpenReadStream().CopyToAsync(stream);
+            }
+            autor.CaminhoImagem = $"/autores/{arquivo.Name}";
+        }
+    }
 
     async Task CriarAutor() {
         autor.GerarNovoId();

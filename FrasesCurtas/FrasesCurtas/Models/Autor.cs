@@ -12,7 +12,7 @@ namespace FrasesCurtas.Models
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         public bool Ativo { get; set; } = true;
 
-
+        public string CaminhoImagem { get; set; }
 
         public ICollection<Frase> Frases { get; set; }
 
