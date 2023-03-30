@@ -29,7 +29,16 @@
             </InputSelect>
         </div>
 
-        <InputFile OnChange="HandleFileSelection" />
+        <div>
+            <label>Imagem</label>
+            <InputFile  OnChange="HandleFileSelection"/>
+            <img src="@autor.CaminhoImagem" id="target">
+
+            <PlaceHolder Visible="!string.IsNullOrEmpty(Erro)">
+                <p>@Erro</p>
+            </PlaceHolder>
+
+        </div>
 
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -41,19 +50,38 @@
 
 @code {
     Autor autor = new();
+    public string Erro { get; set; } = string.Empty;
+
+    private bool ArquivoEhImagem(IBrowserFile file) {
+
+        // extensões de imagem válidas
+        var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png"};
+
+        // verifica se a extensão do arquivo está na lista de extensões permitidas
+        var extensaoArquivo = Path.GetExtension(file.Name);
+        return extensoesPermitidas.Contains(extensaoArquivo.ToLower());
+    }
 
     private async Task HandleFileSelection(InputFileChangeEventArgs e) {
         var arquivo = e.File;
-        if (arquivo != null)
+
+        if (arquivo != null && ArquivoEhImagem(arquivo))
         {
+
             var caminhoArquivo = Path.Combine("wwwroot", "autores", arquivo.Name);
-            using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
-            {
+            using (var stream = new FileStream(caminhoArquivo, FileMode.Create)) {
                 await arquivo.OpenReadStream().CopyToAsync(stream);
             }
             autor.CaminhoImagem = $"/autores/{arquivo.Name}";
-        }
+            Erro = string.Empty;
+
+        }  else
+        {
+            Erro = "Arquivo não selecionado ou inválido (Arquivos aceitos: .jpg e .png)";
+        };
     }
+
+
 
     async Task CriarAutor() {
         autor.GerarNovoId();
