@@ -1,0 +1,63 @@
+﻿@using FrasesCurtas.Models;
+
+<div>
+    <label>@TextoLabel</label>
+    <InputFile  OnChange="HandleFileSelection"/>
+    <img src="@Modelo.CaminhoImagem" id="target">
+    <PlaceHolder Visible="!string.IsNullOrEmpty(Erro)">
+        <p>@Erro</p>
+    </PlaceHolder>
+ </div>
+
+@code {
+    @typeparam T where T : Autor
+
+    [Parameter]
+    public T Modelo { get; set; }
+
+    [Parameter]
+    public string DiretorioImagem { get; set; }
+
+    [Parameter]
+    public string TextoLabel { get; set; } = "Enviar imagem";
+
+    public string Erro { get; set; } = string.Empty;
+
+    private bool ArquivoEhImagem(IBrowserFile file) {
+
+        // extensões de imagem válidas
+        var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png" };
+
+        // verifica se a extensão do arquivo está na lista de extensões permitidas
+        var extensaoArquivo = Path.GetExtension(file.Name);
+        return extensoesPermitidas.Contains(extensaoArquivo.ToLower());
+    }
+
+    private async Task HandleFileSelection(InputFileChangeEventArgs e) {
+        var arquivo = e.File;
+
+        if (arquivo != null && ArquivoEhImagem(arquivo))
+        {
+            // diretório onde a imagem será armazenada
+            var diretorio = $"wwwroot/{DiretorioImagem}";
+
+            // caminho para imagem armazenada
+            var caminhoArquivo = Path.Combine(diretorio, arquivo.Name);
+
+            // verifica se o diretório existe, se não existir cria a pasta
+            if (!Directory.Exists(diretorio)) Directory.CreateDirectory(diretorio);
+            
+            using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
+            {
+                await arquivo.OpenReadStream().CopyToAsync(stream);
+            }
+
+            Modelo.CaminhoImagem = $"/{DiretorioImagem}/{arquivo.Name}";
+            Erro = string.Empty;
+        }
+        else
+        {
+            Erro = "Arquivo não selecionado ou inválido (Arquivos aceitos: .jpg e .png)";
+        };
+    }
+}

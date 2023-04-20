@@ -28,12 +28,15 @@
                  <option value="false">Não</option>
             </InputSelect>
         </div>
+        <div>
+            <ImagemUpload Modelo="@autor" DiretorioImagem="autores"></ImagemUpload>
+        </div>
 
         <DataAnnotationsValidator />
         <ValidationSummary />
 
         <button type="submit">Salvar</button>
-        <NavLink href="int/frases/">Cancelar</NavLink>
+        <NavLink href="int/autores/">Cancelar</NavLink>
 
     </EditForm>
 
