@@ -2,8 +2,21 @@
 
 <div>
     <label>@TextoLabel</label>
+
     <InputFile  OnChange="HandleFileSelection"/>
-    <img src="@Modelo.CaminhoImagem" id="target">
+
+    <PlaceHolder Visible="@ExibeImagem">
+        <img src="@Modelo.CaminhoImagem" style="width:100px; height:100px; border-radius:50%;">
+    </PlaceHolder>
+
+    <PlaceHolder Visible="@ExibeBotaoUpload">
+        <button @onclick="EnviarImagem" type="button">UPLOAD</button>
+    </PlaceHolder>
+
+    <PlaceHolder Visible="@(Modelo.CaminhoImagem != null)">
+        <button @onclick="RemoverImagem" type="button">REMOVER</button>
+    </PlaceHolder>
+
     <PlaceHolder Visible="!string.IsNullOrEmpty(Erro)">
         <p>@Erro</p>
     </PlaceHolder>
@@ -16,12 +29,20 @@
     public T Modelo { get; set; }
 
     [Parameter]
-    public string DiretorioImagem { get; set; }
+    public string DiretorioImagem { get; set; } = string.Empty;
 
     [Parameter]
     public string TextoLabel { get; set; } = "Enviar imagem";
 
     public string Erro { get; set; } = string.Empty;
+
+    private IBrowserFile Arquivo { get; set; }
+
+    public string caminhoArquivo { get; set; } = string.Empty;
+
+    public bool ExibeImagem => Modelo.CaminhoImagem != null;
+    public bool ExibeBotaoUpload => Modelo.CaminhoImagem == null && Arquivo != null;
+    public bool ExibeBotaoRemover => Modelo.CaminhoImagem != null;
 
     private bool ArquivoEhImagem(IBrowserFile file) {
 
@@ -32,32 +53,55 @@
         var extensaoArquivo = Path.GetExtension(file.Name);
         return extensoesPermitidas.Contains(extensaoArquivo.ToLower());
     }
+    
+    private async Task HandleFileSelection(InputFileChangeEventArgs e)
+    {
+        Arquivo = e.File;
+    }
 
-    private async Task HandleFileSelection(InputFileChangeEventArgs e) {
-        var arquivo = e.File;
-
-        if (arquivo != null && ArquivoEhImagem(arquivo))
+    private async Task EnviarImagem()
+    {
+        if (Arquivo != null && ArquivoEhImagem(Arquivo))
         {
             // diretório onde a imagem será armazenada
             var diretorio = $"wwwroot/{DiretorioImagem}";
 
             // caminho para imagem armazenada
-            var caminhoArquivo = Path.Combine(diretorio, arquivo.Name);
+            var caminhoArquivo = Path.Combine(diretorio, Arquivo.Name);
 
             // verifica se o diretório existe, se não existir cria a pasta
             if (!Directory.Exists(diretorio)) Directory.CreateDirectory(diretorio);
-            
+
+            // cria o arquivo
             using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
             {
-                await arquivo.OpenReadStream().CopyToAsync(stream);
+                await Arquivo.OpenReadStream().CopyToAsync(stream);
             }
 
-            Modelo.CaminhoImagem = $"/{DiretorioImagem}/{arquivo.Name}";
+            // guarda caminho da imagem
+            Modelo.CaminhoImagem = $"/{DiretorioImagem}/{Arquivo.Name}";
+           
+            // limpa erros
             Erro = string.Empty;
         }
         else
         {
             Erro = "Arquivo não selecionado ou inválido (Arquivos aceitos: .jpg e .png)";
         };
+    }
+
+    private async Task RemoverImagem()
+    {
+        if (Modelo.CaminhoImagem != null)
+        {
+            // Remove a imagem do diretório
+            //var caminhoArquivo = Path.Combine("wwwroot", Modelo.CaminhoImagem.TrimStart('/'));
+            //if (System.IO.File.Exists(caminhoArquivo))
+            //{
+            //    System.IO.File.Delete(caminhoArquivo);
+            //}
+            // Limpa o caminho da imagem do modelo
+            Modelo.CaminhoImagem = null;
+        }
     }
 }

@@ -2,6 +2,7 @@ Pacotes
 1- Microsoft.EntityFrameworkCore
 2- Microsoft.EntityFrameworkInMemory (depois que funcionar Microsoft.EntityFrameworkCore.Sqlite)
 
+dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 
