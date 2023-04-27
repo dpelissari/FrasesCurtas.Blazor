@@ -8,21 +8,16 @@
 
 <PageTitle>Autores</PageTitle>
 
-
 <div class="container">
     <h1>Autores</h1>
 
      <div class="autores">
 
-        <ListaPaginada Dados="autores.OrderBy(a => a.Nome)" QtdeItensPorPagina="21">
+        <ListaPaginada Dados="autores.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="21">
             <ConteudoPrincipal>
                     <div class="autor">
                         <div class="foto">
                         <img src="@context.CaminhoImagem" alt="@context.Nome" style="width:100px; height:100px; border-radius:50%;" />
-                           @* @context.Nome.Substring(0,2)*@
-                        </div>
-                        <div class="nome">
-                            @context.Nome
                         </div>
                     </div>
             </ConteudoPrincipal>
@@ -44,8 +39,7 @@
         bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esse autor?");
 
         // se a confirmacao for false para por aqui
-        if (confirm is false)
-            return;
+        if (confirm is false) return;
 
         // se a confirmacao for true logaliza o autor pelo id
         var autor = await AutorService.BuscarPor(id);
