@@ -1,23 +1,5 @@
-Projeto de site de frases baseado no pensador desenvolvido em Blazor.
+Este projeto consiste em um site de frases baseado no Pensador, desenvolvido utilizando a tecnologia Blazor. Para isso, foram utilizados recursos como o Blazor App Server (.NET 6), o Entity Framework Core e o SQLite. Além disso, foram utilizados os pacotes Microsoft.EntityFrameworkCore.Design(6.0.0), Microsoft.EntityFrameworkCore.Sqlite(6.0.0) e SixLabors.ImageSharp(3.0.1).
 
-Recursos utilizados:
-- Blazor App Server (.NET 6) 
-- Entity Framework Core
-- SQLite
+O site possui diversas funcionalidades, incluindo a possibilidade de incluir, editar e excluir frases. Também é possível adicionar autores, com a opção de fazer upload de imagem, e editá-los posteriormente. O site conta ainda com autenticação de usuários e botões para compartilhamento de frases pelo WhatsApp e Telegram.
 
-Pacotes:
-- Microsoft.EntityFrameworkCore.Design
-- Microsoft.EntityFrameworkCore.Sqlite
-
-Funcionalidades:
-- Inclusão de Frases
-- Edição de Frases
-- Exclusão de Frases
-- Inclusão de Usuários
-- Edição de usuários
-- Autenticação de Usuários
-- Botões para compartilhamento em redes sociais
-
-funcionalidades futuras:
-- Upload de imagens para as frases
-- Botão para copiar mensagens
+Para o futuro, o projeto prevê a inclusão de um botão para copiar ou transferir mensagens. Essa funcionalidade será de grande utilidade para os usuários, tornando a experiência ainda mais completa e satisfatória.
