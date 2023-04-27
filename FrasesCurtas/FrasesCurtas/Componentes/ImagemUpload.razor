@@ -1,9 +1,10 @@
 ﻿@using FrasesCurtas.Models;
+@using SixLabors.ImageSharp;
 
 <div>
     <label>@TextoLabel</label>
 
-    <InputFile  OnChange="HandleFileSelection"/>
+    <InputFile OnChange="HandleFileSelection" />
 
     <PlaceHolder Visible="@ExibeImagem">
         <img src="@Modelo.CaminhoImagem" style="width:100px; height:100px; border-radius:50%;">
@@ -20,7 +21,7 @@
     <PlaceHolder Visible="!string.IsNullOrEmpty(Erro)">
         <p>@Erro</p>
     </PlaceHolder>
- </div>
+</div>
 
 @code {
     @typeparam T where T : Autor
@@ -32,13 +33,16 @@
     public string DiretorioImagem { get; set; } = string.Empty;
 
     [Parameter]
+    public int LarguraImagem { get; set; } = 150;
+
+    [Parameter]
     public string TextoLabel { get; set; } = "Enviar imagem";
 
     public string Erro { get; set; } = string.Empty;
 
     private IBrowserFile Arquivo { get; set; }
 
-    public string caminhoArquivo { get; set; } = string.Empty;
+    public int caminhoArquivo { get; set; } = 150;
 
     public bool ExibeImagem => Modelo.CaminhoImagem != null;
     public bool ExibeBotaoUpload => Modelo.CaminhoImagem == null && Arquivo != null;
@@ -53,14 +57,12 @@
         var extensaoArquivo = Path.GetExtension(file.Name);
         return extensoesPermitidas.Contains(extensaoArquivo.ToLower());
     }
-    
-    private async Task HandleFileSelection(InputFileChangeEventArgs e)
-    {
+
+    private async Task HandleFileSelection(InputFileChangeEventArgs e) {
         Arquivo = e.File;
     }
 
-    private async Task EnviarImagem()
-    {
+    private async Task EnviarImagem() {
         if (Arquivo != null && ArquivoEhImagem(Arquivo))
         {
             // diretório onde a imagem será armazenada
@@ -72,15 +74,23 @@
             // verifica se o diretório existe, se não existir cria a pasta
             if (!Directory.Exists(diretorio)) Directory.CreateDirectory(diretorio);
 
-            // cria o arquivo
-            using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
+            // redimensiona a imagem
+            using (var image = await SixLabors.ImageSharp.Image.LoadAsync(Arquivo.OpenReadStream()))
             {
-                await Arquivo.OpenReadStream().CopyToAsync(stream);
+                // define a largura da imagem como 100 pixels e calcula a altura automaticamente para manter a proporção
+                image.Mutate(x => x.Resize(new ResizeOptions
+                    {
+                        Size = new Size(LarguraImagem, 0),
+                        Mode = ResizeMode.Max,
+                    }));
+
+                // salva a imagem redimensionada
+                await image.SaveAsync(caminhoArquivo);
             }
 
             // guarda caminho da imagem
             Modelo.CaminhoImagem = $"/{DiretorioImagem}/{Arquivo.Name}";
-           
+
             // limpa erros
             Erro = string.Empty;
         }
@@ -90,8 +100,7 @@
         };
     }
 
-    private async Task RemoverImagem()
-    {
+    private async Task RemoverImagem() {
         if (Modelo.CaminhoImagem != null)
         {
             // Remove a imagem do diretório
