@@ -9,6 +9,7 @@ namespace FrasesCurtas.Data
 
         public DbSet<Frase>? Frases { get; set; }
         public DbSet<Autor>? Autores { get; set; }
+        public DbSet<CategoriaFrase>? Categorias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
