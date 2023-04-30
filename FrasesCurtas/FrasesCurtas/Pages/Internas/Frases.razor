@@ -5,10 +5,10 @@
 @inject IJSRuntime JSRuntime
 @inject FrasesCurtas.Services.IFraseService FraseService;
 @inject FrasesCurtas.Services.IAutorService AutorService;
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 @using FrasesCurtas.Componentes;
 
 <PageTitle>Frases</PageTitle>
-
 
 <div class="container">
     <h1>Frases</h1>
@@ -21,17 +21,18 @@
         <ListaPaginada Dados="frases">
             <ConteudoPrincipal>
                 <div class="frase-item">
-
                     <div class="descricao">
                         <h3>Frase</h3>
                         <p>@context.Descricao. <a href="/int/autores/atualizar-autor/@context.Autor.Id">@context.Autor.Nome</a> </p>
                     </div>
-
+                    <div class="categoria">
+                        <h3>Categoria</h3>
+                        <p>@context.Categoria.Categoria</p>
+                    </div>
                     <div class="cadastro">
                         <h3>Data Cadastro</h3>
                         <p>@context.DataCadastro?.ToString("dd/MM/yyyy")</p>
                     </div>
-
                     <div class="status">
                         <h3>Arquivada?</h3>
                         <p>@(context.Arquivada == true ? "Sim" : "Não")</p>
@@ -47,7 +48,6 @@
     </div>
 </div>
 
-
 @code {
 
     [CascadingParameter]
@@ -59,10 +59,11 @@
     protected override async Task OnInitializedAsync() {
         frases = await FraseService.BuscarTodas();
 
-        // alimenta autores
+        // obtem autores e categoria
         foreach (var frase in frases)
         {
             frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
+            frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
         }
     }
 

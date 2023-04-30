@@ -1,0 +1,56 @@
+﻿@page "/categorias"
+
+
+@using FrasesCurtas.Models
+@inject IJSRuntime JSRuntime
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+@using FrasesCurtas.Componentes;
+@using FrasesCurtas.Services;
+
+<PageTitle>Categorias</PageTitle>
+
+<div class="container">
+    <h1>Categorias</h1>
+
+     <div class="autores">
+
+        <ListaPaginada Dados="categorias.OrderBy(a => a.Categoria).Where(a => a.Ativo)" QtdeItensPorPagina="21">
+            <ConteudoPrincipal>
+                <div>@context.Id</div>
+                <div>@context.Categoria</div>
+                <div>@context.Descricao</div>
+                <div>@context.DataCadastro</div>
+                <div>@context.Ativo</div>
+            </ConteudoPrincipal>
+        </ListaPaginada>
+      </div>
+</div>
+
+@code {
+    private IQueryable<CategoriaFrase> categorias;
+
+    // ao inicializar busca todos autores
+    protected override async Task OnInitializedAsync() {
+        categorias = await CategoriaFraseService.BuscarTodas();
+    }
+
+    async Task ApagarFrase(Guid id) {
+
+        // exibe um alerta de confirmacao ao apagar autor
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir essa categoria?");
+
+        // se a confirmacao for false para por aqui
+        if (confirm is false) return;
+
+        // se a confirmacao for true logaliza o autor pelo id
+        var categoria = await CategoriaFraseService.BuscarPor(id);
+
+        // apaga o autor encontrado
+        await CategoriaFraseService.Apagar(categoria);
+
+        // atualiza os autores que serao exibidos
+        categorias = await CategoriaFraseService.BuscarTodas();
+
+        StateHasChanged();
+    }
+}

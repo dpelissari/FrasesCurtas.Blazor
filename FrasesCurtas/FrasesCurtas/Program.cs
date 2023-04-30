@@ -20,7 +20,6 @@ builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, ProvedorAutenticacao>();
 builder.Services.AddSingleton<ContaUsuarioService>();
 
-
 // salvando em memoria
 //builder.Services.AddDbContext<AplicacaoDbContexto>(options => options.UseInMemoryDatabase("FrasesDb"));
 
@@ -30,6 +29,7 @@ builder.Services.AddSqlite<AplicacaoDbContexto>(connectionString);
 // configurando a injeção de dependencia dos nossos serviços
 builder.Services.AddScoped<IFraseService, FraseService>();
 builder.Services.AddScoped<IAutorService, AutorService>();
+builder.Services.AddScoped<ICategoriaFraseService, CategoriaFraseService>();
 
 
 var app = builder.Build();

@@ -1,0 +1,16 @@
+﻿.container { padding:20px; }
+.novo-registro { display:flex; justify-content:flex-end; } 
+.novo-registro .btn { display:flex; align-items:center; width:max-content; background:#404040; color:#fff; text-transform:uppercase;  } 
+.card { padding: 0; }
+.frase-item { display:grid;  grid-template-columns:1fr 1fr 1fr 1fr 1fr; padding:15px; align-items:center; }
+.frase-item .descricao a { color:#404040; font-weight:600; }
+
+.frase-item:nth-child(even) { background:#ddd; }
+.frase-item div { text-align:center; }
+
+@media (max-width:740px){
+    .frase-item { grid-template-columns:1fr 1fr 1fr;}
+    .frase-item .cadastro { display:none; }
+     .frase-item .acoes { display:flex; flex-direction:column; }
+    .frase-item a.btn { width:100%; box-sizing:border-box; margin:5px 0; }
+}

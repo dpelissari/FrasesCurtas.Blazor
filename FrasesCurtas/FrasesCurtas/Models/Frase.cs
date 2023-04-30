@@ -7,7 +7,11 @@ namespace FrasesCurtas.Models {
 
         public Guid IdAutor { get; set; }
 
+        public Guid IdCategoriaFrase { get; set; }
+
         public Autor Autor { get; set; }
+
+        public CategoriaFrase Categoria { get; set; }
 
         [Required]
         [MaxLength(500)]

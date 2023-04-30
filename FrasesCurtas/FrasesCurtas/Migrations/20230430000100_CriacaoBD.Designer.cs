@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FrasesCurtas.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20230330171942_ImagemAutor")]
-    partial class ImagemAutor
+    [Migration("20230430000100_CriacaoBD")]
+    partial class CriacaoBD
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,33 @@ namespace FrasesCurtas.Migrations
                     b.ToTable("Autores");
                 });
 
+            modelBuilder.Entity("FrasesCurtas.Models.CategoriaFrase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categorias");
+                });
+
             modelBuilder.Entity("FrasesCurtas.Models.Frase", b =>
                 {
                     b.Property<Guid>("Id")
@@ -65,9 +92,14 @@ namespace FrasesCurtas.Migrations
                     b.Property<Guid>("IdAutor")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("IdCategoriaFrase")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdAutor");
+
+                    b.HasIndex("IdCategoriaFrase");
 
                     b.ToTable("Frases");
                 });
@@ -80,10 +112,23 @@ namespace FrasesCurtas.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FrasesCurtas.Models.CategoriaFrase", "Categoria")
+                        .WithMany("Frases")
+                        .HasForeignKey("IdCategoriaFrase")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Autor");
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("FrasesCurtas.Models.Autor", b =>
+                {
+                    b.Navigation("Frases");
+                });
+
+            modelBuilder.Entity("FrasesCurtas.Models.CategoriaFrase", b =>
                 {
                     b.Navigation("Frases");
                 });

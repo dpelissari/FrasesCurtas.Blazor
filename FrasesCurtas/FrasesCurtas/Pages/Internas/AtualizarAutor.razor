@@ -6,8 +6,6 @@
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IAutorService AutorService;
 
-
-
 <div class="container">
 
     <h3>Atualizar Autor</h3>
@@ -45,7 +43,8 @@
 @code {
     Autor autor = new();
 
-    [Parameter]public string id{ get; set; }  
+    [Parameter]
+    public string id{ get; set; }  
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,7 +54,6 @@
     async Task AtualizarAutores()
     {
         await AutorService.Atualizar(autor);
-
         NavigationManager.NavigateTo("/int/autores");
     }
 }

@@ -16,6 +16,7 @@ namespace FrasesCurtas.Models
 
         //[Required(ErrorMessage = "O campo imagem é obrigatório")]
         public string CaminhoImagem { get; set; }
+
         public ICollection<Frase> Frases { get; set; }
         // metodo para geração do id em Guid
         public void GerarNovoId()

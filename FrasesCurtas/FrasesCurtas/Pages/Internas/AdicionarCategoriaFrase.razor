@@ -1,0 +1,48 @@
+﻿@page "/int/categorias/adicionar-categoria/";
+@attribute [Authorize(Roles = "Administrador")]
+
+@using FrasesCurtas.Componentes
+@using FrasesCurtas.Models;
+@inject NavigationManager NavigationManager;
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+
+<div class="container">
+    <h3>Adicionar categoria</h3> 
+
+    <EditForm Model="categoria" OnValidSubmit="CriarCategoriaFrase">
+        <div>
+            <label>Cadastro</label>
+            <InputDate @bind-Value="categoria.DataCadastro"></InputDate>
+        </div>
+        <div>
+            <label>Categoria</label>
+            <InputText @bind-Value="categoria.Categoria"></InputText>
+        </div>
+        <div>
+            <label>Descrição</label>
+            <InputText @bind-Value="categoria.Descricao"/>
+        </div>
+        <div>
+            <label for="arquivadaFrase">Ativo?</label>
+            <InputSelect @bind-Value="categoria.Ativo">
+                 <option value="true">Sim</option>
+                 <option value="false" selected>Não</option>
+            </InputSelect>
+        </div>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <button type="submit">Incluir</button>
+    </EditForm>
+
+</div>
+
+@code {
+    CategoriaFrase categoria = new();
+
+    async Task CriarCategoriaFrase() {
+        categoria.GerarNovoId();
+        await CategoriaFraseService.Adicionar(categoria);
+        NavigationManager.NavigateTo("/int/categorias");
+    }
+}

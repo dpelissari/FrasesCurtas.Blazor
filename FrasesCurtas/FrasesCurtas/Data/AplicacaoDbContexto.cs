@@ -9,12 +9,15 @@ namespace FrasesCurtas.Data
 
         public DbSet<Frase>? Frases { get; set; }
         public DbSet<Autor>? Autores { get; set; }
+        public DbSet<CategoriaFrase>? Categorias { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // mapeia propriedades
             modelBuilder.Entity<Frase>().HasKey(m => m.Id);
             modelBuilder.Entity<Autor>().HasKey(m => m.Id);
+            modelBuilder.Entity<CategoriaFrase>().HasKey(m => m.Id);
 
             // configura a relação onde um autor pode ter varias frases e uma frase um unico autor
             modelBuilder.Entity<Autor>()
@@ -22,6 +25,14 @@ namespace FrasesCurtas.Data
             .WithOne(s => s.Autor)
             .HasForeignKey(s => s.IdAutor)
             .OnDelete(DeleteBehavior.Cascade);
+
+            // configura a relação onde uma categoria pode ter varias frases e uma frase uma unica autor
+            modelBuilder.Entity<CategoriaFrase>()
+            .HasMany(c => c.Frases)
+            .WithOne(f => f.Categoria)
+            .HasForeignKey(f => f.IdCategoriaFrase)
+            .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
     }

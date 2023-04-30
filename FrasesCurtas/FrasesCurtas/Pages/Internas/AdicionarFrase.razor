@@ -7,8 +7,7 @@
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IFraseService FraseService;
 @inject FrasesCurtas.Services.IAutorService AutorService;
-
-
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 
 
 <div class="container">
@@ -16,6 +15,15 @@
 
     <EditForm Model="frase" OnValidSubmit="CriarFrase">
         <div>
+            <label>Categoria</label>
+            <InputSelect @bind-Value="frase.IdCategoriaFrase">
+                @foreach (var categoria in categorias)
+                {
+                    <option value="@categoria.Id">@categoria.Categoria</option>
+                }
+            </InputSelect>
+
+
             <label>Autor</label>
             <InputSelect @bind-Value="frase.IdAutor">
                 @foreach (var autor in autores) {
@@ -47,6 +55,7 @@
 @code {
     Frase frase = new();
     private IQueryable<Autor> autores;
+    private IQueryable<CategoriaFrase> categorias;
 
     async Task CriarFrase() {
         frase.GerarNovoId();
@@ -55,5 +64,9 @@
     }
 
     // ao inicializar busca todos autores
-    protected override async Task OnInitializedAsync() { autores = await AutorService.BuscarTodas(); }
+    protected override async Task OnInitializedAsync() { 
+        autores = await AutorService.BuscarTodas(); 
+        categorias = await CategoriaFraseService.BuscarTodas();
+    
+    }
 }

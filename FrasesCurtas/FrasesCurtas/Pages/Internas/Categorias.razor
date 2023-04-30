@@ -1,0 +1,62 @@
+﻿@page "/int/categorias"
+@attribute [Authorize(Roles = "Administrador")]
+
+@using FrasesCurtas.Models
+@inject IJSRuntime JSRuntime
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+@using FrasesCurtas.Componentes;
+
+<PageTitle>Categorias</PageTitle>
+
+
+<div class="container"
+    <div class="novo-registro">
+        <a href="/int/categorias/adicionar-categoria" class="btn">Incluir categoria</a>
+    </div>
+
+    <div class="">
+        <ListaPaginada Dados="categorias">
+            <ConteudoPrincipal>
+                <div class="categoria-item">
+                    <div>@context.Categoria</div>
+                    <div>@context.Descricao</div>
+                    <div>@context.DataCadastro</div>
+                    <div class="acoes">
+                        <a href="int/categorias/atualizar-categoria/@context.Id">Atualizar</a>
+                        <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
+                    </div>
+                </div>
+            </ConteudoPrincipal>
+        </ListaPaginada>
+    </div>
+</div>
+
+@code {
+    private IQueryable<CategoriaFrase> categorias;
+
+    // ao inicializar busca todas categorias
+    protected override async Task OnInitializedAsync() {
+        categorias = await CategoriaFraseService.BuscarTodas();
+    }
+
+    async Task ApagarFrase(Guid id) {
+
+        // exibe um alerta de confirmacao ao apagar categoria
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir essa categoria?");
+
+        // se a confirmacao for false para por aqui
+        if (confirm is false)
+            return;
+
+        // se a confirmacao for true logaliza a categoria pelo id
+        var categoria = await CategoriaFraseService.BuscarPor(id);
+
+        // apaga a categoria encontrada
+        await CategoriaFraseService.Apagar(categoria);
+
+        // atualiza as categorias que serao exibidas
+        categorias = await CategoriaFraseService.BuscarTodas();
+
+        StateHasChanged();
+    }
+}
