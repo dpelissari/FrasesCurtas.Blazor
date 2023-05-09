@@ -4,6 +4,7 @@
 @inject FrasesCurtas.Services.IAutorService AutorService
 @inject NavigationManager NavigationManager
 @using FrasesCurtas.Componentes;
+@using FrasesCurtas.Models.Interop;
 
 <PageTitle>Frases</PageTitle>
 
@@ -24,6 +25,11 @@
             </div>
         </ConteudoPrincipal>
     </ListaPaginada>
+
+
+    <ObservadorTamanhoJanela AoRedimensionar="Redimensionou" />
+    @_ehCelular
+
 </div>
  
 
@@ -43,5 +49,15 @@
         foreach (var frase in frases){
             frase.Autor = await AutorService.BuscarPor(frase.IdAutor);    
         }
+    }
+
+    public Dimensao? Dimensao { get; private set; }
+
+    private bool _ehCelular = false;
+
+    private async Task Redimensionou(Dimensao dimensao) {
+        _ehCelular = dimensao.Largura <= 640;
+        Dimensao = dimensao;
+        await Task.CompletedTask;
     }
 }

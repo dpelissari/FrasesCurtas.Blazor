@@ -1,0 +1,61 @@
+﻿@typeparam T
+
+<PlaceHolder Visible="DataSource == null">
+    <PlaceHolder Visible="LoadingTemplate != null">
+        @LoadingTemplate
+    </PlaceHolder>
+</PlaceHolder>
+
+<PlaceHolder Visible="DataSource != null">
+
+    <PlaceHolder Visible="EmptyTemplate != null && !DataSource.Any()">
+        @EmptyTemplate
+    </PlaceHolder>
+
+    <PlaceHolder Visible="DataSource.Any()">
+
+        <PlaceHolder Visible="HeaderTemplate != null">
+            @HeaderTemplate
+        </PlaceHolder>
+
+        @RepeaterContainerTemplate(
+            @: @{
+                PrimeiroItem = true;
+                foreach (var item in DataSource)
+                {
+                    <PlaceHolder Visible="!PrimeiroItem && ItemSeparatorTemplate != null">
+                        @ItemSeparatorTemplate
+                    </PlaceHolder>
+
+                    @ItemTemplate(item);
+                    PrimeiroItem = false;
+                }
+            }
+        )
+
+        <PlaceHolder Visible="FooterTemplate != null">
+            @FooterTemplate
+        </PlaceHolder>
+
+    </PlaceHolder>
+
+</PlaceHolder>
+
+@code {
+
+    [Parameter] public IEnumerable<T> DataSource { get; set; }
+    [Parameter] public RenderFragment HeaderTemplate { get; set; }
+    [Parameter] public RenderFragment FooterTemplate { get; set; }
+    [Parameter] public RenderFragment LoadingTemplate { get; set; }
+    [Parameter] public RenderFragment<RenderFragment> RepeaterContainerTemplate { get; set; }
+    [Parameter] public RenderFragment<T> ItemTemplate { get; set; }
+    [Parameter] public RenderFragment ItemSeparatorTemplate { get; set; }
+    [Parameter] public RenderFragment EmptyTemplate { get; set; }
+    public bool PrimeiroItem { get; private set; }
+
+    protected override void OnParametersSet()
+    {
+        if (RepeaterContainerTemplate == null)
+            RepeaterContainerTemplate = new RenderFragment<RenderFragment>(fragment => fragment);
+    }
+}

@@ -1,4 +1,5 @@
 using FrasesCurtas.Autenticacao;
+using FrasesCurtas.Componentes;
 using FrasesCurtas.Data;
 using FrasesCurtas.Services;
 using Microsoft.AspNetCore.Components;
@@ -30,6 +31,10 @@ builder.Services.AddSqlite<AplicacaoDbContexto>(connectionString);
 builder.Services.AddScoped<IFraseService, FraseService>();
 builder.Services.AddScoped<IAutorService, AutorService>();
 builder.Services.AddScoped<ICategoriaFraseService, CategoriaFraseService>();
+builder.Services.AddScoped<ICategoriaFraseService, CategoriaFraseService>();
+
+// adiciona relações de interoperabilidade
+builder.Services.AddScoped<RedimensionarJsInterop>();
 
 
 var app = builder.Build();

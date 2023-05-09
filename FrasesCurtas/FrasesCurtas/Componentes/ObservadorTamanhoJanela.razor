@@ -1,0 +1,31 @@
+﻿@using FrasesCurtas.Models;
+@using FrasesCurtas.Models.Interop;
+
+
+@inject RedimensionarJsInterop _redimensionar
+
+@code
+{
+    [Parameter] public EventCallback<Dimensao> AoRedimensionar { get; set; }
+
+    public Dimensao DimensaoAtual { get; private set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (!firstRender)
+            return;
+
+        var dimensao = await _redimensionar.Escutar();
+
+        _redimensionar.AoRedimensionar += async (s, d) => await Redimensionou(s, d);
+
+        DimensaoAtual = dimensao;
+
+        StateHasChanged();
+    }
+
+    protected async Task Redimensionou(object sender, Dimensao dimensao) {
+        DimensaoAtual = dimensao;
+        await AoRedimensionar.InvokeAsync(dimensao);
+    }
+
+}
