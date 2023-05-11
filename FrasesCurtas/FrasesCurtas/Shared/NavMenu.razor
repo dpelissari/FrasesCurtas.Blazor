@@ -3,31 +3,37 @@
 @inject NavigationManager navManager;
 
 <header>
-    <nav class="container">
-        <button onclick="AtivarMenuMblExt()" id="menu-mobile">
-            <img id="btn-ext-mobile" src="imagens/ico-menu-mobile.svg" width="21" height="21" alt="Abrir menu mobile" />
+    <div class="container">
+        <div class="nav-container" tabindex="0">
+            <button class="nav-toggle" onclick="abreMenu();"></button>
+
+            <nav class="nav-items" onclick="fecharMenu()">
+                <NavLink class="nav-item" href="/">Frases</NavLink>
+                <NavLink class="nav-item" href="/autores">Autores</NavLink>
+                <NavLink class="nav-item" href="/categorias">Categorias</NavLink>
+                <NavLink class="nav-item" href="/" >Quem somos</NavLink>
+                <NavLink class="nav-item" href="/">Anuncie no site</NavLink>
+                <NavLink class="nav-item" href="/">Notificar um erro ou bug</NavLink>
+                <NavLink class="nav-item" href="/">Contato</NavLink>
+                <AuthorizeView>
+                    <Authorized>
+                        <NavLink class="nav-item" @onclick="Logout">Encerrar seção</NavLink>
+                    </Authorized>
+                    <NotAuthorized>
+                        <NavLink class="nav-item" href="entrar/">Acessar painel administrativo</NavLink>
+                    </NotAuthorized>
+                </AuthorizeView>
+                <NavLink class="nav-item" href="/contato">Contato</NavLink>
+            </nav>
+        </div>
+        <span class="logo">Frases Curtas</span>
+        <button class="btn-modo-visualizacao">
+            <img src="imagens/ico-modo-escuro.svg" width="40" height="40" alt="Habilitar modo escuro" />
         </button>
-
-        <a class="logo-mobile">
-           @* <img src="imagens/logo-mobile.png" alt="Logo" />*@ Frases Curtas
-        </a>
-
-        <ul class="navegar">
-            <li><NavLink href="/">Frases</NavLink></li>
-            <li><NavLink href="autores/">Autores</NavLink></li>
-            <li><NavLink href="/categorias" >Categorias</NavLink></li>
-            <li><NavLink href="/">Contato</NavLink></li>
-            <AuthorizeView>
-                <Authorized>
-                    <li><NavLink @onclick="Logout">Sair</NavLink></li>
-                </Authorized>
-                <NotAuthorized>
-                    <li><NavLink href="entrar/">Entrar</NavLink></li>
-                </NotAuthorized>
-            </AuthorizeView>
-        </ul>
-    </nav>
+    </div>
+    
 </header>
+
 
 @code {
     private async Task Logout() {
