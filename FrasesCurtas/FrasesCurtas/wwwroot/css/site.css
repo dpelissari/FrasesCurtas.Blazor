@@ -1,14 +1,13 @@
 
 @media all {
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;700;900&display=swap');
 
     * { outline:none; margin:0; padding:0; border:none; }
-    body { background:#F8F8F8; }
+    body { font-family:'Raleway', sans-serif; }
     input { background:#ddd; width:100%; height:30px; border-radius:10px; }
     .container {  max-width:1200px; display:block; margin:0 auto; }
 
-    .card { display:flex; flex-direction:column; width:100%; background:#ddd; margin:20px 0; padding:15px; border-radius:5px; justify-content:center; align-items:center;
+    .card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:15px; border-radius:5px; justify-content:center; align-items:center;
             box-shadow:0 0.3px 0.9px rgb(0 0 0 / 11%), 0 1.6px 3.6px rgb(0 0 0 / 13%); box-sizing:border-box; background:#FFF; }
 
 
@@ -29,8 +28,6 @@
     .pg.retroceder-um { background:#f1c40f; }
     .pg.retroceder-todos { background:blue; }
     .pg.retroceder-todos disabled { background:blue; }
-
-
 
     .pg.pg-ultimo { background:#ff6a00; }
 }

@@ -27,8 +27,8 @@
             </nav>
         </div>
         <span class="logo">Frases Curtas</span>
-        <button class="btn-modo-visualizacao">
-            <img src="imagens/ico-modo-escuro.svg" width="40" height="40" alt="Habilitar modo escuro" />
+        <button class="btn-modo-visualizacao" onclick="toggleDarkMode()">
+            <img src="imagens/ico-modo-escuro.svg" width="40" height="40" alt="Habilitar modo escuro" id="ico-modovisual" />
         </button>
     </div>
     
@@ -36,9 +36,11 @@
 
 
 @code {
+
     private async Task Logout() {
         var customAuthStateProvider = (ProvedorAutenticacao)authStateProvider;
         await customAuthStateProvider.AtualizarEstadoAutenticao(null);
         navManager.NavigateTo("/", true);
     }
+
 }

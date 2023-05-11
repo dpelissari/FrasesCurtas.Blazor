@@ -1,4 +1,4 @@
-﻿header { padding:10px 0; background:#5F4BB6; font-family: 'Raleway', sans-serif; position:fixed; width:100%; }
+﻿header { padding:10px 0; background:#5F4BB6; position:fixed; width:100%; }
 .container { display:flex; justify-content:space-between; align-items:center; }
 .nav-container { display: inline-block; max-width: 50px; max-height: 50px; overflow: visible; outline: none; }
 .nav-container.is-active .nav-toggle:before, .nav-container.is-active .nav-toggle:after { box-shadow: none; }
