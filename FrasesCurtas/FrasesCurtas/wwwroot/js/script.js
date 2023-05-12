@@ -17,17 +17,32 @@ window.addEventListener('click', function (event) {
 });
 
 window.toggleDarkMode = function () {
-
     var ligth = document.getElementById("ligthmode");
     var dark = document.getElementById("darkmode");
 
     if (ligth.disabled) {
         ligth.disabled = false;
         dark.disabled = true;
-        $('#ico-modovisual').attr('src', 'imagens/ico-modo-escuro.svg');
-    } else {
+        $('#ico-modovisual').attr('src', 'imagens/icones/ico-modo-escuro.svg');
+        localStorage.setItem("modoVisual", "claro");
+    } else if (dark.disabled) {
         ligth.disabled = true;
         dark.disabled = false;
-        $('#ico-modovisual').attr('src', 'imagens/ico-modo-claro.svg');
+        $('#ico-modovisual').attr('src', 'imagens/icones/ico-modo-claro.svg');
+        localStorage.setItem("modoVisual", "escuro");
+    }
+}
+
+window.onload = function () {
+    var modo = localStorage.getItem("modoVisual");
+    var ligth = document.getElementById("ligthmode");
+    var dark = document.getElementById("darkmode");
+
+    if (modo == "claro") {
+        ligth.disabled = false;
+        dark.disabled = true;
+    } else if (modo == "escuro") {
+        ligth.disabled = true;
+        dark.disabled = false;
     }
 }
