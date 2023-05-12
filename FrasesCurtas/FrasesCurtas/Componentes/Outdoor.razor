@@ -1,12 +1,35 @@
-﻿<section class="outdoor">
+﻿@using FrasesCurtas.Models;
+@using FrasesCurtas.Services;
+@inject FrasesCurtas.Services.IAutorService AutorService
+<section class="outdoor">
     <div class="container">
-        <div class="info">
-            <h1>Site Frases Curtas</h1>
+        <div class="card sombra">
+            <h1>@Frase</h1>
+            <p>@Autor.Nome</p>
+            <button class="btn-frase-aleatoria" @onclick=" FraseAleatoria">
+                <img src="imagens/icones/ico-atualizar.svg" width="40" height="40" alt="Trocar frase" />
+            </button>
         </div>
     </div>
-
 </section>
 
 @code {
+    private string Frase;
+    private Autor Autor;
 
+    [Inject]
+    private IFraseService FraseService { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        await FraseAleatoria();
+    }
+
+    private async Task FraseAleatoria() {
+        var todasFrases = await FraseService.BuscarTodas();
+        var random = new Random();
+        var index = random.Next(todasFrases.Count());
+        var fraseDoDia = todasFrases.ElementAt(index);
+        Frase = fraseDoDia.Descricao;
+        Autor = await AutorService.BuscarPor(fraseDoDia.IdAutor);
+    }
 }

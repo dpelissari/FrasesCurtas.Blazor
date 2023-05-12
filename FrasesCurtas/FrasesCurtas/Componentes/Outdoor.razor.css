@@ -1,21 +1,8 @@
 ﻿/* OUTDOOR */
 @media all {
-    .outdoor { color:#FFF; min-height:490px; margin-top:0; padding-top:20px; background:top center no-repeat #0093d3; background-size:cover; }
-    .outdoor h1, p { color:#fff; font-size:30px; font-weight:600; }
-    .central { display:flex; flex-direction:column; align-items:end; }
-    .outdoor .container { display:flex; justify-content:center; padding-top:20px; flex-direction:column; align-items:flex-start; }
-    .outdoor .container .info { display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:38px; height:445px; width:100%; }
-    .outdoor h1 { font-weight:600; margin:0; color:#fff; font-weight:normal; text-align:center; font-size:28px;  }
-    .outdoor h1 strong { display:block; font-weight:bold; font-size:42px; color:#4496E5; }
-    .outdoor p { font-weight:600; margin:20px 0 10px 0; line-height:15px; text-transform:uppercase; font-size:15px; }
-    .outdoor small { background:#a61e15; border-radius:10px; font-size:20px; margin:10px; padding:10px; }
-}
-
-@media (max-width: 1035px) {
-    .outdoor .central { padding:60px 0 0 0; }
-    .outdoor .central .info { width:100%; padding:20px; bottom:30px; top:auto; text-align:center; box-sizing:border-box; }
-}
-
-@media (max-width:370px) {
-    .outdoor { background-position-x:-220px; }
+    .outdoor { min-height:400px; margin-top:0; padding-top:20px; background:top center no-repeat #0093d3; background-size:cover; display:flex; }
+    .outdoor .card { width:100%; }
+    .outdoor .container { display:flex; justify-content:center;  padding-top:20px; flex-direction:column; align-items:flex-start; }
+    .outdoor .aleatoria { width:100%; display:block; margin:0 auto; }
+    .btn-frase-aleatoria { background:#ff0000; cursor:pointer; border-radius:6px; }
 }
