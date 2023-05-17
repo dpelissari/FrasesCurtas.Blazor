@@ -1,24 +1,31 @@
 ﻿@using FrasesCurtas.Models;
 @using FrasesCurtas.Services;
-@inject FrasesCurtas.Services.IAutorService AutorService
+@inject FrasesCurtas.Services.IAutorService AutorService;
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+@inject FrasesCurtas.Services.IFraseService FraseService;
+
 <section class="outdoor">
     <div class="container">
         <div class="card sombra">
-            <h1>@Frase</h1>
-            <p>@Autor.Nome</p>
-            <button class="btn-frase-aleatoria" @onclick=" FraseAleatoria">
-                <img src="imagens/icones/ico-atualizar.svg" width="40" height="40" alt="Trocar frase" />
-            </button>
+            <div>
+                <div class="frase">
+                    <p class="categoria">@frase.Categoria?.Categoria</p>
+                    <h1>@frase.Descricao</h1>
+                    <p class="autor">Por: @frase.Autor?.Nome</p>
+                </div>
+                <div>
+                    <button class="btn-frase-aleatoria" @onclick="FraseAleatoria">
+                        <img src="imagens/icones/ico-atualizar.svg" width="40" height="40" alt="Trocar frase" />
+                    </button>
+                </div>
+            </div>
+   
         </div>
     </div>
 </section>
 
 @code {
-    private string Frase;
-    private Autor Autor;
-
-    [Inject]
-    private IFraseService FraseService { get; set; }
+    private Frase frase = new();
 
     protected override async Task OnInitializedAsync() {
         await FraseAleatoria();
@@ -28,8 +35,8 @@
         var todasFrases = await FraseService.BuscarTodas();
         var random = new Random();
         var index = random.Next(todasFrases.Count());
-        var fraseDoDia = todasFrases.ElementAt(index);
-        Frase = fraseDoDia.Descricao;
-        Autor = await AutorService.BuscarPor(fraseDoDia.IdAutor);
+        frase = todasFrases.ElementAt(index);
+        frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
+        frase.Categoria  = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
     }
 }

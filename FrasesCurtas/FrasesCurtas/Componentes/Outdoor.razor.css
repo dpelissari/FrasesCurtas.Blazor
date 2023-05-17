@@ -1,8 +1,12 @@
 ﻿/* OUTDOOR */
 @media all {
     .outdoor { min-height:400px; margin-top:0; padding-top:20px; background:top center no-repeat #0093d3; background-size:cover; display:flex; }
+    .outdoor .container { display:flex; justify-content:center;  padding-top:20px; flex-direction:column; align-items:flex-start; width:100%; }
     .outdoor .card { width:100%; }
-    .outdoor .container { display:flex; justify-content:center;  padding-top:20px; flex-direction:column; align-items:flex-start; }
+    .outdoor .container .card > div { display:flex; justify-content:space-between; align-items:center; width:100%; }
+
+    .outdoor .container .card .frase .categoria, .outdoor .container .card .frase .autor { text-transform:uppercase; margin:10px 0; }
+
     .outdoor .aleatoria { width:100%; display:block; margin:0 auto; }
     .btn-frase-aleatoria { background:#ff0000; cursor:pointer; border-radius:6px; }
 }

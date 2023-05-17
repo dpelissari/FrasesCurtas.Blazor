@@ -1,13 +1,11 @@
 ﻿@page "/int/frases/atualizar-frase/{id}";
 @attribute [Authorize(Roles = "Administrador")]
-
 @using FrasesCurtas.Componentes
 @using FrasesCurtas.Models;
 @inject NavigationManager NavigationManager;
 @inject FrasesCurtas.Services.IFraseService FraseService;
 @inject FrasesCurtas.Services.IAutorService AutorService;
-
-
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 
 <div class="container">
 
@@ -16,15 +14,26 @@
     <EditForm Model="frase" OnValidSubmit="AtualizarFrases">
 
         <div>
-            <label for="autorFrase">Autor</label>
-                <InputSelect @bind-Value="frase.IdAutor" class="form-control">
-             
-                    @foreach (var autor in autores){
-                        <option value="@autor.Id">@autor.Nome</option>
-                    }
-                </InputSelect>
+            <label>Autor</label>
+            <InputSelect @bind-Value="frase.IdAutor">
 
-         </div>
+                @foreach (var autor in autores)
+                {
+                    <option value="@autor.Id">@autor.Nome</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div>
+            <label>Categoria</label>
+            <InputSelect @bind-Value="frase.IdCategoriaFrase">
+
+                @foreach (var categoria in categorias)
+                {
+                    <option value="@categoria.Id">@categoria.Categoria</option>
+                }
+            </InputSelect>
+        </div>
 
         <div>
             <label for="descricaoFrase">Frase</label>
@@ -32,13 +41,13 @@
         </div>
         <div>
             <label for="dataCadastroFrase">Data Cadastro</label>
-                 <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase"/>
+            <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase" />
         </div>
         <div>
             <label for="arquivadaFrase">Arquvida</label>
-               <InputSelect @bind-Value="frase.Arquivada" class="form-control">
-                 <option value="true">Sim</option>
-                 <option value="false">Não</option>
+            <InputSelect @bind-Value="frase.Arquivada" class="form-control">
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
             </InputSelect>
         </div>
 
@@ -55,20 +64,18 @@
 @code {
     Frase frase = new();
     private IQueryable<Autor> autores;
+    private IQueryable<CategoriaFrase> categorias;
 
-    [Parameter]public string id{ get; set; }  
+    [Parameter] public string id { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() {
         frase = await FraseService.BuscarPor(Guid.Parse(id));
         autores = await AutorService.BuscarTodas();
+        categorias = await CategoriaFraseService.BuscarTodas();
     }
-    
 
-    async Task AtualizarFrases()
-    {
+    async Task AtualizarFrases() {
         await FraseService.Atualizar(frase);
-
         NavigationManager.NavigateTo("/int/frases");
     }
 
