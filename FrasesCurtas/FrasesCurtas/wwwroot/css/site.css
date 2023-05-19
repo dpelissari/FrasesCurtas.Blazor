@@ -7,7 +7,6 @@
     input { background:#ddd; width:100%; height:30px; border-radius:10px; }
     ::-webkit-scrollbar { height:14px; width:14px; }
  
-
     .container {  max-width:1200px; display:block; margin:0 auto; }
     .card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:15px; border-radius:5px; justify-content:center; align-items:center;
             box-shadow:0 0.3px 0.9px rgb(0 0 0 / 11%), 0 1.6px 3.6px rgb(0 0 0 / 13%); box-sizing:border-box; background:#FFF; }
@@ -22,14 +21,11 @@
     .paginacao { margin:20px; }
     .pg { width:50px; height:50px; border-radius:50%; margin:0 15px; font-size:30px;  }
     .pg:hover { cursor:pointer;  }
-
     .pg.avancar-proximo { background:#404040; }
     .pg.avancar-ultimo { background:#404040; }
-
     .pg.retroceder-um { background:#f1c40f; }
     .pg.retroceder-todos { background:blue; }
     .pg.retroceder-todos disabled { background:blue; }
-
     .pg.pg-ultimo { background:#ff6a00; }
 }
 
