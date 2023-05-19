@@ -10,9 +10,7 @@ window.fecharMenu = function () {
 window.addEventListener('click', function (event) {
     const navContainer = document.querySelector('.nav-container');
     const navItems = document.querySelector('.nav-items');
-    if (navContainer.contains(event.target) || navItems.contains(event.target)) {
-        return;
-    }
+    if (navContainer.contains(event.target) || navItems.contains(event.target)) return;
     fecharMenu();
 });
 
@@ -45,4 +43,19 @@ window.onload = function () {
         ligth.disabled = true;
         dark.disabled = false;
     }
+}
+
+window.copiarFrase = function (frase, autor) {
+    var elementoTemporario = document.createElement('textarea');
+    elementoTemporario.value = `${frase} Autor: ${autor}, conheça outras frases acessando o repositório no GitHub.`;
+    document.body.appendChild(elementoTemporario);
+    elementoTemporario.select();
+    document.execCommand('copy');
+    document.body.removeChild(elementoTemporario);
+    Swal.fire({
+        position: 'top-end', icon: 'success',
+        title: `Frase copiada para a área de transferência.`,
+        showConfirmButton: false,
+        timer: 1000
+    })
 }

@@ -15,8 +15,13 @@
                 </div>
                 <div>
                     <button class="btn-frase-aleatoria" @onclick="FraseAleatoria">
-                        <img src="imagens/icones/ico-atualizar.svg" width="40" height="40" alt="Trocar frase" />
+                        <img src="imagens/icones/ico-atualizar.svg" width="30" height="30" alt="Trocar frase" />
                     </button>
+
+                    <button class="btn-frase-aleatoria" onclick="copiarFrase('@frase.Descricao', '@frase.Autor?.Nome');">
+                        <img src="imagens/icones/ico-clipboard.svg" width="30" height="30" alt="Trocar frase" />
+                    </button>
+
                 </div>
             </div>
    

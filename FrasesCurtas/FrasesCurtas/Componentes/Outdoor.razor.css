@@ -2,7 +2,7 @@
 @media all {
     .outdoor { min-height:400px; margin-top:0; padding-top:20px; background:top center no-repeat #0093d3; background-size:cover; display:flex; }
     .outdoor .container { display:flex; justify-content:center;  padding-top:20px; flex-direction:column; align-items:flex-start; width:100%; }
-    .outdoor .card { width:100%; }
+    .outdoor .card { width:100%; height:180px; overflow:auto; }
     .outdoor .container .card > div { display:flex; justify-content:space-between; align-items:center; width:100%; }
 
     .outdoor .container .card .frase .categoria, .outdoor .container .card .frase .autor { text-transform:uppercase; margin:10px 0; }
