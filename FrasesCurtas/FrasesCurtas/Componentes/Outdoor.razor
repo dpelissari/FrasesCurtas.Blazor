@@ -8,33 +8,29 @@
     <div class="container">
         <div class="card sombra">
             <div>
-                <div class="frase">
+                <div class="frase-item">
                     <p class="categoria">@frase.Categoria?.Categoria</p>
-                    <h1>@frase.Descricao</h1>
-                    <p class="autor">Por: @frase.Autor?.Nome</p>
+                    <h1 class="frase">@frase.Descricao</h1>
+                    <p class="autor">Autor: @frase.Autor?.Nome</p>
                 </div>
-                <div>
+                <div class="acoes">
                     <button class="btn-frase-aleatoria" @onclick="FraseAleatoria">
                         <img src="imagens/icones/ico-atualizar.svg" width="30" height="30" alt="Trocar frase" />
                     </button>
-
-                    <button class="btn-frase-aleatoria" onclick="copiarFrase('@frase.Descricao', '@frase.Autor?.Nome');">
+                    <button class="btn-clipboard" onclick="copiarFrase('@frase.Descricao', '@frase.Autor?.Nome');">
                         <img src="imagens/icones/ico-clipboard.svg" width="30" height="30" alt="Trocar frase" />
                     </button>
-
                 </div>
             </div>
-   
         </div>
     </div>
 </section>
 
 @code {
+
     private Frase frase = new();
 
-    protected override async Task OnInitializedAsync() {
-        await FraseAleatoria();
-    }
+    protected override async Task OnInitializedAsync() { await FraseAleatoria(); }
 
     private async Task FraseAleatoria() {
         var todasFrases = await FraseService.BuscarTodas();

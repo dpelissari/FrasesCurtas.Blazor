@@ -2,11 +2,26 @@
 @media all {
     .outdoor { min-height:400px; margin-top:0; padding-top:20px; background:top center no-repeat #0093d3; background-size:cover; display:flex; }
     .outdoor .container { display:flex; justify-content:center;  padding-top:20px; flex-direction:column; align-items:flex-start; width:100%; }
-    .outdoor .card { width:100%; height:180px; overflow:auto; }
+    .outdoor .card { width:100%; height:240px; overflow:auto; }
     .outdoor .container .card > div { display:flex; justify-content:space-between; align-items:center; width:100%; }
+    .outdoor .container .card .frase-item { max-width:90%; margin-right:15px; line-height:30px; }
+    .outdoor .container .card .acoes { width:110px; min-width:110px; max-width:110px; }
 
-    .outdoor .container .card .frase .categoria, .outdoor .container .card .frase .autor { text-transform:uppercase; margin:10px 0; }
+    .outdoor h1 { font-weight:400; }
+    .outdoor .container .card .frase-item .categoria, .outdoor .container .card .frase-item .autor { text-transform:uppercase; margin:10px 0; }
 
     .outdoor .aleatoria { width:100%; display:block; margin:0 auto; }
-    .btn-frase-aleatoria { background:#ff0000; cursor:pointer; border-radius:6px; }
+    button { width:50px; height:50px; }
+    button:hover { opacity:0.8;   }
+    .btn-frase-aleatoria { background:#5f4bb6; border-radius:50%; cursor:pointer; }
+    .btn-clipboard { background:#3C445F; border-radius:50%; cursor:pointer; }
+}
+
+@media (max-width:980px){
+ .outdoor .card { height:330px; max-height:330px;} 
+ .outdoor .container { padding-top:40px; }
+ .outdoor .container .card > div { flex-direction:column; }
+ .outdoor .container .card .frase-item { margin-right:0; }
+ .outdoor .container .card .acoes { margin-top:20px; }
+
 }
