@@ -1,6 +1,8 @@
 ﻿@media all {
-    footer { background:#3B3F49; color:#FFF; padding:20px }
+    footer { background:#5F4BB6; color:#FFF; padding:20px }
     footer ::deep a { text-decoration:none; color:#FFF; display:flex; text-transform:uppercase; margin:10px 0; }
+    footer ::deep a:hover { text-decoration:underline; }
+    footer .logo p { font-size:18px; text-transform: uppercase; border:1px solid #5F4BB6;  padding:10px; border-radius:6px; width:fit-content; background:#FFF; color:#5F4BB6; }
     footer .superior { display:flex; flex-direction:column; align-items:flex-end; }
-    footer .inferior { display:flex; align-items:center; justify-content:center; border-top:1px solid #DDD; padding:5px 0; margin-top:30px; text-transform:uppercase; }
+    footer .inferior { display:flex; align-items:center; justify-content:center; border-top:1px solid #DDD; padding:5px 0; margin-top:30px;  }
 }
