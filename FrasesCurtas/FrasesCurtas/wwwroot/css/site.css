@@ -8,8 +8,7 @@
     ::-webkit-scrollbar { height:14px; width:14px; }
  
     .container {  max-width:1200px; display:block; margin:0 auto; }
-    .card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:15px; border-radius:5px; justify-content:center; align-items:center;
-            box-shadow:0 0.3px 0.9px rgb(0 0 0 / 11%), 0 1.6px 3.6px rgb(0 0 0 / 13%); box-sizing:border-box; background:#FFF; }
+    .card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:30px; border-radius:5px; justify-content:center; align-items:center; box-sizing:border-box; background:#FFF; }
 
     /* botoes */
     .btn { text-decoration:none; height:30px; border-radius:5px; width:min-content; padding:5px 10px; }
@@ -17,16 +16,33 @@
     .btn-amarelo { background:#f1c40f; color:#FFF; }
     .btn-vermelho { background:#e74c3c; color:#FFF; }
 
+    /* frases */
+    .frase { font-size:20px; margin:10px 0; transition:0.5s ease; line-height:30px; transition:0.5s ease; } 
+    .categoria { font-size:16px; text-transform:uppercase; font-weight:600; color:#86A5D9; }
+    .autor { font-size:16px; }
+
     /* paginacao */
-    .paginacao { margin:20px; }
-    .pg { width:50px; height:50px; border-radius:50%; margin:0 15px; font-size:30px;  }
-    .pg:hover { cursor:pointer;  }
-    .pg.avancar-proximo { background:#404040; }
-    .pg.avancar-ultimo { background:#404040; }
-    .pg.retroceder-um { background:#f1c40f; }
-    .pg.retroceder-todos { background:blue; }
-    .pg.retroceder-todos disabled { background:blue; }
-    .pg.pg-ultimo { background:#ff6a00; }
+    .paginacao { margin:20px; display:flex; align-items:center; justify-content:center; }
+    .paginacao span {  }
+    .pg { width:40px; height:40px; border-radius:50%; margin:0 5px; font-size:30px;  }
+    .total-pg { display:flex; justify-content:center; margin:10px 0;  }
+    .pg:hover { cursor:pointer; opacity:0.5;  }
+
+ /*   .pg.avancar-um { background:#C4EBC8; }
+    .pg.avancar-todos { background:#C4EBC8; }
+
+    .pg.retroceder-um { background:#C4EBC8; }
+    .pg.retroceder-todos { background:#C4EBC8; }*/
+
+    button { background:#C4EBC8; color:#202A25; }
+    button:disabled { cursor:no-drop; opacity:0.5; }
+    .pg.avancar-ultimo disabled { opacity:0.2; }
+
+    /*.pg.pg-ultimo { background:#ff6a00; }*/
+}
+
+@media (max-width:980px){
+    .frase { font-size:18px; }
 }
 
 @media (max-width:1300px){

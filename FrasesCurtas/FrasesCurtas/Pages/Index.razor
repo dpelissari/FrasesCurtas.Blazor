@@ -5,34 +5,42 @@
 @inject NavigationManager NavigationManager
 @using FrasesCurtas.Componentes;
 @using FrasesCurtas.Models.Interop;
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 
 <PageTitle>Frases</PageTitle>
 
-
 <div class="container">
-    <ListaPaginada Dados="frases.Where(f => f.Arquivada == false).OrderBy(f => f.DataCadastro)" QtdeItensPorPagina="10">
+    <ListaPaginada Dados="frases.Where(f => f.Arquivada == false).OrderBy(f => f.DataCadastro)" QtdeItensPorPagina="10" ExibirTotalPaginas="true">
 
         <ConteudoPrincipal>
-            <div class="card">
+            <div class="card sombra">
+                <p class="categoria">@context.Categoria?.Categoria</p>
                 <p class="frase">@context.Descricao</p>
-                <p class="autor">@context.Autor?.Nome</p>
+                <p class="autor">Autor: @context.Autor?.Nome</p>
 
                 <div class="compartilhamento">
-                    <p>Compartilhar frase:</p>
-                    <a href="https://wa.me/?text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br" target="_blank">Whats</a>
-                    <a  href="https://telegram.me/share/url?url=@currentUrl&text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br." target="_blank">Telegram</a>                     
+                    <p>Compartilhar essa frase:</p>
+                    <div>
+                        <a class="whatsApp" href="https://wa.me/?text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br" target="_blank">
+                            <img src="imagens/icones/ico-whatsapp.svg" width="20" height="20" alt="Icone WhatsApp" />
+                        </a>
+                        <a class="telegram" href="https://telegram.me/share/url?url=@currentUrl&text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br." target="_blank">
+                            <img src="imagens/icones/ico-telegram.svg" width="20" height="20" alt="Icone Telegram" />
+                        </a>
+                        <button class="clipboard" onclick="copiarFrase('@context.Descricao', '@context.Autor?.Nome');">
+                            <img src="imagens/icones/ico-clipboard.svg" width="20" height="20" alt="Icone copiar mensagem" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </ConteudoPrincipal>
     </ListaPaginada>
 
-
     <ObservadorTamanhoJanela AoRedimensionar="Redimensionou" />
-    @_ehCelular
+   @* @_ehCelular*@
 
 </div>
  
-
 @code {
     private IQueryable<Frase> frases;
     private string currentUrl;
@@ -45,9 +53,10 @@
 
         frases = await FraseService.BuscarTodas(); 
 
-        // alimenta autores
+        // alimenta autores e categoria
         foreach (var frase in frases){
-            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);    
+            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
+            frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
         }
     }
 
