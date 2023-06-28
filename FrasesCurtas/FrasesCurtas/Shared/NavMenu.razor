@@ -11,19 +11,17 @@
                 <NavLink class="nav-item" href="/">Frases</NavLink>
                 <NavLink class="nav-item" href="/autores">Autores</NavLink>
                 <NavLink class="nav-item" href="/categorias">Categorias</NavLink>
-                <NavLink class="nav-item" href="/" >Quem somos</NavLink>
-                <NavLink class="nav-item" href="/">Anuncie no site</NavLink>
-                <NavLink class="nav-item" href="/">Notificar um erro ou bug</NavLink>
-                <NavLink class="nav-item" href="/">Contato</NavLink>
                 <AuthorizeView>
                     <Authorized>
-                        <NavLink class="nav-item" @onclick="Logout">Encerrar seção</NavLink>
+                        <NavLink class="nav-item" href="/int/frases">Gerenciar Frases</NavLink>
+                        <NavLink class="nav-item" href="/int/autores">Gerenciar Autores</NavLink>
+                        <NavLink class="nav-item" href="/int/categorias">Gerenciar Categorias</NavLink>
+                        <NavLink class="nav-item" @onclick="Logout">Fazer logout</NavLink>
                     </Authorized>
                     <NotAuthorized>
-                        <NavLink class="nav-item" href="entrar/">Acessar painel administrativo</NavLink>
+                        <NavLink class="nav-item" href="entrar/">Efetuar login</NavLink>
                     </NotAuthorized>
                 </AuthorizeView>
-                <NavLink class="nav-item" href="/contato">Contato</NavLink>
             </nav>
         </div>
         <span class="logo">Frases Curtas</span>

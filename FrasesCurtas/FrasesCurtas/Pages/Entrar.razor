@@ -1,45 +1,49 @@
 ﻿@page "/entrar";
 @using FrasesCurtas.Autenticacao;
 @using FrasesCurtas.Componentes
+@using FrasesCurtas.Models;
 @inject ContaUsuarioService contaUsuarioservice;
 @inject IJSRuntime js;
 @inject AuthenticationStateProvider provedorAutenticacao;
 @inject NavigationManager navManager;
 
-
-
-<div class="container">
-    <h1>Entrar</h1>
-    <input @bind="modelo.Nome" />
-    <input @bind="modelo.Senha" type="password" />
-    <button @onclick="Autenticar">Entrar</button>
-</div>
+<EditForm Model="usuario" OnValidSubmit="Autenticar">
+    <div class="container">
+        <h1>Painel administrativo</h1>
+        <div class="campo">
+            <label>Login</label>
+            <input @bind="usuario.Usuario" />
+        </div>
+        <div class="campo">
+            <label>Senha</label>
+            <input @bind="usuario.Senha" type="password" />
+        </div>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <button @onclick="Autenticar">Entrar</button>
+    </div>
+</EditForm>
 
 @code {
-    private class Modelo
-    {
-        public string Nome { get; set; }
-        public string Senha { get; set; }
-    }
 
-    private Modelo modelo = new Modelo();
+    private Login usuario = new Login();
 
     private async Task Autenticar()
     {
-        var contaUsuario = contaUsuarioservice.BuscarPorNome(modelo.Nome);
-        if (contaUsuario == null || contaUsuario.Senha != modelo.Senha)
+        var contaUsuario = contaUsuarioservice.BuscarPorNome(usuario.Usuario);
+        if (contaUsuario == null || contaUsuario.Senha != usuario.Senha)
         {
-            await js.InvokeVoidAsync("alert", "Usuario ou senha invalidos!");
+            //await js.InvokeVoidAsync("alert", "Usuario ou senha invalidos!");
             return;
         }
 
         var provedorAutenticacaoCustomizado = (ProvedorAutenticacao)provedorAutenticacao;
         await provedorAutenticacaoCustomizado.AtualizarEstadoAutenticao(new UsuarioSessao
-            {
-                Nome = contaUsuario.Nome,
-                NivelAcesso = contaUsuario.NivelAcesso
-            });
-            navManager.NavigateTo("int/frases/", true);
+        {
+            Nome = contaUsuario.Nome,
+            NivelAcesso = contaUsuario.NivelAcesso
+        });
+        navManager.NavigateTo("int/frases/", true);
     }
 }
  
