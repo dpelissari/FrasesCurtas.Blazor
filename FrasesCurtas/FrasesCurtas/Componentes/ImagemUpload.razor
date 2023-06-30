@@ -1,5 +1,6 @@
 ﻿@using FrasesCurtas.Models;
 @using SixLabors.ImageSharp;
+@inject IWebHostEnvironment _ambiente;
 
 <div>
     <label>@TextoLabel</label>
@@ -63,10 +64,11 @@
     }
 
     private async Task EnviarImagem() {
+
         if (Arquivo != null && ArquivoEhImagem(Arquivo))
         {
             // diretório onde a imagem será armazenada
-            var diretorio = $"wwwroot/{DiretorioImagem}";
+            var diretorio = Path.Combine(_ambiente.WebRootPath, DiretorioImagem);
 
             // caminho para imagem armazenada
             var caminhoArquivo = Path.Combine(diretorio, Arquivo.Name);
