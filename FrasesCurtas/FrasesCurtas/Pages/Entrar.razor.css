@@ -1,0 +1,11 @@
+﻿.container { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; }
+.login { display:flex; flex-direction:column; align-items:center; padding:20px; background:#5F4BB6; border-radius:6px; width:400px; }
+.login h1 { text-align:left; text-transform:uppercase; color:#FFF; font-size:18px; margin:20px 0; font-weight:400; }
+.login button { margin:20px; width:100%; text-transform:uppercase; color:#FFF; background:#86A5D9; height:40px; font-size:18px; }
+.login .campo { margin:5px; width:100%; color:#FFF; }
+.login .campo input { margin:5px 0; height:40px; padding:0 10px; box-sizing:border-box; }
+.login .erro { margin:20px 0; color:#FFF; }
+
+@media (max-width:980px){
+    .login { max-width:90%; }
+}

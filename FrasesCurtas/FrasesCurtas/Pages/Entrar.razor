@@ -6,34 +6,48 @@
 @inject IJSRuntime js;
 @inject AuthenticationStateProvider provedorAutenticacao;
 @inject NavigationManager navManager;
+@layout LoginLayout;
 
 <EditForm Model="usuario" OnValidSubmit="Autenticar">
     <div class="container">
-        <h1>Painel administrativo</h1>
-        <div class="campo">
-            <label>Login</label>
-            <input @bind="usuario.Usuario" />
+        <div class="login sombra">
+        <h1>Painel do adminstrador</h1>
+            <div class="campo">
+                <label>Login</label>
+                <input @bind="usuario.Usuario" />
+                <ValidationMessage For="@(() => usuario.Usuario)" />
+            </div>
+            <div class="campo">
+                <label>Senha</label>
+                <input @bind="usuario.Senha" type="password" />
+                <ValidationMessage For="@(() => usuario.Senha)" />
+            </div>
+
+            <PlaceHolder Visible="!string.IsNullOrEmpty(MensagemErro)">
+                <div class="erro">
+                    @MensagemErro
+                </div>
+            </PlaceHolder>
+
+            <DataAnnotationsValidator />
+           
+            <button @onclick="Autenticar" class="btn">Acessar</button>
+            
         </div>
-        <div class="campo">
-            <label>Senha</label>
-            <input @bind="usuario.Senha" type="password" />
-        </div>
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <button @onclick="Autenticar">Entrar</button>
     </div>
 </EditForm>
 
 @code {
 
     private Login usuario = new Login();
+    public string MensagemErro { get; set; } = string.Empty;
 
     private async Task Autenticar()
     {
         var contaUsuario = contaUsuarioservice.BuscarPorNome(usuario.Usuario);
         if (contaUsuario == null || contaUsuario.Senha != usuario.Senha)
         {
-            //await js.InvokeVoidAsync("alert", "Usuario ou senha invalidos!");
+            MensagemErro = "Usuário ou senha invalidos, verifique suas credencias e tente novamente!";
             return;
         }
 
