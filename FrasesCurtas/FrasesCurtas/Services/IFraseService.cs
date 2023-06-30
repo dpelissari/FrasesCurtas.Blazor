@@ -8,6 +8,7 @@ namespace FrasesCurtas.Services {
         Task Atualizar(Frase frase);
         Task Apagar(Frase frase);
         Task <Frase>BuscarPor(Guid id);
+        Task<IQueryable<Frase>> BuscarPorAutorId(Guid id);
         Task<IQueryable<Frase>> BuscarTodas();
     }
 }

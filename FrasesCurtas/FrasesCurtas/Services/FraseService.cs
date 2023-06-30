@@ -42,5 +42,14 @@ namespace FrasesCurtas.Services {
             return frase.AsQueryable();
         }
 
+        // metodo para listar todas frases de um autor
+        public async Task<IQueryable<Frase>> BuscarPorAutorId(Guid autorId) {
+            var frases = await dbContexto.Frases
+                .Where(f => f.IdAutor == autorId)
+                .ToListAsync();
+
+            return frases.AsQueryable();
+        }
+
     }
 }

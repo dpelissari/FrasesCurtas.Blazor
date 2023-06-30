@@ -19,7 +19,9 @@
                         <div class="foto">
                             <img src="@context.CaminhoImagem" alt="@context.Nome" style="width:100px; height:100px; border-radius:50%;" />
                         </div>
+                    <NavLink href="@($"autor/{context.Id}")" class="nav-link" Match="NavLinkMatch.All">
                         @context.Nome
+                    </NavLink>
                     </div>
             </ConteudoPrincipal>
         </ListaPaginada>

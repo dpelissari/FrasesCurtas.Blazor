@@ -1,0 +1,63 @@
+﻿@page "/autor/"
+@page "/autor/{id}"
+@using FrasesCurtas.Models
+@using FrasesCurtas.Services;
+@inject FrasesCurtas.Services.IFraseService FraseService;
+@inject FrasesCurtas.Services.IAutorService AutorService;
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+
+<div class="container">
+    @if (autor != null)
+    {
+        <h2>Frases de @autor.Nome</h2>
+
+        @if (frases != null && frases.Any())
+        {
+            @foreach (var frase in frases)
+            {
+                <div class="frase">
+                    <div>
+                        @frase.Descricao
+                    </div>
+                    <div>
+                        @frase.Categoria.Categoria
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Nenhuma frase encontrada para este autor.</p>
+        }
+    }
+    else
+    {
+        <p>Autor não encontrado.</p>
+    }
+    <NavLink href="autores/">Voltar lista de autores</NavLink>
+</div>
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Autor autor;
+    private IQueryable<Frase> frases;
+
+    protected override async Task OnInitializedAsync() {
+
+        if (autor != null)
+        {
+            autor = await AutorService.BuscarPor(Guid.Parse(Id));
+            frases = await FraseService.BuscarPorAutorId(Guid.Parse(Id));
+
+            // alimenta autores e categoria
+            foreach (var frase in frases)
+            {
+                frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
+            }
+
+        }
+    }
+}
