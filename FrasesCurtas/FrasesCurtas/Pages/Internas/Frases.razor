@@ -7,40 +7,42 @@
 @inject FrasesCurtas.Services.IAutorService AutorService;
 @inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 @using FrasesCurtas.Componentes;
+@layout InternasLayout;
 
-<PageTitle>Frases</PageTitle>
+<PageTitle>Gerenciar frases</PageTitle>
 
 <div class="container">
-    <h1>Frases</h1>
-
-    <div class="novo-registro">
-        <a href="/int/frases/adicionar-frase/" class="btn">Incluir frase</a>
-    </div>
-
-    <div class="frases card lista-itens">
-        <ListaPaginada Dados="frases">
+    <div class="frases card">
+        <div class="cab">
+            <h1>Gerenciar frase</h1>
+            <a href="/int/frases/adicionar-frase/" class="btn btn-roxo">INCLUIR FRASE</a>
+        </div>
+        <ListaPaginada Dados="frases" ExibirTotalPaginas="true" Context="f">
             <ConteudoPrincipal>
-                <div class="frase-item">
-                    <div class="descricao">
-                        <h3>Frase</h3>
-                        <p>@context.Descricao. <a href="/int/autores/atualizar-autor/@context.Autor.Id">@context.Autor.Nome</a> </p>
+                <div class="item sombra">
+                    <div>
+                        <label>Frase</label>
+                        <div>@f.Descricao</div>
                     </div>
-                    <div class="categoria">
-                        <h3>Categoria</h3>
-                        <p>@context.Categoria.Categoria</p>
-                    </div>
-                    <div class="cadastro">
-                        <h3>Data Cadastro</h3>
-                        <p>@context.DataCadastro?.ToString("dd/MM/yyyy")</p>
-                    </div>
-                    <div class="status">
-                        <h3>Arquivada?</h3>
-                        <p>@(context.Arquivada == true ? "Sim" : "Não")</p>
-                    </div>
-
-                    <div class="acoes">
-                        <a href="/int/frases/atualizar-frase/@context.Id" class="btn btn-amarelo">Atualizar</a>
-                        <a @onclick="async () => await ApagarFrase(context.Id)" class="btn btn-vermelho">Apagar</a>
+                    <div class="grupo">
+                        <div>
+                            <label>Autor</label>
+                            <div>@f.Autor.Nome</div>
+                        </div>
+                        <div>
+                            <label>Categoria</label>
+                            <div>@f.Categoria.Categoria</div>
+                        </div>
+                        <div>
+                            <label>Arquivada?</label>
+                            <div>@(f.Arquivada == true ? "Sim" : "Não")</div>
+                        </div>
+                        <div>
+                            <div class="acoes">
+                                <a href="/int/frases/atualizar-frase/@f.Id" class="btn btn-amarelo">Editar</a>
+                                <a @onclick="async () => await ApagarFrase(f.Id)" class="btn btn-vermelho">Excluir</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </ConteudoPrincipal>
@@ -73,8 +75,7 @@
         bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir essa frase?");
 
         // se a confirmacao for false para por aqui
-        if (confirm is false)
-            return;
+        if (confirm is false) return;
 
         // se a confirmacao for true logaliza a frase pelo id
         var frase = await FraseService.BuscarPor(id);

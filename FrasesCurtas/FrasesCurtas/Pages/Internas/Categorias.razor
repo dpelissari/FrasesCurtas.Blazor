@@ -5,26 +5,46 @@
 @inject IJSRuntime JSRuntime
 @inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 @using FrasesCurtas.Componentes;
+@layout InternasLayout;
 
-<PageTitle>Categorias</PageTitle>
+<PageTitle>Gerenciar categorias</PageTitle>
 
-
-<div class="container"
-    <div class="novo-registro">
-        <a href="/int/categorias/adicionar-categoria" class="btn">Incluir categoria</a>
-    </div>
-
-    <div class="">
-        <ListaPaginada Dados="categorias">
+<div class="container">
+    <div class="frases card">
+        <div class="cab">
+            <h1>Gerenciar categorias</h1>
+            <a href="/int/autores/adicionar-autor" class="btn btn-roxo">INCLUIR CATEGORIA</a>
+        </div>
+        <ListaPaginada Dados="categorias" ExibirTotalPaginas="true" Context="c">
             <ConteudoPrincipal>
-                <div class="categoria-item">
-                    <div>@context.Categoria</div>
-                    <div>@context.Descricao</div>
-                    <div>@context.DataCadastro</div>
-                    <div class="acoes">
-                        <a href="int/categorias/atualizar-categoria/@context.Id">Atualizar</a>
-                        <button @onclick="async () => await ApagarFrase(context.Id)">Apagar</button>
+                <div class="item sombra">
+                    <div class="grupo">
+                        <div>
+                            <label>Categoria</label>
+                            <div>@c.Categoria</div>
+                        </div>
+                        <div>
+                            <label>Descrição</label>
+                            <div>@c.Descricao</div>
+                        </div>
+                        <div>
+                            <label>Categoria ativa?</label>
+                            <div>@(c.Ativo == true ? "Sim" : "Não")</div>
+                        </div>
+                        <div>
+                            <label>Frases</label>
+                            <p>@c.Frases.Count</p>
+                        </div>
+                        <div>
+                            <label>Data de cadastro</label>
+                            <p>@c.DataCadastro.ToShortDateString().ToString()</p>
+                        </div>
+                        <div class="acoes">
+                            <a href="/int/autores/atualizar-autor/@c.Id" class="btn btn-amarelo">Editar</a>
+                            <a @onclick="async () => await ApagarCategoria(c.Id)" class="btn btn-vermelho">Excluir</a>
+                        </div>
                     </div>
+
                 </div>
             </ConteudoPrincipal>
         </ListaPaginada>
@@ -39,7 +59,7 @@
         categorias = await CategoriaFraseService.BuscarTodas();
     }
 
-    async Task ApagarFrase(Guid id) {
+    async Task ApagarCategoria(Guid id) {
 
         // exibe um alerta de confirmacao ao apagar categoria
         bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir essa categoria?");
