@@ -15,7 +15,7 @@
     <div class="frases card">
         <div class="cab">
             <h1>Gerenciar frase</h1>
-            <a href="/int/frases/adicionar-frase/" class="btn btn-roxo">INCLUIR FRASE</a>
+            <a href="/int/frases/gerenciar-frase/" class="btn btn-roxo">INCLUIR FRASE</a>
         </div>
         <ListaPaginada Dados="frases" ExibirTotalPaginas="true" Context="f">
             <ConteudoPrincipal>
@@ -39,7 +39,7 @@
                         </div>
                         <div>
                             <div class="acoes">
-                                <a href="/int/frases/atualizar-frase/@f.Id" class="btn btn-amarelo">Editar</a>
+                                <a href="/int/frases/gerenciar-frase/@f.Id" class="btn btn-amarelo">Editar</a>
                                 <a @onclick="async () => await ApagarFrase(f.Id)" class="btn btn-vermelho">Excluir</a>
                             </div>
                         </div>
