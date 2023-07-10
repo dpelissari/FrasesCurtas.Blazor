@@ -13,7 +13,7 @@
     <div class="frases card">
         <div class="cab">
             <h1>Gerenciar autor</h1>
-            <a href="/int/autores/adicionar-autor" class="btn btn-roxo">INCLUIR AUTOR</a>
+            <a href="/int/autores/gerenciar-autor/novo" class="btn btn-roxo">INCLUIR AUTOR</a>
         </div>
         <ListaPaginada Dados="autores" ExibirTotalPaginas="true" Context="a">
             <ConteudoPrincipal>
@@ -32,7 +32,7 @@
                             <p>@a.DataCadastro.ToShortDateString().ToString()</p>
                         </div>
                         <div class="acoes">
-                            <a href="/int/autores/atualizar-autor/@a.Id" class="btn btn-amarelo">Editar</a>
+                            <a href="/int/autores/gerenciar-autor/@a.Id" class="btn btn-amarelo">Editar</a>
                             <a @onclick="async () => await ApagarAutor(a.Id)" class="btn btn-vermelho">Excluir</a>
                         </div>
                     </div>
