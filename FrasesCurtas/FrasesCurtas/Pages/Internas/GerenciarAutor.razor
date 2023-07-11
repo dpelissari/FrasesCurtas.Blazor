@@ -15,27 +15,29 @@
 
         <EditForm Model="autor" OnValidSubmit="AtualizarAutores">
             <div>
-                <label for="nomeAutor">Nome</label>
-                <InputText @bind-Value="autor.Nome" class="form-control" id="nomeAutor"></InputText>
+                <label>Nome</label>
+                <InputText @bind-Value="autor.Nome"></InputText>
+                <ValidationMessage For="@(() => autor.Nome)" />
             </div>
             <div>
-                <label for="dataCadastroAutor">Data Cadastro</label>
-                <InputDate @bind-Value="autor.DataCadastro" id="dataCadastroAutor" />
+                <label>Data Cadastro</label>
+                <InputDate @bind-Value="autor.DataCadastro" />
+                <ValidationMessage For="@(() => autor.DataCadastro)" />
             </div>
             <div>
-                <label for="arquivadaFrase">Ativo?</label>
-                <InputSelect @bind-Value="autor.Ativo" class="form-control">
+                <label>Ativo?</label>
+                <InputSelect @bind-Value="autor.Ativo">
                     <option value="true">Sim</option>
                     <option value="false">Não</option>
                 </InputSelect>
+                <ValidationMessage For="@(() => autor.Ativo)" />
             </div>
             <div>
-                <ImagemUpload Modelo="@autor" DiretorioImagem="autores"></ImagemUpload>
+                <ImagemUpload Modelo="@autor" DiretorioImagem="autores" />
+                <ValidationMessage For="@(() => autor.CaminhoImagem)" />
             </div>
 
             <DataAnnotationsValidator />
-            <ValidationSummary />
-
             <button type="submit">Salvar</button>
             <NavLink href="int/autores/">Cancelar</NavLink>
 
@@ -47,26 +49,30 @@
 
         <EditForm Model="autor" OnValidSubmit="CriarAutor">
             <div>
-                <label for="nomeAutor">Nome</label>
+                <label>Nome</label>
                 <InputText @bind-Value="autor.Nome" class="form-control" id="autornome"></InputText>
+                <ValidationMessage For="@(() => autor.Nome)" />
             </div>
             <div>
-                <label for="dataCadastroAutor">Data Cadastro</label>
+                <label>Data Cadastro</label>
                 <InputDate @bind-Value="autor.DataCadastro" />
+                <ValidationMessage For="@(() => autor.DataCadastro)" />
             </div>
             <div>
-                <label for="arquivadaFrase">Ativo?</label>
+                <label>Ativo?</label>
                 <InputSelect @bind-Value="autor.Ativo" class="form-control">
                     <option value="true">Sim</option>
                     <option value="false" selected>Não</option>
-
                 </InputSelect>
+                <ValidationMessage For="@(() => autor.Ativo)" />
+
+            </div>
+            <div>
+                <ImagemUpload Modelo="@autor" DiretorioImagem="autores" TextoLabel="Upload imagem" LarguraImagem="100" />
+                <ValidationMessage For="@(() => autor.CaminhoImagem)" />
             </div>
 
-            <ImagemUpload Modelo="@autor" DiretorioImagem="autores" TextoLabel="Upload imagem" LarguraImagem="100" />
-
             <DataAnnotationsValidator />
-            <ValidationSummary />
 
             <button type="submit">Incluir</button>
         </EditForm>
