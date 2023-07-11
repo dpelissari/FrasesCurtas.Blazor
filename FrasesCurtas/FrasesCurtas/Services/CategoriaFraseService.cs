@@ -1,5 +1,6 @@
 ﻿using FrasesCurtas.Data;
 using FrasesCurtas.Models;
+using FrasesCurtas.Pages;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrasesCurtas.Services {
@@ -26,6 +27,12 @@ namespace FrasesCurtas.Services {
 
         // metodo asincrono para apagar autorews
         public async Task Apagar(CategoriaFrase categoria) {
+
+            // Remover as frases associadas a categoria
+            var frases = await dbContexto.Frases.Where(f => f.IdCategoriaFrase == categoria.Id).ToListAsync();
+            dbContexto.Frases.RemoveRange(frases);
+
+            // Remover a categoria
             dbContexto.Remove(categoria);
             await dbContexto.SaveChangesAsync();
         }
