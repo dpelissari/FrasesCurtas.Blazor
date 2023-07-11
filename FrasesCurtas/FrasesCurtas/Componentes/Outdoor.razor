@@ -8,19 +8,26 @@
     <div class="container">
         <div class="card sombra">
             <div>
-                <div class="frase-item">
-                    <p class="categoria">@frase.Categoria?.Categoria</p>
-                    <h1 class="frase">@frase.Descricao</h1>
-                    <p class="autor">Autor: @frase.Autor?.Nome</p>
-                </div>
-                <div class="acoes">
-                    <button class="btn-frase-aleatoria" @onclick="FraseAleatoria">
-                        <img src="imagens/icones/ico-atualizar.svg" width="30" height="30" alt="Trocar frase" />
-                    </button>
-                    <button class="btn-clipboard" onclick="copiarFrase('@frase.Descricao', '@frase.Autor?.Nome');">
-                        <img src="imagens/icones/ico-clipboard.svg" width="30" height="30" alt="Trocar frase" />
-                    </button>
-                </div>
+                @if (frase != null)
+                {
+                    <div class="frase-item">
+                        <p class="categoria">@frase.Categoria?.Categoria</p>
+                        <h1 class="frase">@frase.Descricao</h1>
+                        <p class="autor">Autor: @frase.Autor?.Nome</p>
+                    </div>
+                    <div class="acoes">
+                        <button class="btn-frase-aleatoria" @onclick="FraseAleatoria">
+                            <img src="imagens/icones/ico-atualizar.svg" width="30" height="30" alt="Trocar frase" />
+                        </button>
+                        <button class="btn-clipboard" onclick="copiarFrase('@frase.Descricao', '@frase.Autor?.Nome');">
+                            <img src="imagens/icones/ico-clipboard.svg" width="30" height="30" alt="Trocar frase" />
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <p class="mensagem">Não há frases disponíveis no momento.</p>
+                }
             </div>
         </div>
     </div>
@@ -28,16 +35,25 @@
 
 @code {
 
-    private Frase frase = new();
+    private Frase frase;
 
-    protected override async Task OnInitializedAsync() { await FraseAleatoria(); }
+    protected override async Task OnInitializedAsync() {
+        await FraseAleatoria();
+    }
 
     private async Task FraseAleatoria() {
         var todasFrases = await FraseService.BuscarTodas();
-        var random = new Random();
-        var index = random.Next(todasFrases.Count());
-        frase = todasFrases.ElementAt(index);
-        frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
-        frase.Categoria  = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
+        if (todasFrases.Any())
+        {
+            var random = new Random();
+            var index = random.Next(todasFrases.Count());
+            frase = todasFrases.ElementAt(index);
+            frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
+            frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
+        }
+        else
+        {
+            frase = null;
+        }
     }
 }
