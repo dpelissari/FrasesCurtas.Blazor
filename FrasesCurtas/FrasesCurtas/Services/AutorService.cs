@@ -26,7 +26,12 @@ namespace FrasesCurtas.Services {
 
         // metodo asincrono para apagar autorews
         public async Task Apagar(Autor autor) {
-            dbContexto.Remove(autor);
+            // Remover as frases associadas ao autor
+            var frases = await dbContexto.Frases.Where(f => f.IdAutor == autor.Id).ToListAsync();
+            dbContexto.Frases.RemoveRange(frases);
+
+            // Remover o autor
+            dbContexto.Autores.Remove(autor);
             await dbContexto.SaveChangesAsync();
         }
 
