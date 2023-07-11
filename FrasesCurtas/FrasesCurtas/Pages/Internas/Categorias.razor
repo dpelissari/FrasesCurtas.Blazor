@@ -12,19 +12,19 @@
 <div class="container">
     <div class="frases card">
         <div class="cab">
-            <h1>Gerenciar categorias</h1>
-            <a href="/int/autores/adicionar-autor" class="btn btn-roxo">INCLUIR CATEGORIA</a>
+            <h1>Categorias</h1>
+            <a href="/int/categorias/nova" class="btn btn-roxo">INCLUIR CATEGORIA</a>
         </div>
         <ListaPaginada Dados="categorias" ExibirTotalPaginas="true" Context="c">
             <ConteudoPrincipal>
                 <div class="item sombra">
                     <div class="grupo">
                         <div>
-                            <label>Categoria</label>
+                            <label>Nome</label>
                             <div>@c.Categoria</div>
                         </div>
                         <div>
-                            <label>Descrição</label>
+                            <label>Descricao</label>
                             <div>@c.Descricao</div>
                         </div>
                         <div>
@@ -33,18 +33,19 @@
                         </div>
                         <div>
                             <label>Frases</label>
-                            <p>@c.Frases.Count</p>
+                            <div>@TotalFrasesCategoria</div>
                         </div>
                         <div>
-                            <label>Data de cadastro</label>
-                            <p>@c.DataCadastro.ToShortDateString().ToString()</p>
+                            <label>Data de cadastro?</label>
+                            <div>@c.DataCadastro.ToShortDateString().ToString()</div>
                         </div>
-                        <div class="acoes">
-                            <a href="/int/autores/atualizar-autor/@c.Id" class="btn btn-amarelo">Editar</a>
-                            <a @onclick="async () => await ApagarCategoria(c.Id)" class="btn btn-vermelho">Excluir</a>
+                        <div>
+                            <div class="acoes">
+                                <a href="/int/categorias/gerenciar-categoria/@c.Id" class="btn btn-amarelo">Editar</a>
+                                <a @onclick="async () => await ApagarCategoria(c.Id)" class="btn btn-vermelho">Excluir</a>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </ConteudoPrincipal>
         </ListaPaginada>
@@ -53,10 +54,12 @@
 
 @code {
     private IQueryable<CategoriaFrase> categorias;
+    protected int TotalFrasesCategoria;
 
     // ao inicializar busca todas categorias
     protected override async Task OnInitializedAsync() {
         categorias = await CategoriaFraseService.BuscarTodas();
+        TotalFrasesCategoria = categorias.Count();
     }
 
     async Task ApagarCategoria(Guid id) {
@@ -76,6 +79,8 @@
 
         // atualiza as categorias que serao exibidas
         categorias = await CategoriaFraseService.BuscarTodas();
+
+        TotalFrasesCategoria = categorias.Count();
 
         StateHasChanged();
     }

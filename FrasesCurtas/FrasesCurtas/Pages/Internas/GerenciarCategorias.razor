@@ -1,0 +1,101 @@
+﻿@page "/int/categorias/gerenciar-categoria/{id?}";
+@page "/int/categorias/nova";
+@attribute [Authorize(Roles = "Administrador")]
+
+@using FrasesCurtas.Componentes
+@using FrasesCurtas.Models
+@inject NavigationManager NavigationManager
+@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService
+@layout InternasLayout;
+
+<div class="container">
+    @if (modoEdicao)
+    {
+        <h3>Atualizar Categoria</h3>
+
+        <EditForm Model="categoria" OnValidSubmit="AtualizarCategoriaFrase">
+            <div>
+                <label>Categoria</label>
+                <InputText @bind-Value="categoria.Categoria"></InputText>
+            </div>
+            <div>
+                <label>Descrição</label>
+                <InputText @bind-Value="categoria.Descricao"></InputText>
+            </div>
+            <div>
+                <label>Data Cadastro</label>
+                <InputDate @bind-Value="categoria.DataCadastro" />
+            </div>
+            <div>
+                <label>Ativo?</label>
+                <InputSelect @bind-Value="categoria.Ativo">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                </InputSelect>
+            </div>
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <button type="submit">Salvar</button>
+            <NavLink href="int/categorias/">Cancelar</NavLink>
+
+        </EditForm>
+    }
+    else
+    {
+        <h3>Adicionar Categoria</h3>
+        <EditForm Model="categoria" OnValidSubmit="CriarCategoriaFrase">
+            <div>
+                <label>Cadastro</label>
+                <InputDate @bind-Value="categoria.DataCadastro"></InputDate>
+            </div>
+            <div>
+                <label>Categoria</label>
+                <InputText @bind-Value="categoria.Categoria"></InputText>
+            </div>
+            <div>
+                <label>Descrição</label>
+                <InputText @bind-Value="categoria.Descricao" />
+            </div>
+            <div>
+                <label for="arquivadaFrase">Ativo?</label>
+                <InputSelect @bind-Value="categoria.Ativo">
+                    <option value="true">Sim</option>
+                    <option value="false" selected>Não</option>
+                </InputSelect>
+            </div>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <button type="submit">Incluir</button>
+        </EditForm>
+    }
+</div>
+
+@code {
+    CategoriaFrase categoria = new();
+    bool modoEdicao = false;
+
+    [Parameter]
+    public string id { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        if (!string.IsNullOrEmpty(id))
+        {
+            modoEdicao = true;
+            categoria = await CategoriaFraseService.BuscarPor(Guid.Parse(id));
+        }
+    }
+
+    async Task CriarCategoriaFrase() {
+        categoria.GerarNovoId();
+        await CategoriaFraseService.Adicionar(categoria);
+        NavigationManager.NavigateTo("/int/categorias");
+    }
+
+    async Task AtualizarCategoriaFrase() {
+        await CategoriaFraseService.Atualizar(categoria);
+        NavigationManager.NavigateTo("/int/categorias");
+    }
+}
