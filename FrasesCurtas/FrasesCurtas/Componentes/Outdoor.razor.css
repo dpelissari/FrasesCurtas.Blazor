@@ -20,8 +20,8 @@
 @media (max-width:980px){
  .outdoor .card { height:330px; max-height:330px;} 
  .outdoor .container { padding-top:40px; }
- .outdoor .container .card > div { flex-direction:column; }
+ .outdoor .container .card > div { flex-direction:column; align-items:flex-start; }
  .outdoor .container .card .frase-item { margin-right:0; }
- .outdoor .container .card .acoes { margin-top:20px; }
+ .outdoor .container .card .acoes { margin:20px auto; }
 
 }

@@ -11,101 +11,112 @@
 @layout InternasLayout
 
 <div class="container">
-    @if (modoEdicao)
-    {
-        <h3>Atualizar Frase</h3>
+    <div class="card mt80">
+        @if (modoEdicao)
+        {
+            <h3>Editar Frase</h3>
 
-        <EditForm Model="frase" OnValidSubmit="AtualizarFrases">
+            <EditForm Model="frase" OnValidSubmit="AtualizarFrases">
 
-            <div>
-                <label>Autor</label>
-                <InputSelect @bind-Value="frase.IdAutor">
+                <div class="cmp">
+                    <label>Categoria</label>
+                    <InputSelect @bind-Value="frase.IdCategoriaFrase">
+                        <Repeater DataSource="categorias" Context="c">
+                            <ItemTemplate>
+                                <option value="@c.Id">@c.Categoria</option>
+                            </ItemTemplate>
+                        </Repeater>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => frase.Categoria)" />
+                </div>
+                <div class="cmp">
+                    <label>Arquvida</label>
+                    <InputSelect @bind-Value="frase.Arquivada">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </InputSelect>
+                </div>
+                <div class="cmp">
+                    <label>Autor</label>
+                    <InputSelect @bind-Value="frase.IdAutor">
+                        <Repeater DataSource="autores" Context="a">
+                            <ItemTemplate>
+                                <option value="@a.Id">@a.Nome</option>
+                            </ItemTemplate>
+                        </Repeater>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => frase.Autor)" />
+                </div>
+                <div class="cmp">
+                    <label>Frase</label>
+                    <InputTextArea @bind-Value="frase.Descricao" rows="5"></InputTextArea>
+                    <ValidationMessage For="@(() => frase.Descricao)" />
+                </div>
 
-                    @foreach (var autor in autores)
-                    {
-                        <option value="@autor.Id">@autor.Nome</option>
-                    }
-                </InputSelect>
-            </div>
+                <DataAnnotationsValidator />
 
-            <div>
-                <label>Categoria</label>
-                <InputSelect @bind-Value="frase.IdCategoriaFrase">
+                <div class="acoes mtb20">
+                    <button class="btn btn-amarelo" type="submit">ATUALIZAR</button>
+                    <NavLink class="btn btn-vermelho" href="int/frases/">CANCELAR</NavLink>
+                </div>
 
-                    @foreach (var categoria in categorias)
-                    {
-                        <option value="@categoria.Id">@categoria.Categoria</option>
-                    }
-                </InputSelect>
-            </div>
+            </EditForm>
 
-            <div>
-                <label for="descricaoFrase">Frase</label>
-                <InputText @bind-Value="frase.Descricao" class="form-control" id="descricaoFrase"></InputText>
-            </div>
-            <div>
-                <label for="dataCadastroFrase">Data Cadastro</label>
-                <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase" />
-            </div>
-            <div>
-                <label for="arquivadaFrase">Arquvida</label>
-                <InputSelect @bind-Value="frase.Arquivada" class="form-control">
-                    <option value="true">Sim</option>
-                    <option value="false">Não</option>
-                </InputSelect>
-            </div>
+        }
+        else
+        {
+            <h3>Incluir Frase</h3>
 
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+            <EditForm Model="frase" OnValidSubmit="CriarFrase">
+                <div>
 
-            <button class="btn btn-success" type="submit">Salvar</button>
-            <NavLink href="int/frases/">Cancelar</NavLink>
+                    <div class="cmp">
+                        <label>Categoria</label>
+                        <InputSelect @bind-Value="frase.IdCategoriaFrase">
+                            <Repeater DataSource="categorias" Context="c">
+                                <ItemTemplate>
+                                    <option value="@c.Id">@c.Categoria</option>
+                                </ItemTemplate>
+                            </Repeater>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => frase.Categoria)" />
+                    </div>
+                    <div class="cmp">
+                        <label>Arquvida?</label>
+                        <InputSelect @bind-Value="frase.Arquivada">
+                            <option value="true">Sim</option>
+                            <option value="false" selected>Não</option>
+                        </InputSelect>
+                    </div>
+                     <div class="cmp">
+                        <label>Autor</label>
+                        <InputSelect @bind-Value="frase.IdAutor">
+                            <Repeater DataSource="autores" Context="a">
+                                <ItemTemplate>
+                                    <option value="@a.Id">@a.Nome</option>
+                                </ItemTemplate>
+                            </Repeater>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => frase.Autor)" />
+                    </div>
+                    <div class="cmp">
+                        <label>Frase</label>
+                        <InputTextArea @bind-Value="frase.Descricao" rows="5"></InputTextArea>
+                        <ValidationMessage For="@(() => frase.Descricao)" />
+                    </div>
+                </div>
 
-        </EditForm>
-    }
-    else
-    {
-        <h3>Adicionar Frase</h3>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
-        <EditForm Model="frase" OnValidSubmit="CriarFrase">
-            <div>
-                <label>Categoria</label>
-                <InputSelect @bind-Value="frase.IdCategoriaFrase">
-                    @foreach (var categoria in categorias)
-                    {
-                        <option value="@categoria.Id">@categoria.Categoria</option>
-                    }
-                </InputSelect>
-
-
-                <label>Autor</label>
-                <InputSelect @bind-Value="frase.IdAutor">
-                    @foreach (var autor in autores)
-                    {
-                        <option value="@autor.Id">@autor.Nome</option>
-                    }
-                </InputSelect>
-                <label for="descricaoFrase">Frase</label>
-                <InputText @bind-Value="frase.Descricao" id="descricaoFrase"></InputText>
-            </div>
-            <div>
-                <label for="dataCadastroFrase">Data Cadastro</label>
-                <InputDate @bind-Value="frase.DataCadastro" id="dataCadastroFrase" />
-            </div>
-            <div>
-                <label for="arquivadaFrase">Arquvida</label>
-                <InputSelect @bind-Value="frase.Arquivada" class="form-control">
-                    <option value="true">Sim</option>
-                    <option value="false" selected>Não</option>
-                </InputSelect>
-            </div>
-
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-
-            <button type="submit">Incluir</button>
-        </EditForm>
-    }
+                <div class="acoes">
+                    <button class="btn btn-amarelo" type="submit">INCLUIR</button>
+                    <NavLink class="btn btn-vermelho" href="int/frases/">CANCELAR</NavLink>
+                </div>
+            </EditForm>
+        }
+    </div>
+ 
 </div>
 
 @code {
@@ -115,17 +126,24 @@
     bool modoEdicao = false;
 
     [Parameter]
+
     public string id { get; set; }
-
     protected override async Task OnInitializedAsync() {
-
         autores = await AutorService.BuscarTodas();
         categorias = await CategoriaFraseService.BuscarTodas();
 
         if (!string.IsNullOrEmpty(id))
         {
-            modoEdicao = true;
-            frase = await FraseService.BuscarPor(Guid.Parse(id));
+            if (Guid.TryParse(id, out Guid idFrase))
+            {
+                frase = await FraseService.BuscarPor(idFrase);
+                modoEdicao = true;
+            }
+            else
+            {
+                // ID inválido, redireciona para listagem de frases
+                NavigationManager.NavigateTo("/int/frases");
+            }
         }
     }
 

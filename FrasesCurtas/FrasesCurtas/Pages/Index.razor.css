@@ -2,7 +2,7 @@
     p { text-align:left; width:100%; }
     .compartilhamento  { display:flex; justify-content:flex-end; align-items:center; width:100%; }
     .compartilhamento > div  { display:flex; }
-    .compartilhamento p { text-align:right; font-size:16px; opacity:0.5; margin:0 15px; width:auto; }
+    .compartilhamento p { text-align:right; font-size:16px; color:#808080; margin:0 15px; width:auto; }
     .compartilhamento a { display:flex; align-items:center; justify-content:center; margin:0 4px; width:40px; height:40px; border-radius:50%; }
     .compartilhamento button { display:flex; align-items:center; justify-content:center; margin:0 4px; width:40px; height:40px; border-radius:50%; cursor:pointer; }
     .compartilhamento a:hover { opacity:0.8; }

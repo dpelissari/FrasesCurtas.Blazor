@@ -2,81 +2,85 @@
 @page "/int/autores/novo/"
 @attribute [Authorize(Roles = "Administrador")]
 
+
 @using FrasesCurtas.Componentes
 @using FrasesCurtas.Models
 @inject NavigationManager NavigationManager
 @inject FrasesCurtas.Services.IAutorService AutorService
+@inject IWebHostEnvironment _ambiente;
 @layout InternasLayout
 
 <div class="container">
-    @if (modoEdicao)
-    {
-        <h3>Atualizar Autor</h3>
+    <div class="card mt80">
 
-        <EditForm Model="autor" OnValidSubmit="AtualizarAutores">
-            <div>
-                <label>Nome</label>
-                <InputText @bind-Value="autor.Nome"></InputText>
-                <ValidationMessage For="@(() => autor.Nome)" />
-            </div>
-            <div>
-                <label>Data Cadastro</label>
-                <InputDate @bind-Value="autor.DataCadastro" />
-                <ValidationMessage For="@(() => autor.DataCadastro)" />
-            </div>
-            <div>
-                <label>Ativo?</label>
-                <InputSelect @bind-Value="autor.Ativo">
-                    <option value="true">Sim</option>
-                    <option value="false">Não</option>
-                </InputSelect>
-                <ValidationMessage For="@(() => autor.Ativo)" />
-            </div>
-            <div>
-                <ImagemUpload Modelo="@autor" DiretorioImagem="autores" />
-                <ValidationMessage For="@(() => autor.CaminhoImagem)" />
-            </div>
+        @if (modoEdicao)
+        {
+            <h3>Editar autor</h3>
 
-            <DataAnnotationsValidator />
-            <button type="submit">Salvar</button>
-            <NavLink href="int/autores/">Cancelar</NavLink>
+            <EditForm Model="autor" OnValidSubmit="AtualizarAutores">
+                <div>
+                    <div class="cmp">
+                        <label>Nome</label>
+                        <InputText @bind-Value="autor.Nome"></InputText>
+                        <ValidationMessage For="@(() => autor.Nome)" />
+                    </div>
+                    <div class="cmp">
+                        <ImagemUpload Modelo="@autor" DiretorioImagem="imagens/autores" />
+                        <ValidationMessage For="@(() => autor.CaminhoImagem)" />
+                    </div>
+                    <div class="cmp">
+                        <label>Autor ativo?</label>
+                        <InputSelect @bind-Value="autor.Ativo">
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </InputSelect>
+                    </div>
+                            
+                    <ValidationMessage For="@(() => autor.Ativo)" />
+                      
+                    <div class="acoes mtb20">
+                        <button class="btn btn-amarelo" type="submit">ATUALIZAR</button>
+                        <NavLink class="btn btn-vermelho" href="int/autores/">CANCELAR</NavLink>
+                    </div>
+                </div>
+                 <DataAnnotationsValidator />
+            </EditForm>
+        }
+        else
+        {
+            <h3>Incluir Autor</h3>
 
-        </EditForm>
-    }
-    else
-    {
-        <h3>Adicionar Autor</h3>
+            <EditForm Model="autor" OnValidSubmit="CriarAutor">
+                <div>
+                    <ImagemUpload Modelo="@autor" DiretorioImagem="autores" TextoLabel="Upload imagem" LarguraImagem="100" />
+                    <ValidationMessage For="@(() => autor.CaminhoImagem)" />
+                </div>
+                <div>
+                    <label>Nome</label>
+                    <InputText @bind-Value="autor.Nome" class="form-control" id="autornome"></InputText>
+                    <ValidationMessage For="@(() => autor.Nome)" />
+                </div>
+                <div>
+                    <div class="cmp">
+                        <label>Autor ativo?</label>
+                        <InputSelect @bind-Value="autor.Ativo">
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </InputSelect>
+                    </div>
+                    <ValidationMessage For="@(() => autor.Ativo)" />
+                </div>
 
-        <EditForm Model="autor" OnValidSubmit="CriarAutor">
-            <div>
-                <label>Nome</label>
-                <InputText @bind-Value="autor.Nome" class="form-control" id="autornome"></InputText>
-                <ValidationMessage For="@(() => autor.Nome)" />
-            </div>
-            <div>
-                <label>Data Cadastro</label>
-                <InputDate @bind-Value="autor.DataCadastro" />
-                <ValidationMessage For="@(() => autor.DataCadastro)" />
-            </div>
-            <div>
-                <label>Ativo?</label>
-                <InputSelect @bind-Value="autor.Ativo" class="form-control">
-                    <option value="true">Sim</option>
-                    <option value="false" selected>Não</option>
-                </InputSelect>
-                <ValidationMessage For="@(() => autor.Ativo)" />
+                <DataAnnotationsValidator />
 
-            </div>
-            <div>
-                <ImagemUpload Modelo="@autor" DiretorioImagem="autores" TextoLabel="Upload imagem" LarguraImagem="100" />
-                <ValidationMessage For="@(() => autor.CaminhoImagem)" />
-            </div>
+                <div class="acoes">
+                    <button class="btn btn-amarelo" type="submit">INCLUIR</button>
+                    <NavLink class="btn btn-vermelho" href="int/autores/">CANCELAR</NavLink>
+                </div>
+            </EditForm>
+        }
+    </div>
 
-            <DataAnnotationsValidator />
-
-            <button type="submit">Incluir</button>
-        </EditForm>
-    }
 </div>
 
 @code {
@@ -89,8 +93,17 @@
     protected override async Task OnInitializedAsync() {
         if (!string.IsNullOrEmpty(id))
         {
-            modoEdicao = true;
-            autor = await AutorService.BuscarPor(Guid.Parse(id));
+
+            if (Guid.TryParse(id, out Guid idAutor))
+            {
+                autor = await AutorService.BuscarPor(idAutor);
+                modoEdicao = true;
+            }
+            else
+            {
+                // ID inválido, redireciona para listagem de autores
+                NavigationManager.NavigateTo("/int/autores");
+            }
         }
     }
 

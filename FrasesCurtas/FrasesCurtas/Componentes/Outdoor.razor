@@ -51,9 +51,5 @@
             frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
             frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
         }
-        else
-        {
-            frase = null;
-        }
     }
 }

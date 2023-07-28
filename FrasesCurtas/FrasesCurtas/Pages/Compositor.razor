@@ -44,20 +44,23 @@
 
     private Autor autor;
     private IQueryable<Frase> frases;
+    private string mensagem;
 
     protected override async Task OnInitializedAsync() {
-
-        if (autor != null)
+        if (!string.IsNullOrEmpty(Id) && Guid.TryParse(Id, out Guid autorId))
         {
-            autor = await AutorService.BuscarPor(Guid.Parse(Id));
-            frases = await FraseService.BuscarPorAutorId(Guid.Parse(Id));
-
-            // alimenta autores e categoria
-            foreach (var frase in frases)
+            autor = await AutorService.BuscarPor(autorId);
+            if (autor != null)
             {
-                frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
-            }
+                frases = await FraseService.BuscarPorAutorId(autorId);
 
+                // Alimenta autores e categoria
+                foreach (var frase in frases)
+                {
+                    frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
+                }
+            }
         }
+        
     }
 }

@@ -1,0 +1,6 @@
+﻿h3 { text-transform:uppercase; margin:20px 0;  }
+.acoes { width:100%; }
+.acoes > button { width:100%; }
+.card ::deep form > div { max-width:400px; width:400px;  }
+.card ::deep form  div { margin:10px 0; }
+label { margin:10px 0;}

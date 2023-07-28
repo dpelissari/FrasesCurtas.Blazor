@@ -1,6 +1,6 @@
 ﻿@media all {
     body { background:#3A3939; color:#FFFFFF; }
-    input { background:#4E4E4E; color:#FFF;  }
+    input { background:#FFFFFF; color:#404040;  }
     .card { background:#4E4E4E; }
 
     ::-webkit-scrollbar-thumb { background-color:#5F4BB6; border-right:6px; }

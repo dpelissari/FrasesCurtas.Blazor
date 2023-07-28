@@ -9,68 +9,70 @@
 @layout InternasLayout;
 
 <div class="container">
+    <div class="card mt80">
     @if (modoEdicao)
     {
-        <h3>Atualizar Categoria</h3>
+        <h3>Editar Categoria</h3>
 
         <EditForm Model="categoria" OnValidSubmit="AtualizarCategoriaFrase">
-            <div>
-                <label>Categoria</label>
+            <div class ="cmp">
+                <label>Nome</label>
                 <InputText @bind-Value="categoria.Categoria"></InputText>
+                <ValidationMessage For="@(() => categoria.Categoria)" />
             </div>
-            <div>
-                <label>Descrição</label>
-                <InputText @bind-Value="categoria.Descricao"></InputText>
-            </div>
-            <div>
-                <label>Data Cadastro</label>
-                <InputDate @bind-Value="categoria.DataCadastro" />
-            </div>
-            <div>
-                <label>Ativo?</label>
+            <div class="cmp">
+                <label>Categoria ativa?</label>
                 <InputSelect @bind-Value="categoria.Ativo">
                     <option value="true">Sim</option>
                     <option value="false">Não</option>
                 </InputSelect>
+                <ValidationMessage For="@(() => categoria.Ativo)" />
+            </div>
+            <div class="cmp">
+                <label>Descrição</label>
+                <InputTextArea @bind-Value="categoria.Descricao" rows="5"></InputTextArea>
+                <ValidationMessage For="@(() => categoria.Descricao)" />
             </div>
 
             <DataAnnotationsValidator />
-            <ValidationSummary />
 
-            <button type="submit">Salvar</button>
-            <NavLink href="int/categorias/">Cancelar</NavLink>
+            <div class="acoes mtb20">
+                <button class="btn btn-amarelo" type="submit">ATUALIZAR</button>
+                <NavLink class="btn btn-vermelho" href="int/categorias/">CANCELAR</NavLink>
+            </div>
 
         </EditForm>
     }
     else
     {
-        <h3>Adicionar Categoria</h3>
+        <h3>Incluir Categoria</h3>
         <EditForm Model="categoria" OnValidSubmit="CriarCategoriaFrase">
-            <div>
-                <label>Cadastro</label>
-                <InputDate @bind-Value="categoria.DataCadastro"></InputDate>
-            </div>
-            <div>
-                <label>Categoria</label>
+            <div class="cmp">
+                <label>Nome</label>
                 <InputText @bind-Value="categoria.Categoria"></InputText>
             </div>
-            <div>
-                <label>Descrição</label>
-                <InputText @bind-Value="categoria.Descricao" />
-            </div>
-            <div>
-                <label for="arquivadaFrase">Ativo?</label>
+            <div class="cmp">
+                <label for="arquivadaFrase">Categoria ativa?</label>
                 <InputSelect @bind-Value="categoria.Ativo">
                     <option value="true">Sim</option>
                     <option value="false" selected>Não</option>
                 </InputSelect>
+                <ValidationMessage For="@(() => categoria.Ativo)" />
             </div>
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+            <div class="cmp">
+                <label>Descrição</label>
+                <InputTextArea @bind-Value="categoria.Descricao" rows="5"></InputTextArea>
+            </div>
 
-            <button type="submit">Incluir</button>
+            <DataAnnotationsValidator />
+
+            <div class="acoes mtb20">
+                <button class="btn btn-amarelo" type="submit">INCLUIR</button>
+                <NavLink class="btn btn-vermelho" href="int/categorias/">CANCELAR</NavLink>
+            </div>
         </EditForm>
     }
+    </div>
 </div>
 
 @code {
@@ -83,8 +85,15 @@
     protected override async Task OnInitializedAsync() {
         if (!string.IsNullOrEmpty(id))
         {
-            modoEdicao = true;
-            categoria = await CategoriaFraseService.BuscarPor(Guid.Parse(id));
+            if (Guid.TryParse(id, out Guid idCategoria))
+            {
+                categoria = await CategoriaFraseService.BuscarPor(idCategoria);
+                modoEdicao = true;
+            } else
+            {
+                // ID inválido, redireciona para listagem de categorias
+                NavigationManager.NavigateTo("/int/categorias");
+            }
         }
     }
 

@@ -1,6 +1,4 @@
-﻿.card { margin-top:80px; }
-
-.item { display:flex; justify-content:space-between; margin:5px 0; align-items:flex-start; width:100%; border:1px dashed #dddd; border-radius:6px; padding:20px; box-sizing:border-box; }
+﻿.item { display:flex; justify-content:space-between; margin:5px 0; align-items:flex-start; width:100%; border:1px dashed #dddd; border-radius:6px; padding:20px; box-sizing:border-box; }
 .item > div { width:60%; }
 .item .grupo { display:grid; grid-template-columns:repeat(4, 1fr); grid-column-gap:20px; }
 .item .grupo > div { display:flex; flex-direction:column; padding:0 20px; }

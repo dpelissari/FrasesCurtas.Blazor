@@ -2,25 +2,32 @@
 @using SixLabors.ImageSharp;
 @inject IWebHostEnvironment _ambiente;
 
-<div>
-    <label>@TextoLabel</label>
-
-    <InputFile OnChange="HandleFileSelection" />
-
-    <PlaceHolder Visible="@ExibeImagem">
-        <img src="@Modelo.CaminhoImagem" style="width:100px; height:100px; border-radius:50%;">
+<div class="upload">
+    <PlaceHolder Visible="!ExibeImagem">
+        <label>@TextoLabel</label>
+        <InputFile OnChange="HandleFileSelection" />
     </PlaceHolder>
 
-    <PlaceHolder Visible="@ExibeBotaoUpload">
-        <button @onclick="EnviarImagem" type="button">UPLOAD</button>
+    <PlaceHolder Visible="ExibeImagem">
+        <div class="preview">
+            <img src="@Modelo.CaminhoImagem" style="width:100px; height:100px; border-radius:50%;">
+        </div>
     </PlaceHolder>
 
-    <PlaceHolder Visible="@(Modelo.CaminhoImagem != null)">
-        <button @onclick="RemoverImagem" type="button">REMOVER</button>
-    </PlaceHolder>
+    <div class="acoes">
+        <PlaceHolder Visible="ExibeBotaoUpload">
+            <button @onclick="EnviarImagem" type="button" class="btn btn-amarelo">UPLOAD</button>
+        </PlaceHolder>
+
+        <PlaceHolder Visible="Modelo.CaminhoImagem != null">
+            <button @onclick="RemoverImagem" type="button" class="btn btn-vermelho">REMOVER</button>
+        </PlaceHolder>
+    </div>
 
     <PlaceHolder Visible="!string.IsNullOrEmpty(Erro)">
-        <p>@Erro</p>
+        <div>
+            <p>@Erro</p>
+        </div>
     </PlaceHolder>
 </div>
 
@@ -113,6 +120,7 @@
             //}
             // Limpa o caminho da imagem do modelo
             Modelo.CaminhoImagem = null;
+            Arquivo = null;
         }
     }
 }
