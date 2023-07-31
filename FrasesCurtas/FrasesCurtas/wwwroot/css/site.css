@@ -33,10 +33,11 @@
     .autor { font-size:16px; }
 
     /* paginacao */
-    .paginacao { margin:20px; display:flex; align-items:center; justify-content:center; }
-    .pg { width:40px; height:40px; border-radius:50%; margin:0 5px; font-size:30px;  }
+    .paginacao { margin:20px; display:flex; align-items:center; justify-content:center; text-align: center; }
+    .pg { width:40px; height:40px; border-radius:50%; margin:0 5px; font-size:18px;  }
     .total-pg { display:flex; justify-content:center; margin:10px 0;  }
     .pg:hover { cursor:pointer; opacity:0.5;  }
+    .pg.ativo { font-weight: bold; color:#5f4bb6; }
 
     /* botoes */
     button { background:#C4EBC8; color:#202A25; }

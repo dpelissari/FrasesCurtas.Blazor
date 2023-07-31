@@ -14,90 +14,86 @@ else
     @if (TotalPaginas() > 1)
     {
         <div class="paginacao">
-          
-            @if (PaginaAtual == 1)
+            <button @onclick="MoverParaPrimeiraPagina" class="pg retrocer-todos">&laquo;</button>
+            
+            @foreach (var page in Paginas)
             {
-                // se for a primeira pagina inativa botoes de retroceder
-                <button class="pg retrocer-todos" disabled>&laquo;</button>
-                <button class="pg retroceder-um" disabled>&lsaquo;</button>
+                <button @onclick="() => IrParaPagina(page.Numero)" class="pg @(page.EhAtual ? "ativo" : "")">@(page.Numero)</button>
             }
-            else
-            {
-                // se nao for a primeira pagina ativa botoes de retroceder
-                <button @onclick="@AvancarUmaPagina" class="pg retroceder-todos">&laquo;</button>
-                <button @onclick="@VoltarUmaPagina" class="pg retroceder-um">&lsaquo;</button>
-            }
-           
 
-            @if (!IrUltimaPagina())
-            {
-                // se nao for a ultima pagina inativa os botoes de avancar
-                <button @onclick="@MoverProProximo"class="pg avancar-um">&rsaquo;</button>
-                <button @onclick="@MoverProUltimo" class="pg avancar-todos">&raquo;</button>
-            }
-            else
-            {
-                // se nao for a primeira ou a ultima pagina ativa botoes de avancar uma pagina e de retroceder uma pagina
-                <button disabled class="pg avancar-um">&rsaquo;</button>
-                <button disabled class="pg avancar-todos">&raquo;</button>
-            }
+            <button @onclick="MoverParaUltimaPagina" class="pg avancar-todos">&raquo;</button>
         </div>
-
-        <PlaceHolder Visible="ExibirTotalPaginas">
-            <span class="total-pg">Página @PaginaAtual de @TotalPaginas()</span>
-        </PlaceHolder>
     }
 }
 
 @code {
-
     [Parameter]
     public IQueryable<TItem> Dados { get; set; }
     [Parameter]
     public RenderFragment<TItem> ConteudoPrincipal { get; set; }
     [Parameter]
     public int QtdeItensPorPagina { get; set; } = 5;
-    [Parameter]
-    public bool ExibirTotalPaginas { get; set; } = false;
 
-    private int PaginaAtual = 1;
-    private List<TItem> ConteudoAtualExibido;
+    private List<TItem> ConteudoAtualExibido = new List<TItem>();
     private int ContagemTotal;
-    
+    private int? PaginaAtual = 1;
 
-    protected override void OnParametersSet() {
-        AtualizarConteudoExibido();
+    private class Pagina
+    {
+        public int Numero { get; set; }
+        public bool EhAtual { get; set; }
+    }
+
+    private List<Pagina> Paginas => CriarListaDePaginas();
+
+    protected override void OnParametersSet()
+    {
         ContagemTotal = Dados.Count();
+        AtualizarConteudoExibido();
     }
 
-    private void AtualizarConteudoExibido() {
-        ConteudoAtualExibido = Dados.Skip((PaginaAtual - 1) * QtdeItensPorPagina).Take(QtdeItensPorPagina).ToList();
+    private void AtualizarConteudoExibido()
+    {
+        ConteudoAtualExibido = Dados.Skip((PaginaAtual.Value - 1) * QtdeItensPorPagina).Take(QtdeItensPorPagina).ToList();
     }
 
-    private bool IrUltimaPagina() {
+    private List<Pagina> CriarListaDePaginas()
+    {
+        var totalPaginas = TotalPaginas();
+        var paginas = new List<Pagina>();
+
+        for (int i = 1; i <= totalPaginas; i++)
+        {
+            paginas.Add(new Pagina { Numero = i, EhAtual = i == PaginaAtual });
+        }
+
+        return paginas;
+    }
+
+    private bool IrUltimaPagina()
+    {
         return PaginaAtual >= TotalPaginas();
     }
 
-    private int TotalPaginas() {
+    private int TotalPaginas()
+    {
         return Convert.ToInt32(Math.Ceiling(ContagemTotal / Convert.ToDecimal(QtdeItensPorPagina)));
     }
 
-    private void AvancarUmaPagina() {
+    private void IrParaPagina(int pagina)
+    {
+        PaginaAtual = pagina;
+        AtualizarConteudoExibido();
+    }
+
+    private void MoverParaPrimeiraPagina()
+    {
         PaginaAtual = 1;
         AtualizarConteudoExibido();
     }
 
-    private void VoltarUmaPagina() {
-        PaginaAtual--;
-        AtualizarConteudoExibido();
-    }
-
-    private void MoverProProximo() {
-        PaginaAtual++;
-        AtualizarConteudoExibido();
-    }
-
-    private void MoverProUltimo() {
+    private void MoverParaUltimaPagina()
+    {
         PaginaAtual = TotalPaginas();
         AtualizarConteudoExibido();
     }
