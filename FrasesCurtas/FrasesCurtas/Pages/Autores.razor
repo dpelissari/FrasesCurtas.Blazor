@@ -5,27 +5,38 @@
 @inject IJSRuntime JSRuntime
 @inject FrasesCurtas.Services.IAutorService AutorService;
 @using FrasesCurtas.Componentes;
+@layout InternasLayout;
 
 <PageTitle>Autores</PageTitle>
 
-<div class="container">
+<div class="container mt80">
     <h1>Autores</h1>
 
-     <div class="autores">
 
-        <ListaPaginada Dados="autores.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="21">
+    <div class="autores">
+        <ListaPaginada Dados="autores.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="8">
             <ConteudoPrincipal>
-                    <div class="autor">
-                        <div class="foto">
-                            <img src="@context.CaminhoImagem" alt="@context.Nome" style="width:100px; height:100px; border-radius:50%;" />
+
+                <NavLink href="@($"autor/{context.Id}")">
+                    <div class="card sombra">
+                        <div class="imagem-autor">
+                            <img src="@context.CaminhoImagem" alt="@context.Nome" />
                         </div>
-                    <NavLink href="@($"autor/{context.Id}")">
-                        @context.Nome
-                    </NavLink>
+                        <div>
+                            @context.Nome
+
+                        </div>
                     </div>
+                </NavLink>
+
+
             </ConteudoPrincipal>
         </ListaPaginada>
-      </div>
+    </div>
+
+
+
+
 </div>
 
 @code {

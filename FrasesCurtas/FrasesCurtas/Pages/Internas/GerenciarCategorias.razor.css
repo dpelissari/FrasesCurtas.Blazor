@@ -1,4 +1,4 @@
-﻿h3 { text-transform:uppercase; margin:20px 0;  }
+﻿h1 { text-transform:uppercase; margin:40px 0; font-weight:200; font-size:25px;  }
 .acoes { width:100%; }
 .acoes > button { width:100%; }
 .card ::deep form > div { max-width:400px; width:400px;}

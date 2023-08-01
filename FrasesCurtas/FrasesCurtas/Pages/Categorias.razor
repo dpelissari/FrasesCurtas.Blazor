@@ -1,29 +1,27 @@
 ﻿@page "/categorias"
 
-
 @using FrasesCurtas.Models
 @inject IJSRuntime JSRuntime
 @inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 @using FrasesCurtas.Componentes;
 @using FrasesCurtas.Services;
+@layout InternasLayout;
 
 <PageTitle>Categorias</PageTitle>
 
 <div class="container">
-    <h1>Categorias</h1>
-
-     <div class="autores">
-
-        <ListaPaginada Dados="categorias.OrderBy(a => a.Categoria).Where(a => a.Ativo)" QtdeItensPorPagina="21">
-            <ConteudoPrincipal>
-                <div>@context.Id</div>
-                <div>@context.Categoria</div>
-                <div>@context.Descricao</div>
-                <div>@context.DataCadastro</div>
-                <div>@context.Ativo</div>
-            </ConteudoPrincipal>
-        </ListaPaginada>
-      </div>
+    <div class="card mt80">
+        <h1>Categorias</h1>
+        <ul class="categorias">
+            <ListaPaginada Dados="categorias.OrderBy(a => a.Categoria).Where(a => a.Ativo)" QtdeItensPorPagina="50">
+                <ConteudoPrincipal>
+                    <NavLink href="@($"categoria/{context.Id}")">
+                        <li>@context.Categoria</li>
+                    </NavLink>
+                </ConteudoPrincipal>
+            </ListaPaginada>
+        </ul>
+    </div>
 </div>
 
 @code {

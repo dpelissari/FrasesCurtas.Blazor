@@ -3,8 +3,8 @@
     input { background:#f5f5f5; border:1px solid #9d9797;  }
     .card { background:#FFF; }
 
-    ::-webkit-scrollbar-thumb { background-color:#5F4BB6; border-radius:6px; }
-    ::-webkit-scrollbar-track { background-color:#ddd; border-radius:6px;}
+    ::-webkit-scrollbar-thumb { background-color:#5F4BB6;}
+    ::-webkit-scrollbar-track { background-color:#ddd; }
 
     .btn-amarelo { background:transparent; color:#f39c12; border:2px solid #f39c12; }
     .btn-amarelo:hover { background:#f39c12; color:#ffffff; }
@@ -12,4 +12,8 @@
     .btn-vermelho:hover { background:#c0392b; color:#ffff; }
     .btn-roxo { background:transparent; color:#8e44ad; border:2px solid #8e44ad; }
     .btn-roxo:hover { background:#8e44ad; color:#ffff; }
+
+    ul.categorias { color:#404040; }
+    ul.categorias a { color:#404040; }
+
 }

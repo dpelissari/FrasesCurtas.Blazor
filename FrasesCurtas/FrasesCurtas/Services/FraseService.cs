@@ -51,5 +51,13 @@ namespace FrasesCurtas.Services {
             return frases.AsQueryable();
         }
 
+        public async Task<IQueryable<Frase>> BuscarPorIdCategoria(Guid categoriaId) {
+            var frases = await dbContexto.Frases
+                .Where(f => f.IdCategoriaFrase == categoriaId)
+                .ToListAsync();
+
+            return frases.AsQueryable();
+        }
+
     }
 }

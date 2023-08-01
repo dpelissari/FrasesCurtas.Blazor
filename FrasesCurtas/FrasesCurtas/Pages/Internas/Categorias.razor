@@ -15,7 +15,7 @@
             <h1>Categorias</h1>
             <a href="/int/categorias/nova" class="btn btn-roxo">INCLUIR CATEGORIA</a>
         </div>
-        <ListaPaginada Dados="categorias" Context="c">
+        <ListaPaginada Dados="categorias.OrderBy(x => x.Categoria)" Context="c" QtdeItensPorPagina="15">
             <ConteudoPrincipal>
                 <div class="item sombra">
                     <div class="grupo">

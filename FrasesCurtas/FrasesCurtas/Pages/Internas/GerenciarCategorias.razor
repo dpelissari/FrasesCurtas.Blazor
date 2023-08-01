@@ -12,7 +12,7 @@
     <div class="card mt80">
     @if (modoEdicao)
     {
-        <h3>Editar Categoria</h3>
+        <h1>Editar Categoria</h1>
 
         <EditForm Model="categoria" OnValidSubmit="AtualizarCategoriaFrase">
             <div class ="cmp">
@@ -45,7 +45,7 @@
     }
     else
     {
-        <h3>Incluir Categoria</h3>
+        <h1>Incluir Categoria</h1>
         <EditForm Model="categoria" OnValidSubmit="CriarCategoriaFrase">
             <div class="cmp">
                 <label>Nome</label>

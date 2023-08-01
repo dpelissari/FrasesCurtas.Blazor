@@ -34,20 +34,15 @@
 
     /* paginacao */
     .paginacao { margin:20px; display:flex; align-items:center; justify-content:center; text-align: center; }
-    .pg { width:40px; height:40px; border-radius:50%; margin:0 5px; font-size:18px;  }
+    .pg { width:35px; height:35px; border-radius:50%; margin:0 5px; font-size:20px; color:#5F4BB6; }
     .total-pg { display:flex; justify-content:center; margin:10px 0;  }
     .pg:hover { cursor:pointer; opacity:0.5;  }
-    .pg.ativo { font-weight: bold; color:#5f4bb6; }
+    .pg.ativo { background:#5F4BB6; color:#FFF; }
 
-    /* botoes */
-    button { background:#C4EBC8; color:#202A25; }
-    button:disabled { cursor:no-drop; opacity:0.5; }
-   .pg.avancar-ultimo disabled { opacity:0.2; }
-
+    /* campos form */
    .cmp { margin:10px 0;}
    .cmp select { border:1px solid #9d9797; padding:5px; border-radius:6px; width:100%; font-size:18px; background:#f5f5f5;}
    .cmp textarea { width:100%; border:1px solid #9d9797; padding:10px; font-size:18px; border-radius:6px; box-sizing:border-box; resize:none; background:#f5f5f5; }
-
  }
 
 @media (max-width:980px){
