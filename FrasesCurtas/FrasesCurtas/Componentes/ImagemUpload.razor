@@ -42,6 +42,7 @@
 
     [Parameter]
     public int LarguraImagem { get; set; } = 150;
+    public int AlturaImagem { get; set; } = 150;
 
     [Parameter]
     public string TextoLabel { get; set; } = "Enviar imagem";
@@ -89,8 +90,8 @@
                 // define a largura da imagem como 100 pixels e calcula a altura automaticamente para manter a proporção
                 image.Mutate(x => x.Resize(new ResizeOptions
                     {
-                        Size = new Size(LarguraImagem, 0),
-                        Mode = ResizeMode.Max,
+                        Size = new Size(LarguraImagem, AlturaImagem),
+                        Mode = ResizeMode.Crop,
                     }));
 
                 // salva a imagem redimensionada
