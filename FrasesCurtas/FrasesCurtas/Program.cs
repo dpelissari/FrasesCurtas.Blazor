@@ -1,6 +1,7 @@
 using FrasesCurtas.Autenticacao;
 using FrasesCurtas.Componentes;
 using FrasesCurtas.Data;
+using FrasesCurtas.Interfaces;
 using FrasesCurtas.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;

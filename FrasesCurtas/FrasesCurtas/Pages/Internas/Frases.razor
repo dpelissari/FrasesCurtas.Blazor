@@ -3,10 +3,11 @@
 
 @using FrasesCurtas.Models
 @inject IJSRuntime JSRuntime
-@inject FrasesCurtas.Services.IFraseService FraseService;
-@inject FrasesCurtas.Services.IAutorService AutorService;
-@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+@inject IFraseService FraseService;
+@inject IAutorService AutorService;
+@inject ICategoriaFraseService CategoriaFraseService;
 @using FrasesCurtas.Componentes;
+@using FrasesCurtas.Interfaces;
 @layout InternasLayout;
 
 <PageTitle>Gerenciar frases</PageTitle>

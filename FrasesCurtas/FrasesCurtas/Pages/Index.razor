@@ -1,11 +1,14 @@
 ﻿@page "/"
 @using FrasesCurtas.Models
-@inject FrasesCurtas.Services.IFraseService FraseService
-@inject FrasesCurtas.Services.IAutorService AutorService
-@inject NavigationManager NavigationManager
 @using FrasesCurtas.Componentes;
 @using FrasesCurtas.Models.Interop;
-@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
+@using FrasesCurtas.Interfaces;
+
+@inject IFraseService FraseService
+@inject IAutorService AutorService
+@inject NavigationManager NavigationManager
+@inject ICategoriaFraseService CategoriaFraseService;
+
 <PageTitle>Frases</PageTitle>
 
 <div class="container">

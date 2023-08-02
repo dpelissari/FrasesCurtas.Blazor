@@ -3,9 +3,11 @@
 @attribute [Authorize(Roles = "Administrador")]
 
 @using FrasesCurtas.Componentes
+@using FrasesCurtas.Interfaces;
 @using FrasesCurtas.Models
+
 @inject NavigationManager NavigationManager
-@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService
+@inject ICategoriaFraseService CategoriaFraseService
 @layout InternasLayout;
 
 <div class="container">

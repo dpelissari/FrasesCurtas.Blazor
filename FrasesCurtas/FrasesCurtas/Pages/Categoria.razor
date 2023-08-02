@@ -1,12 +1,15 @@
 ﻿@page "/categoria/"
 @page "/categoria/{id}"
+
+@using FrasesCurtas.Interfaces;
 @using FrasesCurtas.Models
 @using FrasesCurtas.Services;
 @using FrasesCurtas.Componentes
+
 @inject NavigationManager NavigationManager
-@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
-@inject FrasesCurtas.Services.IFraseService FraseService;
-@inject FrasesCurtas.Services.IAutorService AutorService;
+@inject ICategoriaFraseService CategoriaFraseService;
+@inject IFraseService FraseService;
+@inject IAutorService AutorService;
 @layout InternasLayout
 
 <div class="container mt80">

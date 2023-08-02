@@ -1,9 +1,11 @@
 ﻿using FrasesCurtas.Data;
+using FrasesCurtas.Interfaces;
 using FrasesCurtas.Models;
 using FrasesCurtas.Pages;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrasesCurtas.Services {
+namespace FrasesCurtas.Services
+{
     public class CategoriaFraseService : ICategoriaFraseService {
 
         // injecao de depencia do dbcontext p/ armezar op em memory

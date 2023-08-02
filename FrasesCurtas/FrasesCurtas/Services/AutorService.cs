@@ -1,8 +1,10 @@
 ﻿using FrasesCurtas.Data;
+using FrasesCurtas.Interfaces;
 using FrasesCurtas.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrasesCurtas.Services {
+namespace FrasesCurtas.Services
+{
     public class AutorService : IAutorService {
 
         // injecao de depencia do dbcontext p/ armezar op em memory

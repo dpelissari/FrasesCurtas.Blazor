@@ -1,8 +1,9 @@
 ﻿@using FrasesCurtas.Models;
 @using FrasesCurtas.Services;
-@inject FrasesCurtas.Services.IAutorService AutorService;
-@inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
-@inject FrasesCurtas.Services.IFraseService FraseService;
+@using FrasesCurtas.Interfaces;
+@inject IAutorService AutorService;
+@inject ICategoriaFraseService CategoriaFraseService;
+@inject IFraseService FraseService;
 
 <section class="outdoor">
     <div class="container">

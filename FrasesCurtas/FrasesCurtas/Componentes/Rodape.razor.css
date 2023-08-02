@@ -1,5 +1,5 @@
 ﻿@media all {
-    footer { background:#5F4BB6; color:#FFF; padding:20px }
+    footer { background:#5F4BB6; color:#FFF; padding:20px 0; }
     footer ::deep a { text-decoration:none; color:#FFF; display:flex; text-transform:uppercase; margin:10px 0; }
     footer ::deep a:hover { text-decoration:underline; }
     footer .logo p { font-size:18px; text-transform: uppercase; border:1px solid #5F4BB6;  padding:10px; border-radius:6px; width:fit-content; background:#FFF; color:#5F4BB6; }
