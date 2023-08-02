@@ -2,6 +2,8 @@
     body { background:#3A3939; color:#FFFFFF; }
     input { background:#FFFFFF; color:#404040;  }
     .card { background:#4E4E4E; }
+    p { color:#FFF; }
+    .link { color:#FFF; }
 
     ::-webkit-scrollbar-thumb { background-color:#5F4BB6; }
     ::-webkit-scrollbar-track { background-color:#202A25; }

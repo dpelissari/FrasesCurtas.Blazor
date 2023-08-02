@@ -2,55 +2,58 @@
 @page "/autor/{id}"
 @using FrasesCurtas.Models
 @using FrasesCurtas.Services;
+@using FrasesCurtas.Componentes
+@inject NavigationManager NavigationManager
 @inject FrasesCurtas.Services.IFraseService FraseService;
 @inject FrasesCurtas.Services.IAutorService AutorService;
 @inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 @layout InternasLayout;
 
 <div class="container mt80">
+
+    <h1>Frases de @autor.Nome</h1>
+
     @if (autor != null)
     {
-        <h2>Frases de @autor.Nome</h2>
-
         @if (frases != null && frases.Any())
         {
-            @foreach (var frase in frases)
-            {
-
-                <div class="card sombra">
-                    <p class="categoria">@frase.Categoria.Categoria</p>
-                    <p class="frase">@frase.Descricao</p>
-                </div>
-            }
+            <Repeater DataSource="frases" Context="frase">
+                <ItemTemplate>
+                    <div class="card sombra">
+                        <p class="categoria">@frase.Categoria.Categoria</p>
+                        <p class="frase">@frase.Descricao</p>
+                    </div>
+                </ItemTemplate>
+            </Repeater>
         }
         else
         {
-            <p>Nenhuma frase encontrada para este autor.</p>
+            <div class="card sombra">
+                <p>Nenhuma frase encontrada para o autor @autor.Nome.</p>
+            </div>
         }
     }
-    else
-    {
-        <p>Autor não encontrado.</p>
-    }
-    <NavLink href="autores/">Voltar lista de autores</NavLink>
+
+    <NavLink href="autores/" class="link">Voltar para a lista de autores</NavLink>
 </div>
 
 
 @code {
-    [Parameter]
-    public string Id { get; set; }
 
-    private Autor autor;
-    private IQueryable<Frase> frases;
-    private string mensagem;
+    [Parameter] public string? Id { get; set; }
+
+    private Autor autor = new();
+    private IQueryable<Frase>? frases;
+    private string? mensagem;
 
     protected override async Task OnInitializedAsync() {
-        if (!string.IsNullOrEmpty(Id) && Guid.TryParse(Id, out Guid autorId))
+
+        if (!string.IsNullOrEmpty(Id))
         {
-            autor = await AutorService.BuscarPor(autorId);
-            if (autor != null)
+            if (Guid.TryParse(Id, out Guid idAutor))
             {
-                frases = await FraseService.BuscarPorAutorId(autorId);
+                frases = await FraseService.BuscarPorAutorId(idAutor);
+                autor = await AutorService.BuscarPor(idAutor);
 
                 // Alimenta autores e categoria
                 foreach (var frase in frases)
@@ -58,7 +61,11 @@
                     frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
                 }
             }
+            else
+            {
+                // ID inválido, redireciona para listagem de autores
+                NavigationManager.NavigateTo("/autores");
+            }
         }
-        
     }
 }

@@ -1,0 +1,4 @@
+﻿.paginacao { margin:20px; display:flex; align-items:center; justify-content:center; text-align: center; width:100%; }
+.pg { width:35px; height:35px; border-radius:50%; margin:0 5px; font-size:20px; color:#5F4BB6; }
+.pg:hover { cursor:pointer; opacity:0.5;  }
+.pg.ativo { background:#5F4BB6; color:#FFF; }

@@ -11,10 +11,9 @@
 
 <div class="container mt80">
     <h1>Autores</h1>
-
-
+ 
     <div class="autores">
-        <ListaPaginada Dados="autores.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="8">
+        <ListaPaginada Dados="autores.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="7">
             <ConteudoPrincipal>
 
                 <NavLink href="@($"autor/{context.Id}")">
@@ -23,8 +22,7 @@
                             <img src="@context.CaminhoImagem" alt="@context.Nome" />
                         </div>
                         <div>
-                            @context.Nome
-
+                            <p>@context.Nome</p>
                         </div>
                     </div>
                 </NavLink>
@@ -33,10 +31,6 @@
             </ConteudoPrincipal>
         </ListaPaginada>
     </div>
-
-
-
-
 </div>
 
 @code {

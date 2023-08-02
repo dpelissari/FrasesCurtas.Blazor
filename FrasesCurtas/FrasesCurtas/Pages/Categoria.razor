@@ -2,6 +2,8 @@
 @page "/categoria/{id}"
 @using FrasesCurtas.Models
 @using FrasesCurtas.Services;
+@using FrasesCurtas.Componentes
+@inject NavigationManager NavigationManager
 @inject FrasesCurtas.Services.ICategoriaFraseService CategoriaFraseService;
 @inject FrasesCurtas.Services.IFraseService FraseService;
 @inject FrasesCurtas.Services.IAutorService AutorService;
@@ -14,14 +16,15 @@
     {
         if (frases != null && frases.Any())
         {
-            @foreach (var frase in frases)
-            {
-                <div class="card sombra">
-                    <p class="categoria">@categoria.Categoria</p>
-                    <p class="frase">@frase.Descricao</p>
-                    <p class="autor">Autor: @frase.Autor.Nome</p>
-                </div>
-            }
+            <Repeater DataSource="frases" Context="frase">
+                <ItemTemplate>
+                    <div class="card sombra">
+                        <p class="categoria">@categoria.Categoria</p>
+                        <p class="frase">@frase.Descricao</p>
+                        <p class="autor">Autor: @frase.Autor.Nome</p>
+                    </div>
+                </ItemTemplate>
+            </Repeater>
         }
         else
         {
@@ -29,40 +32,38 @@
                 <p>Nenhuma frase encontrada para a categoria @categoria.Categoria.</p>
             </div>
         }
+    }
 
-    }
-    else
-    {
-        <div class="card sombra">
-            <p>Categoria não encontrada!</p>
-        </div>
-    }
-    <NavLink href="categorias/">Voltar lista de categorias</NavLink>
+    <NavLink href="categorias/" class="link">Voltar para a lista de categorias</NavLink>
 </div>
 
 
 @code {
-    [Parameter]
-    public string Id { get; set; }
+    [Parameter] public string? Id { get; set; }
 
-    private CategoriaFrase categoria;
-    private IQueryable<Frase> frases;
-    private string mensagem;
+    private CategoriaFrase categoria = new();
+    private IQueryable<Frase>? frases;
+    private string? mensagem;
 
     protected override async Task OnInitializedAsync() {
-        if (!string.IsNullOrEmpty(Id) && Guid.TryParse(Id, out Guid categoriaId))
+
+        if (!string.IsNullOrEmpty(Id))
         {
-            categoria = await CategoriaFraseService.BuscarPor(categoriaId);
-            if (categoria != null)
+            if (Guid.TryParse(Id, out Guid idCategoria))
             {
-                frases = await FraseService.BuscarPorIdCategoria(categoriaId);
+                frases = await FraseService.BuscarPorIdCategoria(idCategoria);
+                categoria = await CategoriaFraseService.BuscarPor(idCategoria);
 
                 // Alimenta autores e categoria
                 foreach (var frase in frases)
                 {
-                    frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
                     frase.Autor = await AutorService.BuscarPor(frase.IdAutor);
                 }
+            }
+            else
+            {
+                // ID inválido, redireciona para listagem de categorias
+                NavigationManager.NavigateTo("/categorias");
             }
         }
 
