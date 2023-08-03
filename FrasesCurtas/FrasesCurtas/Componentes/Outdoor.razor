@@ -5,7 +5,8 @@
 @inject ICategoriaFraseService CategoriaFraseService;
 @inject IFraseService FraseService;
 
-<section class="outdoor">
+
+<section class="outdoor" style="background-image: url('@backgroundImageUrl')">
     <div class="container">
         <div class="card sombra">
             <div>
@@ -37,9 +38,13 @@
 @code {
 
     private Frase frase;
+    private string backgroundImageUrl;
+    [Inject]
+    private HttpClient HttpClient { get; set; }
 
     protected override async Task OnInitializedAsync() {
         await FraseAleatoria();
+        await LoadRandomImage();
     }
 
     private async Task FraseAleatoria() {
@@ -53,4 +58,27 @@
             frase.Categoria = await CategoriaFraseService.BuscarPor(frase.IdCategoriaFrase);
         }
     }
+    private async Task LoadRandomImage() {
+        try
+        {
+            string apiKey = "URSg7Kz5C70b4jDrnPRRIV0IubOOI6LmmLcBgLQ5xkc";
+            string apiUrl = $"https://api.unsplash.com/photos/random?client_id={apiKey}&orientation=landscape";
+
+            var response = await HttpClient.GetJsonAsync<UnsplashApiResponse>(apiUrl);
+            if (response != null && !string.IsNullOrEmpty(response?.Urls?.Regular))
+            {
+                backgroundImageUrl = response.Urls.Regular;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle any error that may occur during the API call
+            // You can log the error or set a default background image here
+            // For simplicity, this example doesn't include extensive error handling
+        }
+    }
 }
+
+
+
