@@ -12,7 +12,7 @@
     .card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:30px; border-radius:5px; justify-content:center; align-items:center; box-sizing:border-box; background:#FFF; }
     .sombra { box-shadow:0 0.3px 0.9px rgba(0,0,0,.108), 0 1.6px 3.6px rgba(0,0,0,.132); }
     .mt80 { margin-top:80px; }
-    .mtb20 { margin:20px 0; }
+    .mtb20 { margin-top:20px; }
     .opt { display:flex;  }
     .opt > div { display:flex; justify-content:flex-start;  }
     label { font-weight: 600; margin-bottom:5px; }
@@ -26,9 +26,9 @@
     .btn:hover { cursor:pointer; opacity:0.8; }
 
     /* frases */
-    .frase { font-size:20px; margin:10px 0; transition:0.5s ease; line-height:30px; transition:0.5s ease; } 
-    .categoria { font-size:16px; text-transform:uppercase; font-weight:600; color:#86A5D9; }
-    .autor { font-size:16px; }
+    .frase { font-size:20px; margin:10px 0; transition:0.5s ease; line-height:30px; transition:0.5s ease; text-align:left; width:100%; } 
+    .categoria { font-size:16px; text-transform:uppercase; font-weight:600; color:#86A5D9; text-align:left; width:100%; }
+    .autor { font-size:16px; text-align:left; width:100%; }
 
     /* form */
    .cmp { margin:10px 0;}

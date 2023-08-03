@@ -1,5 +1,5 @@
 ﻿h1 { text-transform:uppercase; margin:40px 0; font-weight:200; font-size:25px;  }
-.autores { display:flex; justify-content:flex-start; flex-wrap:wrap; gap:20px; }
+.autores { display:flex; justify-content:flex-start; flex-wrap:wrap; gap:20px; margin-bottom:40px; }
 .autores .imagem-autor img { border-radius:50%; width:80px; margin-bottom:10px; }
 .card { margin:0; height:200px; max-height:200px; overflow:auto; width:240px; max-width:240px; padding:20px;  }
 .autores ::deep a {  text-align:center; text-decoration:none; color:#404040; font-weight:600; word-break:break-all; }

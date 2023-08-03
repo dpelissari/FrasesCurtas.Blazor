@@ -1,5 +1,4 @@
 ﻿@media all {
-    p { text-align:left; width:100%; }
     .compartilhamento  { display:flex; justify-content:flex-end; align-items:center; width:100%; }
     .compartilhamento > div  { display:flex; }
     .compartilhamento p { text-align:right; font-size:16px; color:#808080; margin:0 15px; width:auto; }

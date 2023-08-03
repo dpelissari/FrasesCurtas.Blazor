@@ -21,6 +21,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, ProvedorAutenticacao>();
 builder.Services.AddSingleton<ContaUsuarioService>();
+builder.Services.AddHttpClient();
 
 // salvando em memoria
 //builder.Services.AddDbContext<AplicacaoDbContexto>(options => options.UseInMemoryDatabase("FrasesDb"));
