@@ -1,8 +1,8 @@
 ﻿@page "/"
 @using FrasesCurtas.Models
 @using FrasesCurtas.Componentes;
-@using FrasesCurtas.Models.Interop;
 @using FrasesCurtas.Interfaces;
+@using FrasesCurtas.Classes.Interop;
 
 @inject IFraseService FraseService
 @inject IAutorService AutorService
@@ -22,7 +22,7 @@
                 <p class="autor">Autor: @context.Autor?.Nome</p>
 
                 <div class="compartilhamento">
-                    <p>Compartilhar essa frase:</p>
+                    <p>Compartilhe essa frase:</p>
                     <div>
                         <a class="whatsApp" href="https://wa.me/?text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br" target="_blank">
                             <img src="imagens/icones/ico-whatsapp.svg" width="20" height="20" alt="Icone WhatsApp" />
@@ -40,7 +40,7 @@
     </ListaPaginada>
 
     <ObservadorTamanhoJanela AoRedimensionar="Redimensionou" />
-   @* @_ehCelular*@
+    @*@_ehCelular*@
 
 </div>
  

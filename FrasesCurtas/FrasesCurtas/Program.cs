@@ -1,5 +1,5 @@
 using FrasesCurtas.Autenticacao;
-using FrasesCurtas.Componentes;
+using FrasesCurtas.Classes.Interop;
 using FrasesCurtas.Data;
 using FrasesCurtas.Interfaces;
 using FrasesCurtas.Services;
