@@ -1,12 +1,11 @@
-﻿@page "/entrar";
-@using FrasesCurtas.Autenticacao;
-@using FrasesCurtas.Componentes
-@using FrasesCurtas.Models;
-@inject ContaUsuarioService contaUsuarioservice;
+﻿@inject ContaUsuarioService contaUsuarioservice;
 @inject IJSRuntime js;
 @inject AuthenticationStateProvider provedorAutenticacao;
 @inject NavigationManager navManager;
+
+@page "/entrar";
 @layout LoginLayout;
+<PageTitle>Efetuar login</PageTitle>
 
 <EditForm Model="usuario" OnValidSubmit="Autenticar">
     <div class="container">

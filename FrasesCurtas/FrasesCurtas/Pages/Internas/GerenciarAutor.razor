@@ -1,14 +1,12 @@
-﻿@page "/int/autores/gerenciar-autor/{id?}"
+﻿@inject NavigationManager NavigationManager
+@inject IAutorService AutorService
+@inject IWebHostEnvironment _ambiente;
+
+@page "/int/autores/gerenciar-autor/{id?}"
 @page "/int/autores/novo/"
 @attribute [Authorize(Roles = "Administrador")]
 
-
-@using FrasesCurtas.Componentes
-@using FrasesCurtas.Interfaces;
-@using FrasesCurtas.Models
-@inject NavigationManager NavigationManager
-@inject IAutorService AutorService
-@inject IWebHostEnvironment _ambiente;
+<PageTitle>Gerenciar autor</PageTitle>
 
 <div class="container">
     <div class="card mt80">

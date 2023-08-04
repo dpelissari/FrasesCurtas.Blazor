@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using System.Security.Claims;
 
-namespace FrasesCurtas.Autenticacao
+namespace FrasesCurtas.Classes.Autenticacao
 {
     public class ProvedorAutenticacao : AuthenticationStateProvider
     {

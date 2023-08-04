@@ -1,15 +1,13 @@
-﻿@page "/int/frases/gerenciar-frase/{id?}"
-@page "/int/frases/nova/"
-@attribute [Authorize(Roles = "Administrador")]
-
-@using FrasesCurtas.Componentes
-@using FrasesCurtas.Interfaces;
-@using FrasesCurtas.Models
-
-@inject NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager;
 @inject IFraseService FraseService;
 @inject IAutorService AutorService;
 @inject ICategoriaFraseService CategoriaFraseService;
+
+@page "/int/frases/gerenciar-frase/{id?}"
+@page "/int/frases/nova/"
+@attribute [Authorize(Roles = "Administrador")]
+
+<PageTitle>Gerenciar frase</PageTitle>
 
 <div class="container">
     <div class="card mt80">

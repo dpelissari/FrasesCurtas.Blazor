@@ -1,15 +1,11 @@
-﻿@page "/"
-@using FrasesCurtas.Models
-@using FrasesCurtas.Componentes;
-@using FrasesCurtas.Interfaces;
-@using FrasesCurtas.Classes.Interop;
-
-@inject IFraseService FraseService
+﻿@inject IFraseService FraseService
 @inject IAutorService AutorService
 @inject NavigationManager NavigationManager
 @inject ICategoriaFraseService CategoriaFraseService;
-@layout HomeLayout;
 
+@page "/"
+
+@layout HomeLayout;
 <PageTitle>Frases</PageTitle>
 
 <div class="container">
@@ -20,7 +16,6 @@
                 <p class="categoria">@context.Categoria?.Categoria</p>
                 <p class="frase">@context.Descricao</p>
                 <p class="autor">Autor: @context.Autor?.Nome</p>
-
                 <div class="compartilhamento">
                     <p>Compartilhe essa frase:</p>
                     <div>

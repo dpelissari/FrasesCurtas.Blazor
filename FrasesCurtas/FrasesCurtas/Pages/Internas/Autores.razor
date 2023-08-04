@@ -1,11 +1,8 @@
-﻿@page "/int/autores"
-@attribute [Authorize(Roles = "Administrador")]
-
-@using FrasesCurtas.Models
-@inject IJSRuntime JSRuntime
+﻿@inject IJSRuntime JSRuntime
 @inject IAutorService AutorService;
-@using FrasesCurtas.Componentes;
-@using FrasesCurtas.Interfaces;
+
+@page "/int/autores"
+@attribute [Authorize(Roles = "Administrador")]
 
 <PageTitle>Geranciar autores</PageTitle>
 

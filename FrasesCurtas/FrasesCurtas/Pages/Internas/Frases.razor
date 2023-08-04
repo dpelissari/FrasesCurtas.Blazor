@@ -1,15 +1,12 @@
-﻿@page "/int/frases"
-@attribute [Authorize(Roles = "Administrador")]
-
-@using FrasesCurtas.Models
-@inject IJSRuntime JSRuntime
+﻿@inject IJSRuntime JSRuntime
 @inject IFraseService FraseService;
 @inject IAutorService AutorService;
 @inject ICategoriaFraseService CategoriaFraseService;
-@using FrasesCurtas.Componentes;
-@using FrasesCurtas.Interfaces;
 
-<PageTitle>Gerenciar frases</PageTitle>
+@page "/int/frases"
+@attribute [Authorize(Roles = "Administrador")]
+
+<PageTitle>Frases</PageTitle>
 
 <div class="container">
     <div class="card mt80">

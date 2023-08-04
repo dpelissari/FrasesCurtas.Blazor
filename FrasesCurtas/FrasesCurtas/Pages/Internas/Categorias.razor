@@ -1,13 +1,10 @@
-﻿@page "/int/categorias"
+﻿@inject IJSRuntime JSRuntime
+@inject ICategoriaFraseService CategoriaFraseService;
+
+@page "/int/categorias"
 @attribute [Authorize(Roles = "Administrador")]
 
-@using FrasesCurtas.Models
-@inject IJSRuntime JSRuntime
-@inject ICategoriaFraseService CategoriaFraseService;
-@using FrasesCurtas.Componentes;
-@using FrasesCurtas.Interfaces;
-
-<PageTitle>Gerenciar categorias</PageTitle>
+<PageTitle>Categorias</PageTitle>
 
 <div class="container">
     <div class="card mt80">

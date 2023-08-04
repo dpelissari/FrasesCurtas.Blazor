@@ -1,15 +1,11 @@
-﻿@page "/autor/"
-@page "/autor/{id}"
-
-@using FrasesCurtas.Interfaces;
-@using FrasesCurtas.Models
-@using FrasesCurtas.Services;
-@using FrasesCurtas.Componentes
-
-@inject NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager
 @inject IFraseService FraseService;
 @inject IAutorService AutorService;
 @inject ICategoriaFraseService CategoriaFraseService;
+
+@page "/autor/"
+@page "/autor/{id}"
+<PageTitle>Autor @autor.Nome</PageTitle>
 
 <div class="container mt80">
 

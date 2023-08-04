@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
+
 @namespace FrasesCurtas.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -18,18 +19,12 @@
 </head>
 <body>
     @RenderBody()
-
     <div id="blazor-error-ui" style="display:none;">
-        <environment include="Staging,Production">
-            Ocorreu um erro. Este aplicativo pode não responder mais até ser recarregado.
-        </environment>
-        <environment include="Development">
-            Ocorreu uma exceção não tratada. Consulte as ferramentas de desenvolvimento do navegador para obter detalhes.
-        </environment>
+        <environment include="Staging,Production">Ocorreu um erro. Este aplicativo pode não responder mais até ser recarregado.</environment>
+        <environment include="Development">Ocorreu uma exceção não tratada. Consulte as ferramentas de desenvolvimento do navegador para obter detalhes.</environment>
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-
     <script src="_framework/blazor.server.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

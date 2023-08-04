@@ -1,21 +1,14 @@
-﻿@page "/autores"
-
-
-@using FrasesCurtas.Models
-@inject IJSRuntime JSRuntime
+﻿@inject IJSRuntime JSRuntime
 @inject IAutorService AutorService;
-@using FrasesCurtas.Componentes;
-@using FrasesCurtas.Interfaces;
 
+@page "/autores"
 <PageTitle>Autores</PageTitle>
 
 <div class="container mt80">
     <h1>Autores</h1>
- 
     <div class="autores">
-        <ListaPaginada Dados="autores.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="8">
+        <ListaPaginada Dados="autores?.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="8">
             <ConteudoPrincipal>
-
                 <NavLink href="@($"autor/{context.Id}")">
                     <div class="card sombra">
                         <div class="imagem-autor">
@@ -26,15 +19,13 @@
                         </div>
                     </div>
                 </NavLink>
-
-
             </ConteudoPrincipal>
         </ListaPaginada>
     </div>
 </div>
 
 @code {
-    private IQueryable<Autor> autores;
+    private IQueryable<Autor>? autores;
 
     // ao inicializar busca todos autores
     protected override async Task OnInitializedAsync() {

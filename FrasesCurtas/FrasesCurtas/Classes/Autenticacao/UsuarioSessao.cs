@@ -1,4 +1,4 @@
-﻿namespace FrasesCurtas.Autenticacao
+﻿namespace FrasesCurtas.Classes.Autenticacao
 {
     public class UsuarioSessao
     {

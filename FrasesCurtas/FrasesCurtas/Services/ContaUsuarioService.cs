@@ -1,4 +1,6 @@
-﻿namespace FrasesCurtas.Autenticacao
+﻿using FrasesCurtas.Classes.Autenticacao;
+
+namespace FrasesCurtas.Services
 {
     public class ContaUsuarioService
     {
@@ -13,7 +15,8 @@
             };
         }
 
-        public ContaUsuario? BuscarPorNome(string nomeUsuario) {
+        public ContaUsuario? BuscarPorNome(string nomeUsuario)
+        {
             return _usuarios.FirstOrDefault(x => x.Nome == nomeUsuario);
         }
     }

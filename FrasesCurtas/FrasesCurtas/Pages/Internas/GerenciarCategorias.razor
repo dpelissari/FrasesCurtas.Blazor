@@ -1,13 +1,11 @@
-﻿@page "/int/categorias/gerenciar-categoria/{id?}";
+﻿@inject NavigationManager NavigationManager;
+@inject ICategoriaFraseService CategoriaFraseService;
+
+@page "/int/categorias/gerenciar-categoria/{id?}";
 @page "/int/categorias/nova";
 @attribute [Authorize(Roles = "Administrador")]
 
-@using FrasesCurtas.Componentes
-@using FrasesCurtas.Interfaces;
-@using FrasesCurtas.Models
-
-@inject NavigationManager NavigationManager
-@inject ICategoriaFraseService CategoriaFraseService
+<PageTitle>Gerenciar categoria</PageTitle>
 
 <div class="container">
     <div class="card mt80">

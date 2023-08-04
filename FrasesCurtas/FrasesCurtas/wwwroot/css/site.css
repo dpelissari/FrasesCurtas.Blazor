@@ -1,40 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;700;900&display=swap');
 
-@media all {
-    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;700;900&display=swap');
+* { outline:none; margin:0; padding:0; border:none; }
+body { font-family:'Raleway', sans-serif; overflow-x:hidden; }
+input { background:#f5f5f5; width:100%; border-radius:6px; padding:10px; font-size:16px; box-sizing:border-box; }
+input[type=radio] { height:20px; }
+::-webkit-scrollbar { height:14px; width:14px; }
 
-    * { outline:none; margin:0; padding:0; border:none; }
-    body { font-family:'Raleway', sans-serif; overflow-x:hidden; }
-    input { background:#f5f5f5; width:100%; border-radius:6px; padding:10px; font-size:16px; box-sizing:border-box; }
-    input[type=radio] { height:20px; }
-    ::-webkit-scrollbar { height:14px; width:14px; }
- 
-    .container {  max-width:1200px; display:block; margin:0 auto; }
-    .card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:20px; border-radius:5px; justify-content:center; align-items:center; box-sizing:border-box; background:#FFF; }
-    .sombra { box-shadow:0 0.3px 0.9px rgba(0,0,0,.108), 0 1.6px 3.6px rgba(0,0,0,.132); }
-    .mt80 { margin-top:80px; }
-    .mtb20 { margin-top:20px; }
-    .opt { display:flex;  }
-    .opt > div { display:flex; justify-content:flex-start;  }
-    label { font-weight: 600; margin-bottom:5px; }
-    .acoes .btn:first-child { margin-bottom:5px; }
-    .cab { display:flex; justify-content:space-between; width:100%; margin:30px 0; }
-    .cab h1 { text-transform:uppercase; font-weight:400; font-size:22px; }
-    .link { display:block; margin:40px 0; text-align:center  }
+.container {  max-width:1200px; display:block; margin:0 auto; }
+.card { display:flex; flex-direction:column; width:100%; margin:20px 0; padding:20px; border-radius:5px; justify-content:center; align-items:center; box-sizing:border-box; background:#FFF; }
+.sombra { box-shadow:0 0.3px 0.9px rgba(0,0,0,.108), 0 1.6px 3.6px rgba(0,0,0,.132); }
+.mt80 { margin-top:80px; }
+.mtb20 { margin-top:20px; }
+.opt { display:flex;  }
+.opt > div { display:flex; justify-content:flex-start;  }
+label { font-weight: 600; margin-bottom:5px; }
+.acoes .btn:first-child { margin-bottom:5px; }
+.cab { display:flex; justify-content:space-between; width:100%; margin:30px 0; }
+.cab h1 { text-transform:uppercase; font-weight:400; font-size:22px; }
+.link { display:block; margin:40px 0; text-align:center  }
 
-    /* botoes */
-    .btn { display:block; text-decoration:none; height:30px; border-radius:5px; width:min-content; padding:5px 10px; font-size:16px; box-sizing:border-box; text-align:center; width:auto; }
-    .btn:hover { cursor:pointer; opacity:0.8; }
+/* botoes */
+.btn { display:block; text-decoration:none; height:30px; border-radius:5px; width:min-content; padding:5px 10px; font-size:16px; box-sizing:border-box; text-align:center; width:auto; }
+.btn:hover { cursor:pointer; opacity:0.8; }
 
-    /* frases */
-    .frase { font-size:18px; margin:10px 0; transition:0.5s ease; line-height:30px; transition:0.5s ease; text-align:left; width:100%; } 
-    .categoria { font-size:14px; text-transform:uppercase; font-weight:600; color:#86A5D9; text-align:left; width:100%; }
-    .autor { font-size:16px; text-align:left; width:100%; }
+/* frases */
+.frase { font-size:18px; margin:10px 0; transition:0.5s ease; line-height:30px; transition:0.5s ease; text-align:left; width:100%; } 
+.categoria { font-size:14px; text-transform:uppercase; font-weight:600; color:#86A5D9; text-align:left; width:100%; }
+.autor { font-size:16px; text-align:left; width:100%; }
 
-    /* form */
-   .cmp { margin:10px 0;}
-   .cmp select { border:1px solid #9d9797; padding:5px; border-radius:6px; width:100%; font-size:18px; background:#f5f5f5;}
-   .cmp textarea { width:100%; border:1px solid #9d9797; padding:10px; font-size:18px; border-radius:6px; box-sizing:border-box; resize:none; background:#f5f5f5; }
- }
+/* form */
+.cmp { margin:10px 0;}
+.cmp select { border:1px solid #9d9797; padding:5px; border-radius:6px; width:100%; font-size:18px; background:#f5f5f5;}
+.cmp textarea { width:100%; border:1px solid #9d9797; padding:10px; font-size:18px; border-radius:6px; box-sizing:border-box; resize:none; background:#f5f5f5; }
 
 @media (max-width:1300px){
     .container {  max-width:95%; }

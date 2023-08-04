@@ -1,4 +1,4 @@
-using FrasesCurtas.Autenticacao;
+using FrasesCurtas.Classes.Autenticacao;
 using FrasesCurtas.Classes.Interop;
 using FrasesCurtas.Data;
 using FrasesCurtas.Interfaces;

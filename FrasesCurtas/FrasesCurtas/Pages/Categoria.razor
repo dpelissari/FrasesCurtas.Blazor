@@ -1,15 +1,11 @@
-﻿@page "/categoria/"
-@page "/categoria/{id}"
-
-@using FrasesCurtas.Interfaces;
-@using FrasesCurtas.Models
-@using FrasesCurtas.Services;
-@using FrasesCurtas.Componentes
-
-@inject NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager
 @inject ICategoriaFraseService CategoriaFraseService;
 @inject IFraseService FraseService;
 @inject IAutorService AutorService;
+
+@page "/categoria/"
+@page "/categoria/{id}"
+<PageTitle>@categoria.Categoria</PageTitle>
 
 <div class="container mt80">
     <h1>@categoria.Categoria</h1>
