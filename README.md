@@ -1,4 +1,4 @@
-O **FraseCurtas** é um site de frases inspirado no **Pensador**. Este projeto aproveita as capacidades do Blazor App Server (utilizando o .NET 6), do Entity Framework Core e do SQLite para oferecer uma experiência única. 
+O **FraseCurtas** é um site de frases inspirado no **Pensador**. Este projeto aproveita as capacidades do Blazor WebServer (utilizando o .NET 6), do Entity Framework Core e do SQLite para oferecer uma experiência única. 
 
 Para o desenvolvimento do **FrasesCurtas**, optei por não depender de nenhum framework CSS externo, como *Bootstrap* ou *Bulma*, para uma abordagem mais personalizada e limpa.
 
