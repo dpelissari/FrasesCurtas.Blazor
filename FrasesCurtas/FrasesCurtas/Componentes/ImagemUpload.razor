@@ -90,7 +90,7 @@
                 // define a largura da imagem como 100 pixels e calcula a altura automaticamente para manter a proporção
                 image.Mutate(x => x.Resize(new ResizeOptions
                     {
-                        Size = new Size(LarguraImagem, AlturaImagem),
+                        Size = new Size(LarguraImagem),
                         Mode = ResizeMode.Crop,
                     }));
 

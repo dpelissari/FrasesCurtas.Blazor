@@ -5,18 +5,17 @@ namespace FrasesCurtas.Models {
         [Key]
         public Guid Id { get; set; }
 
+        [Required(ErrorMessage = "O campo autor é obrigatório")]
         public Guid IdAutor { get; set; }
 
 
         [Required(ErrorMessage = "O campo categoria é obrigatório")]
         public Guid IdCategoriaFrase { get; set; }
+    
 
-
-        [Required(ErrorMessage = "O campo autor é obrigatório")]
         public Autor Autor { get; set; }
 
 
-        [Required(ErrorMessage = "O campo categoria é obrigatório")]
         public CategoriaFrase Categoria { get; set; }
 
 
