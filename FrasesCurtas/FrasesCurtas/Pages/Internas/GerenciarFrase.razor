@@ -72,7 +72,7 @@
                     <div class="cmp">
                         <label>Categoria</label>
                         <InputSelect @bind-Value="frase.IdCategoriaFrase">
-                            <Repeater DataSource="categorias" Context="c">
+                            <Repeater DataSource="categorias.OrderBy(c => c.Categoria)" Context="c">
                                 <ItemTemplate>
                                     <option value="@c.Id">@c.Categoria</option>
                                 </ItemTemplate>
@@ -90,7 +90,7 @@
                      <div class="cmp">
                         <label>Autor</label>
                         <InputSelect @bind-Value="frase.IdAutor">
-                            <Repeater DataSource="autores" Context="a">
+                            <Repeater DataSource="autores.OrderBy(a => a.Nome)" Context="a">
                                 <ItemTemplate>
                                     <option value="@a.Id">@a.Nome</option>
                                 </ItemTemplate>
@@ -106,7 +106,6 @@
                 </div>
 
                 <DataAnnotationsValidator />
-                <ValidationSummary />
 
                 <div class="acoes">
                     <button class="btn btn-amarelo" type="submit">INCLUIR</button>
@@ -143,6 +142,11 @@
                 // ID inválido, redireciona para listagem de frases
                 NavigationManager.NavigateTo("/int/frases");
             }
+        }else
+        {
+            // Define valores iniciais para autor e categoria
+            frase.IdAutor = autores.FirstOrDefault()?.Id ?? Guid.Empty; 
+            frase.IdCategoriaFrase = categorias.FirstOrDefault()?.Id ?? Guid.Empty;
         }
     }
 
