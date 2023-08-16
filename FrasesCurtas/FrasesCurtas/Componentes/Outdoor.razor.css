@@ -10,7 +10,7 @@
     .outdoor h1 { font-weight:400; }
 
     .outdoor .aleatoria { width:100%; display:block; margin:0 auto; }
-    button { width:40px; height:40px; margin:0 4px; }
+    button { width:40px; height:40px; margin:0 4px; display:flex; align-items:center; justify-content:center; }
     button:hover { opacity:0.8;   }
     .btn-frase-aleatoria { background:#5f4bb6; border-radius:50%; cursor:pointer; }
     .btn-clipboard { background:#3C445F; border-radius:50%; cursor:pointer; }
