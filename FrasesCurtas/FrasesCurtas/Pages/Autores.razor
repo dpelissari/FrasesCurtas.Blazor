@@ -7,7 +7,7 @@
 <div class="container mt80">
     <h1>Autores</h1>
     <div class="autores">
-        <ListaPaginada Dados="autores?.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="8">
+        <ListaPaginada Dados="autores?.OrderBy(a => a.Nome).Where(a => a.Ativo)" QtdeItensPorPagina="16">
             <ConteudoPrincipal>
                 <NavLink href="@($"autor/{context.Id}")">
                     <div class="card sombra">

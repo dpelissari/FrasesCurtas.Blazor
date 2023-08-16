@@ -12,7 +12,7 @@
             <h1>Autores</h1>
             <a href="/int/autores/novo" class="btn btn-roxo">INCLUIR AUTOR</a>
         </div>
-        <ListaPaginada Dados="autores.OrderBy(a => a.Nome)" Context="a">
+        <ListaPaginada Dados="autores.OrderBy(a => a.Nome)" Context="a" QtdeItensPorPagina="10">
             <ConteudoPrincipal>
                 <div class="item sombra">
                     <div class="grupo">

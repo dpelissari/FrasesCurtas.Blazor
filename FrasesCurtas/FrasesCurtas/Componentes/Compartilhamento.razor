@@ -1,0 +1,28 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="compartilhamento">
+    <p>Compartilhe essa frase:</p>
+    <div>
+        <a class="whatsApp" href="https://wa.me/?text=@Modelo.Descricao por @Modelo.Autor.Nome. Frase compartilhada via site frasescurtas.com.br" target="_blank">
+            <img src="imagens/icones/ico-whatsapp.svg" width="20" height="20" alt="Icone WhatsApp" />
+        </a>
+        <a class="telegram" href="https://telegram.me/share/url?url=@currentUrl&text=@Modelo.Descricao por @Modelo.Autor.Nome. Frase compartilhada via site frasescurtas.com.br." target="_blank">
+            <img src="imagens/icones/ico-telegram.svg" width="20" height="20" alt="Icone Telegram" />
+        </a>
+        <button class="clipboard" onclick="copiarFrase('@Modelo.Descricao', '@Modelo.Autor?.Nome');">
+            <img src="imagens/icones/ico-clipboard.svg" width="20" height="20" alt="Icone copiar mensagem" />
+        </button>
+    </div>
+</div>
+
+@code {
+    @typeparam T where T : Frase
+    [Parameter]
+    public T Modelo { get; set; }
+    private string currentUrl;
+
+    protected override async Task OnInitializedAsync() {
+        //url atual
+        currentUrl = NavigationManager.Uri;
+    }
+}

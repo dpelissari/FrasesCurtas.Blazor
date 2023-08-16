@@ -16,25 +16,12 @@
                 <p class="categoria">@context.Categoria?.Categoria</p>
                 <p class="frase">@context.Descricao</p>
                 <p class="autor">Autor: @context.Autor?.Nome</p>
-                <div class="compartilhamento">
-                    <p>Compartilhe essa frase:</p>
-                    <div>
-                        <a class="whatsApp" href="https://wa.me/?text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br" target="_blank">
-                            <img src="imagens/icones/ico-whatsapp.svg" width="20" height="20" alt="Icone WhatsApp" />
-                        </a>
-                        <a class="telegram" href="https://telegram.me/share/url?url=@currentUrl&text=@context.Descricao por @context.Autor.Nome. Frase compartilhada via site frasescurtas.com.br." target="_blank">
-                            <img src="imagens/icones/ico-telegram.svg" width="20" height="20" alt="Icone Telegram" />
-                        </a>
-                        <button class="clipboard" onclick="copiarFrase('@context.Descricao', '@context.Autor?.Nome');">
-                            <img src="imagens/icones/ico-clipboard.svg" width="20" height="20" alt="Icone copiar mensagem" />
-                        </button>
-                    </div>
-                </div>
+                <Compartilhamento Modelo="context" />
             </div>
         </ConteudoPrincipal>
     </ListaPaginada>
 
-    <ObservadorTamanhoJanela AoRedimensionar="Redimensionou" />
+    @*<ObservadorTamanhoJanela AoRedimensionar="Redimensionou" />*@
     @*@_ehCelular*@
 
 </div>
