@@ -1,5 +1,47 @@
-Este projeto consiste em um site de frases baseado no Pensador, desenvolvido utilizando a tecnologia Blazor. Para isso, foram utilizados recursos como o Blazor App Server (.NET 6), o Entity Framework Core e o SQLite. Além disso, foram utilizados os pacotes Microsoft.EntityFrameworkCore.Design(6.0.0), Microsoft.EntityFrameworkCore.Sqlite(6.0.0) e SixLabors.ImageSharp(3.0.1).
+O **FraseCurtas** é um site de frases inspirado no **Pensador**. Este projeto aproveita as capacidades do Blazor WebServer (utilizando o .NET 6), do Entity Framework Core e do SQLite para oferecer uma experiência única. 
 
-O site possui diversas funcionalidades, incluindo a possibilidade de incluir, editar e excluir frases. Também é possível adicionar autores, com a opção de fazer upload de imagem, e editá-los posteriormente. O site conta ainda com autenticação de usuários e botões para compartilhamento de frases pelo WhatsApp e Telegram.
+Para o desenvolvimento do **FrasesCurtas**, optei por não depender de nenhum framework CSS externo, como *Bootstrap* ou *Bulma*, para uma abordagem mais personalizada e limpa.
 
-Para o futuro, o projeto prevê a inclusão de um botão para copiar ou transferir mensagens. Essa funcionalidade será de grande utilidade para os usuários, tornando a experiência ainda mais completa e satisfatória.
+### Principais Recursos
+- CRUD de Autores com Upload de Imagem: Gerencie autores de forma simples e eficiente, inclusive permitindo o upload de imagens de perfil.
+
+- CRUD de Categorias de Frases: Explore diferentes categorias temáticas para organizar e encontrar facilmente suas frases favoritas.
+
+- CRUD de Frases: Curta e compartilhe frases inspiradoras através de um sistema de gerenciamento completo.
+
+- Autenticação de Usuários e Controle de Acesso: Garanta a segurança e a privacidade por meio da autenticação de usuários, além de controlar o acesso a páginas internas com permissões bem definidas.
+
+- Clipboard Integrado: Com apenas um clique, copie mensagens para a área de transferência do seu dispositivo para compartilhar facilmente com outras pessoas.
+
+- Compartilhamento Rápido: Compartilhe mensagens instantaneamente no WhatsApp e Telegram através de botões dedicados.
+
+- Frase Aleatória na Página Inicial: Descubra uma dose diária de inspiração com uma frase aleatória exibida na página inicial.
+
+- Imagens de Fundo Cativantes: Cada card de frase sorteada apresenta uma imagem de fundo única e envolvente, obtida através da API do Unsplash.
+
+### Pré-Requisitos para Execução:
+Antes de iniciar, certifique-se de ter o SDK do .NET Core instalado. Caso ainda não o tenha, você pode baixá-lo em: https://dotnet.microsoft.com/download
+
+# Executando o Projeto no Visual Studio (Professional ou Community):
+
+- Clone este repositório para a sua máquina.
+
+- Abra o projeto no Visual Studio.
+
+- Execute a solution pressionando CTRL + F5 para iniciar o site.
+
+# Executando o Projeto no Visual Studio Code:
+
+- Clone este repositório para a sua máquina.
+
+- Abra o Visual Studio Code.
+
+- No Visual Studio Code, vá em "File" -> "Open Folder" e selecione a pasta raiz do projeto Blazor.
+
+- Abra o terminal dentro do Visual Studio Code (utilize o atalho Ctrl + ` ou clique em "Terminal" -> "New Terminal").
+
+- Navegue até a pasta que contém o arquivo .csproj do projeto.
+
+- Execute o comando **dotnet watch run** para iniciar o servidor de desenvolvimento do Blazor.
+
+Espero que o FrasesCurtas seja uma fonte constante de inspiração para você e para todos os que visitarem o este repositório. Sinta-se à vontade para explorar, contribuir e compartilhar com quem quiser!
