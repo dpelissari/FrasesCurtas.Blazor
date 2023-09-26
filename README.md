@@ -2,6 +2,15 @@ O **FraseCurtas** é um site de frases inspirado no **Pensador**. Este projeto a
 
 Para o desenvolvimento do **FrasesCurtas**, optei por não depender de nenhum framework CSS externo, como *Bootstrap* ou *Bulma*, para uma abordagem mais personalizada e limpa.
 
+[![Home Frases Curtas](https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/home.jpg "Home Frases Curtas")](https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/home.jpg "Home Frases Curtas")
+
+[![Categorias](https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/categorias.jpg "Categorias")](http://https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/categorias.jpg "Categorias")
+
+[![Autores](https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/autores.jpg "Autores")](https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/autores.jpg "Autores")
+
+[![Login](https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/login.jpg "Login")](http://https://raw.githubusercontent.com/dpelissari/FrasesCurtas.Blazor/67f3c30e7d03fd48a39fc2589bac5eca51440344/FrasesCurtas/FrasesCurtas/wwwroot/imagens/prints/login.jpg "Login")
+
+
 ### Principais Recursos
 - CRUD de Autores com Upload de Imagem: Gerencie autores de forma simples e eficiente, inclusive permitindo o upload de imagens de perfil.
 
